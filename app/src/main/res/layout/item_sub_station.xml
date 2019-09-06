@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorGrayBackground"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/padding_10"
+    android:paddingRight="@dimen/padding_10">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:paddingLeft="@dimen/padding_10"
+        android:paddingRight="@dimen/padding_10">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBlack"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/padding_1"
+            android:paddingLeft="@dimen/padding_1"
+            android:paddingRight="@dimen/padding_1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+
+                <TextView
+                    android:id="@+id/tv_rly"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:padding="@dimen/padding_5"
+                    android:text="Rly."
+                    android:textColor="@color/colorDarkBlack"
+                    android:textSize="@dimen/text_8" />
+
+
+                <View
+                    android:layout_width="@dimen/padding_1"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorDarkBlack" />
+
+                <TextView
+                    android:id="@+id/tv_div"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:padding="@dimen/padding_5"
+                    android:text="Div."
+                    android:textColor="@color/colorDarkBlack"
+                    android:textSize="@dimen/text_8" />
+
+                <View
+                    android:layout_width="@dimen/padding_1"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorDarkBlack" />
+
+                <TextView
+                    android:id="@+id/tv_sub_station"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:padding="@dimen/padding_5"
+                    android:text="Sub-Station"
+                    android:textColor="@color/colorDarkBlack"
+                    android:textSize="@dimen/text_8" />
+
+
+                <View
+                    android:layout_width="@dimen/padding_1"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorDarkBlack" />
+
+                <TextView
+                    android:id="@+id/tv_iv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:padding="@dimen/padding_5"
+                    android:text="Incoming Voltage"
+                    android:textColor="@color/colorDarkBlack"
+                    android:textSize="@dimen/text_8" />
+
+
+                <View
+                    android:layout_width="@dimen/padding_1"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorDarkBlack" />
+
+                <TextView
+                    android:id="@+id/tv_connected_load"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:padding="@dimen/padding_5"
+                    android:text="tv_connected_load"
+                    android:textColor="@color/colorDarkBlack"
+                    android:textSize="@dimen/text_8" />
+
+                <View
+                    android:layout_width="@dimen/padding_1"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorDarkBlack" />
+
+                <TextView
+                    android:id="@+id/tv_contract_demand"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:padding="@dimen/padding_5"
+                    android:text="Contract Demand"
+                    android:textColor="@color/colorDarkBlack"
+                    android:textSize="@dimen/text_8" />
+
+
+                <View
+                    android:layout_width="@dimen/padding_1"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorDarkBlack" />
+
+                <TextView
+                    android:id="@+id/tv_seb"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.25"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:padding="@dimen/padding_5"
+                    android:text="SEB"
+                    android:textColor="@color/colorDarkBlack"
+                    android:textSize="@dimen/text_8" />
+
+
+                <View
+                    android:layout_width="@dimen/padding_1"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorDarkBlack" />
+
+                <TextView
+                    android:id="@+id/tv_state"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.75"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:padding="@dimen/padding_5"
+                    android:text="State"
+                    android:textColor="@color/colorDarkBlack"
+                    android:textSize="@dimen/text_8" />
+
+                <View
+                    android:layout_width="@dimen/padding_1"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorDarkBlack" />
+
+                <TextView
+                    android:id="@+id/tv_role"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="@dimen/padding_5"
+                    android:layout_gravity="center"
+                    android:text="Role"
+                    android:textColor="@color/colorDarkBlack"
+                    android:textSize="@dimen/text_8" />
+
+                <View
+                    android:layout_width="@dimen/padding_1"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorDarkBlack" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="@dimen/padding_5">
+
+                    <TextView
+                        android:id="@+id/tv_details"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="@dimen/padding_5"
+                        android:text="Details"
+                        android:textColor="@color/colorDarkBlack"
+                        android:textSize="@dimen/text_8" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

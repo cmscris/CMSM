@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/drop_shadow"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_10">
+
+    <TextView
+        android:id="@+id/tv_annexure"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/text_16"
+        android:text="@string/annexure"
+        android:textColor="@color/colorBlueText" />
+
+    <TextView
+        android:id="@+id/tv_annexure_subheading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/sub_heading"
+        android:textColor="@color/colorBlueText"
+        android:textSize="@dimen/text_12"
+        android:visibility="gone" />
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/spn_ryCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_10"
+        android:background="@drawable/shape" />
+
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/spn_divCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_10"
+        android:background="@drawable/shape" />
+
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/spn_fYear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_10"
+        android:background="@drawable/shape" />
+
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/spn_month"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_10"
+        android:background="@drawable/shape" />
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/spn_no_of_year"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_10"
+        android:background="@drawable/shape"
+        android:visibility="gone" />
+
+
+    <Button
+        android:id="@+id/btn_get_report"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_15"
+        android:background="@color/colorButton"
+        android:text="@string/get_mis_report"
+        android:textColor="@color/colorWhite" />
+</LinearLayout>
+

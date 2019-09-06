@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorGrayBackground"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/padding_10"
+    android:paddingRight="@dimen/padding_10">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:paddingLeft="@dimen/padding_10"
+        android:paddingRight="@dimen/padding_10">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBlack"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/padding_1"
+            android:paddingLeft="@dimen/padding_1"
+            android:paddingRight="@dimen/padding_1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+
+                <TextView
+                    android:id="@+id/tv_running_days"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.2"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:padding="@dimen/padding_5"
+                    android:text="Run Days"
+                    android:textColor="@color/colorDarkBlack"
+                    android:textSize="@dimen/text_8" />
+
+
+                <View
+                    android:layout_width="@dimen/padding_1"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorDarkBlack" />
+
+
+
+
+                <TextView
+                    android:id="@+id/tv_non_run_days"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.2"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:padding="@dimen/padding_5"
+                    android:text="NonRun Days"
+                    android:textColor="@color/colorDarkBlack"
+                    android:textSize="@dimen/text_8" />
+
+
+                <View
+                    android:layout_width="@dimen/padding_1"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorDarkBlack" />
+
+                <TextView
+                    android:id="@+id/tv_leaves"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.2"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:padding="@dimen/padding_5"
+                    android:text="Leaves"
+                    android:textColor="@color/colorDarkBlack"
+                    android:textSize="@dimen/text_8" />
+
+
+                <View
+                    android:layout_width="@dimen/padding_1"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorDarkBlack" />
+
+
+
+                <TextView
+                    android:id="@+id/tv_absents"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.2"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:padding="@dimen/padding_5"
+                    android:text="Absents"
+                    android:textColor="@color/colorDarkBlack"
+                    android:textSize="@dimen/text_8" />
+
+
+                <View
+                    android:layout_width="@dimen/padding_1"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorDarkBlack" />
+
+
+                <TextView
+                    android:id="@+id/tv_total_duty"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.2"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:padding="@dimen/padding_5"
+                    android:text="Tot Duty"
+                    android:textColor="@color/colorDarkBlack"
+                    android:textSize="@dimen/text_8" />
+
+
+                <View
+                    android:layout_width="@dimen/padding_1"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorDarkBlack" />
+
+                <TextView
+                    android:id="@+id/tv_from"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:padding="@dimen/padding_5"
+                    android:text="From"
+                    android:textColor="@color/colorDarkBlack"
+                    android:textSize="@dimen/text_8" />
+
+
+                <View
+                    android:layout_width="@dimen/padding_1"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorDarkBlack" />
+
+
+                <TextView
+                    android:id="@+id/tv_to"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:padding="@dimen/padding_5"
+                    android:text="To"
+                    android:textColor="@color/colorDarkBlack"
+                    android:textSize="@dimen/text_8" />
+
+
+                <View
+                    android:layout_width="@dimen/padding_1"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorDarkBlack" />
+
+
+
+
+
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

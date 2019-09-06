@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorGrayBackground"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/padding_10"
+    android:paddingRight="@dimen/padding_10">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:paddingLeft="@dimen/padding_10"
+        android:paddingRight="@dimen/padding_10">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBlack"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/padding_1"
+            android:paddingLeft="@dimen/padding_1"
+            android:paddingRight="@dimen/padding_1">
+
+            <LinearLayout
+                android:id="@+id/linear_feeder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+
+                <TextView
+                    android:id="@+id/tv_feeders_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="@dimen/padding_5"
+                    android:text="Feeder Name"
+                    android:textColor="@color/colorDarkBlack"
+                    android:textSize="@dimen/text_8" />
+
+
+                <View
+                    android:layout_width="@dimen/padding_1"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorDarkBlack" />
+
+                <TextView
+                    android:id="@+id/tv_voltage"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="@dimen/padding_5"
+                    android:text="Traction"
+                    android:textColor="@color/colorDarkBlack"
+                    android:textSize="@dimen/text_8" />
+
+                <View
+                    android:layout_width="@dimen/padding_1"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorDarkBlack" />
+
+                <TextView
+                    android:id="@+id/tv_type_switch"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="@dimen/padding_5"
+                    android:text="Non-Traction"
+                    android:textColor="@color/colorDarkBlack"
+                    android:textSize="@dimen/text_8" />
+
+
+                <View
+                    android:layout_width="@dimen/padding_1"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorDarkBlack" />
+
+                <TextView
+                    android:id="@+id/tv_make"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="@dimen/padding_5"
+                    android:text="Total"
+                    android:textColor="@color/colorDarkBlack"
+                    android:textSize="@dimen/text_8" />
+
+
+                <View
+                    android:layout_width="@dimen/padding_1"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorDarkBlack" />
+
+                <TextView
+                    android:id="@+id/tv_rate_in_amp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="@dimen/padding_5"
+                    android:text="Traction"
+                    android:textColor="@color/colorDarkBlack"
+                    android:textSize="@dimen/text_8" />
+
+                <View
+                    android:layout_width="@dimen/padding_1"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorDarkBlack" />
+
+                <TextView
+                    android:id="@+id/tv_break_cap"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="@dimen/padding_5"
+                    android:text="Non-Traction"
+                    android:textColor="@color/colorDarkBlack"
+                    android:textSize="@dimen/text_8" />
+
+
+                <View
+                    android:layout_width="@dimen/padding_1"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorDarkBlack" />
+
+                <TextView
+                    android:id="@+id/tv_year_acqui"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="@dimen/padding_5"
+                    android:text="Total"
+                    android:textColor="@color/colorDarkBlack"
+                    android:textSize="@dimen/text_8" />
+
+
+                <View
+                    android:layout_width="@dimen/padding_1"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorDarkBlack" />
+
+                <TextView
+                    android:id="@+id/tv_cost_aqui"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="@dimen/padding_5"
+                    android:text="Traction"
+                    android:textColor="@color/colorDarkBlack"
+                    android:textSize="@dimen/text_8" />
+
+                <View
+                    android:layout_width="@dimen/padding_1"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorDarkBlack" />
+
+                <TextView
+                    android:id="@+id/tv_ct_ratio"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="@dimen/padding_5"
+                    android:text="Non-Traction"
+                    android:textColor="@color/colorDarkBlack"
+                    android:textSize="@dimen/text_8" />
+
+                <View
+                    android:id="@+id/view_meter_value"
+                    android:layout_width="@dimen/padding_1"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorDarkBlack" />
+
+                <TextView
+                    android:id="@+id/tv_meter_available"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="@dimen/padding_5"
+                    android:text=""
+                    android:textColor="@color/colorDarkBlack"
+                    android:textSize="@dimen/text_8" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

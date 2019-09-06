@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".abnorresponse_activity"
+    android:orientation="vertical">
+    <include layout="@layout/actionbar_layout" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txt_statment"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:background="@color/colorBlueText"
+            android:text="  The list of pending abnormalities.  "
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorWhite"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/dept"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:background="@color/colorBlueText"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorWhite"
+            android:visibility="visible" />
+
+    </LinearLayout>
+
+
+    <de.codecrafters.tableview.TableView
+        android:id="@+id/tableview"
+        android:padding="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:tableView_columnCount="3"
+        app:tableView_headerColor="@color/colorBlueGrey"
+        android:background="@drawable/splash_background1">
+    </de.codecrafters.tableview.TableView>
+
+
+
+
+
+</LinearLayout>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorGrayBackground"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_header_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorLine"
+                android:padding="@dimen/padding_5"
+                android:text="NR - JAN/2016"
+                android:textColor="@color/colorWhite"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_10"
+                android:background="@drawable/drop_shadow"
+                android:orientation="vertical"
+                android:padding="@dimen/padding_10">
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/til_tpr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_10">
+
+                    <EditText
+                        android:id="@+id/et_tpr"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/total_tpr"
+                        android:inputType="numberDecimal"
+                        android:padding="@dimen/padding_10"
+                        android:textColor="@color/colorBlack"
+                        android:textColorHint="@color/colorBlueText"
+                        android:textSize="@dimen/text_14" />
+                </android.support.design.widget.TextInputLayout>
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/til_tepr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_10">
+
+                    <EditText
+                        android:id="@+id/et_tepr"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/total_tepr"
+                        android:inputType="numberDecimal"
+                        android:padding="@dimen/padding_10"
+                        android:textColor="@color/colorBlack"
+                        android:textColorHint="@color/colorBlueText"
+                        android:textSize="@dimen/text_14" />
+                </android.support.design.widget.TextInputLayout>
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/til_total_rebate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_10">
+
+                    <EditText
+                        android:id="@+id/et_total_rebate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/total_rebate"
+                        android:inputType="numberDecimal"
+                        android:padding="@dimen/padding_10"
+                        android:textColor="@color/colorBlack"
+                        android:textColorHint="@color/colorBlueText"
+                        android:textSize="@dimen/text_14" />
+                </android.support.design.widget.TextInputLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/linear_buttons"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:gravity="center">
+
+                    <Button
+                        android:id="@+id/btn_submit"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+
+                        android:layout_weight="0.5"
+                        android:background="@color/colorButton"
+                        android:text="@string/submit"
+                        android:textColor="@color/colorWhite" />
+
+                    <View
+                        android:id="@+id/view_margin"
+                        android:layout_width="@dimen/margin_10"
+                        android:layout_height="match_parent"
+                        android:visibility="gone" />
+
+                    <Button
+                        android:id="@+id/btn_forward"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:background="@color/colorButton"
+                        android:text="@string/forward"
+                        android:textColor="@color/colorWhite"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/padding_1" />
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

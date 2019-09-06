@@ -1,0 +1,167 @@
+<resources>
+    <string name="app_name">CMS</string>
+    <string name="headline">CREW \n Management System</string>
+    <string name="login_id">Login ID</string>
+    <string name="login">Login</string>
+    <string name="copy_right">© Center For Railway Information System</string>
+    <string name="cms">CMS</string>
+    <string name="ir_greenri">CMS Reports</string>
+    <string name="photo_gallery">Photo Gallery</string>
+    <string name="useful_links">Useful Links</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="feedback">Feedback</string>
+    <string name="welcome_msg">Welcome \n To \n CREW Management System</string>
+    <string name="Enter_Abnormality_Description_here">Enter Abnormality Description here</string>
+    <string name="UPLOAD_IMAGE">UPLOAD IMAGE(if any)</string>
+    <string name="Enter_LOCO">Enter LOCO</string>
+    <string name="Submit">Submit</string>
+    <string name="RESET">RESET</string>
+    <string name="LOCO">LOCO</string>
+    <string name="ABNR_SUBHEAD">ABNR SUBHEAD</string>
+    <string name="ABNR_HEAD">ABNR HEAD</string>
+    <string name="Get_Section">Get Section</string>
+    <string name="To_Station">To Station</string>
+    <string name="From_Station">From Station</string>
+    <string name="Abnormality_Time">Abnormality Time</string>
+    <string name="cms_login">CMS Login</string>
+    <string name="ir_login">IR/Zone/Division/Lobby</string>
+    <string name="crew_login">Crew/LI</string>
+    <string name="blank">""</string>
+    <string name="Departmental_Abnormality_User">Departmental Abnormality User</string>
+    <string name="crew_position">Current Crew \n Position</string>
+    <string name="crew_strength">Crew \n Strength</string>
+    <string name="railway_wise_crew_strength">Crew Strength</string>
+    <string name="railway_wise_crew_availability">Crew Availability</string>
+    <string name="railway_wise_crew_position">Crew Position</string>
+
+    <string name="crew_utilization">Crew \n Utilization</string>
+    <string name="monthly_utilization">Monthly</string>
+    <string name="fortnightly_utilization">Fortnightly</string>
+    <string name="select_date">Select Date</string>
+
+
+    <string name="crew_availability">Crew \n Availability </string>
+    <string name="energy_consumption">Energy \n consumption</string>
+    <string name="li_crew_details">Crew Details For LI</string>
+    <string name="login_options">Login Options</string>
+    <string name="abnormality">Abnormality</string>
+    <string name="irregular_crew">Irregular Crew</string>
+    <string name="abnormality_report">Report Abnormality</string>
+    <string name="sfoorti">SFOORTI</string>
+
+    <string name="consumption">Consumption</string>
+    <string name="regneration">Regeneration</string>
+    <string name="sec_sfc">SEC / SFC</string>
+
+
+    <string name="crew_monitored">Crew \n Monitored</string>
+    <string name="grading">Grading</string>
+
+    <string name="biodata">Biodata</string>
+    <string name="training_details">Training\nDetails</string>
+    <string name="loco_competency">Loco\nCompetency</string>
+    <string name="road_learnings">Road\nLearning</string>
+    <string name="vcd_status">VCD Status</string>
+    <string name="crew_mileage">Mileage\nDetails</string>
+    <string name="overtime">Overtime\nDetails</string>
+    <string name="crew_availability_detail">Crew Availability\nDetail</string>
+    <string name="Future_Use">Future Use</string>
+
+    <string name="train_no">Train No</string>
+    <string name="consumption_entry">Consumption Entry</string>
+    <string name="sub_station">Sub-Station Consumption</string>
+    <string name="sub_station_lt">LT Connection Consumption</string>
+    <string name="mis_report">MIS Report</string>
+    <string name="sub_station_consumption">Sub-Station\n Consumption Dashboard</string>
+    <string name="action_title_consumption">Sub-Station Consumption Dashboard</string>
+    <string name="monthly_consumption">Monthly Consumption</string>
+    <string name="sub_station_cons">Sub-Station Report</string>
+    <string name="sub_station_assets">Assets Management Master Report</string>
+    <string name="assets_report">Assets Report</string>
+    <string name="railway_wise_consumption">Indian Railways Consumption</string>
+    <string name="spn_station_consumption">Sub-Station Consumption Dashboard</string>
+    <string name="consumption_analytics">Consumption Analytics</string>
+    <string name="other_options">Other Options</string>
+    <string name="submit">Submit</string>
+    <string name="connected_load">Connected Load (KW)</string>
+    <string name="from_time">From Time</string>
+    <string name="from_date">From Date</string>
+    <string name="to_date">To Date</string>
+    <string name="mdi">MDI (KVA)</string>
+    <string name="power_factor">PF (Power Factor)</string>
+    <string name="total_energy_consumed">Total Energy Consumed In Unit (KVAH/kWh)</string>
+    <string name="total_energy_bill">Total Energy Bill Paid (₹)</string>
+    <string name="normal_bill">Normal Bill</string>
+    <string name="total_bill">Total Bill (₹)</string>
+    <string name="average_cost">Average Cost (₹/Unit)</string>
+    <string name="remarks">Remarks</string>
+    <string name="save_n_next"><![CDATA[Save & Next]]></string>
+    <string name="total_mdi_charge">Total Excess MDI Surcharge (₹)</string>
+    <string name="total_pf">Total Low PF Surcharge (₹)</string>
+    <string name="total_tdps">Total Delayed Payment Surcharge (₹)</string>
+    <string name="total_tptm">Total Penalty of Traffic Min Charges (₹)</string>
+    <string name="total_tefs">Total Excess FCA Surcharge (₹)</string>
+    <string name="total_tpr">Total PF Rebate (₹)</string>
+    <string name="total_tepr">Total Early Payment Rebate (₹)</string>
+    <string name="total_rebate">Total E-Payment Rebate (₹)</string>
+    <string name="railway">Railway</string>
+    <string name="division">Division</string>
+    <string name="sse_incharge">SSE Incharge</string>
+    <string name="supc"><![CDATA[State Utilities & Power Companies]]></string>
+    <string name="no_of_connection">No. Of Connection</string>
+    <string name="total_connected_load">Total Connected Load (KVA)</string>
+    <string name="total_consumed_energy">Total Energy Consumed In Unit (KVAH/kWh)</string>
+    <string name="total_ebp">Total Energy Bill Paid (₹)</string>
+    <string name="avg_cost_energy">Average Cost Of Energy (₹/Units)</string>
+    <string name="otherthancms">Other than CMS</string>
+
+
+    <!-- SSL Strings -->
+    <string name="certificate_error">Certificate error.</string>
+    <string name="certificate_untrusted">Certificate is untrusted.</string>
+    <string name="certificate_expired">Certificate has expired.</string>
+    <string name="certificate_mistmatch">Certificate ID is mismatched.</string>
+    <string name="certificate_not_valid">Certificate is not yet valid.</string>
+    <string name="do_you_want_continue"> Do you want to continue anyway?</string>
+    <string name="cancel_string">Cancel</string>
+    <string name="ok_string">Ok</string>
+    <string name="username">Username</string>
+    <string name="arrears">Arrears</string>
+    <string name="amount">Amount</string>
+
+    <string name="filter">Apply</string>
+    <string name="contact_title">For any Queries/Suggestion please contact</string>
+    <string name="contact_1">Mr. R. K. Chaudhary, GGM/ELEC, CRIS,\n3rd Floor, ITPI Building, ITO, \nNew Delhi</string>
+    <string name="contact_2">Mr. R. K. Sharma, PPE/CMS</string>
+    <string name="contact_3">Praveen Malik  &amp; Vinod Kumar, SPE/CMS</string>
+    <string name="contact_4">Avinesh Kumar &amp; Sanjay Ranga, SPE/CMS</string>
+    <string name="contact_5">Surbhi Gupta, Harsh Kumar &amp; Arvind Kumar, PE/CMS</string>
+    <string name="annexure">Annexure - 14</string>
+    <string name="indian_railway">[INDIAN RAILWAY]</string>
+    <string name="energy_consumed_railway">Energy Consumed Railway Wise</string>
+    <string name="mis_railway">Railway</string>
+    <string name="mis_consumed_energy">Energy consumed in million units kWh</string>
+    <string name="mis_connected_load">Connected Load (KW)</string>
+    <string name="mis_bill_paid">Bill paid in million Rs.</string>
+    <string name="mis_avg_cost">Average cost of energy in Rs/kWh.</string>
+    <string name="get_mis_report">Report</string>
+    <string name="compare_billing">Billing</string>
+    <string name="compare_consumption">Consumption</string>
+    <string name="sub_heading">Sub heading</string>
+    <string name="mis_traction">Annexure Reports \nTraction</string>
+    <string name="mis_nontraction">Annexure Reports \nNon-Traction</string>
+    <string name="mis_planning">Planning Reports</string>
+    <string name="seb">SEB</string>
+    <string name="proceed">Proceed</string>
+    <string name="forward">Forward</string>
+    <string name="list_of_pending_abnormalities">List of pending Abnormalities.</string>
+    <string name="dialog_message">Welcome to alert dialog</string>
+    <string name="dialog_title">alert dialog</string>
+    <string name="name">NAME</string>
+    <string name="crew_id">Crew ID</string>
+    <string name="designation">Designation</string>
+    <string name="date_of_journey">Date of Journey</string>
+    <string name="traffice_advise_ta">Traffice Advise (TA)</string>
+
+
+</resources>

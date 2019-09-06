@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorBlack"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/margin_half"
+    android:paddingLeft="@dimen/padding_1"
+    android:paddingRight="@dimen/padding_1"
+    android:paddingTop="@dimen/margin_half">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <TextView
+            android:id="@+id/tv_transformer_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorWhite"
+            android:padding="@dimen/padding_10"
+            android:gravity="center"
+            android:text="Connected Load"
+            android:textColor="@color/colorDarkBlack"
+            android:textSize="@dimen/text_8" />
+
+        <View
+            android:layout_width="@dimen/padding_1"
+            android:layout_height="match_parent"
+            android:background="@color/colorBlack" />
+
+        <TextView
+            android:id="@+id/tv_transformer_type"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@color/colorWhite"
+            android:padding="@dimen/padding_10"
+            android:text="Connected Load"
+            android:textColor="@color/colorDarkBlack"
+            android:textSize="@dimen/text_8" />
+
+
+        <View
+            android:layout_width="@dimen/padding_1"
+            android:layout_height="match_parent"
+            android:background="@color/colorBlack" />
+
+        <TextView
+            android:id="@+id/tv_transformer_capacity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorWhite"
+            android:padding="@dimen/padding_10"
+            android:gravity="center"
+            android:text="Connected Load"
+            android:textColor="@color/colorDarkBlack"
+            android:textSize="@dimen/text_8" />
+    </LinearLayout>
+
+
+</LinearLayout>

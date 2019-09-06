@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.cris.cmsm.widget.JitinRLSlidingLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/slidingPaneLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="@dimen/pane_layout_width"
+        android:layout_height="match_parent"
+        android:layout_gravity="left"
+        android:background="@color/colorLine">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_10">
+
+            <TextView
+                android:id="@+id/tv_filters"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/text_16"
+                android:text="Filters"
+                android:textColor="@color/colorWhite" />
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/spn_ryCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_10"
+                android:background="@drawable/shape" />
+
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/spn_divCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_10"
+                android:background="@drawable/shape" />
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/spn_lobbyCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_10"
+                android:background="@drawable/shape" />
+
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/spn_department"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_10"
+                android:background="@drawable/shape" />
+
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/spn_fYear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_10"
+                android:background="@drawable/shape" />
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/spn_no_of_year"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_10"
+                android:background="@drawable/shape" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_10"
+                android:background="@drawable/shape"
+                android:orientation="vertical">
+
+
+
+                <com.cris.cmsm.widget.NonScrollListView
+                    android:id="@+id/listView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:divider="@null" />
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/btn_filter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_15"
+                android:background="@color/colorButton"
+                android:text="@string/filter"
+                android:textColor="@color/colorWhite" />
+        </LinearLayout>
+    </ScrollView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/actionbar_layout" />
+
+        <FrameLayout
+            android:id="@+id/parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorGrayBackground">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/padding_10">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/item_height"
+                        android:background="@color/colorWhite"
+                        android:orientation="vertical"
+                        android:padding="@dimen/padding_10">
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/tv_consumption"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:padding="@dimen/padding_10"
+                                android:textColor="@color/colorLine"
+                                android:textSize="@dimen/text_14" />
+
+                            <ImageView
+                                android:id="@+id/iv_zoom_cons"
+                                android:layout_width="@dimen/zoom_size"
+                                android:layout_height="@dimen/zoom_size"
+                                android:layout_gravity="right|top"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/icon_zoom" />
+                        </FrameLayout>
+
+                        <com.github.mikephil.charting.charts.PieChart
+                            android:id="@+id/pieChart"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/item_height"
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:background="@color/colorWhite"
+                        android:orientation="vertical"
+                        android:padding="@dimen/padding_10">
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/tv_billing"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:padding="@dimen/padding_10"
+                                android:textColor="@color/colorLine"
+                                android:textSize="@dimen/text_14" />
+
+                            <ImageView
+                                android:id="@+id/iv_zoom_bill"
+                                android:layout_width="@dimen/zoom_size"
+                                android:layout_height="@dimen/zoom_size"
+                                android:layout_gravity="right|top"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/icon_zoom" />
+                        </FrameLayout>
+
+                        <com.github.mikephil.charting.charts.PieChart
+                            android:id="@+id/bill_pieChart"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/item_height"
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:background="@color/colorWhite"
+                        android:orientation="vertical"
+                        android:padding="@dimen/padding_10">
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/tv_connected_load"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:padding="@dimen/padding_10"
+                                android:textColor="@color/colorLine"
+                                android:textSize="@dimen/text_14" />
+
+                            <ImageView
+                                android:id="@+id/iv_connected_load"
+                                android:layout_width="@dimen/zoom_size"
+                                android:layout_height="@dimen/zoom_size"
+                                android:layout_gravity="right|top"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/icon_zoom" />
+                        </FrameLayout>
+
+                        <com.github.mikephil.charting.charts.PieChart
+                            android:id="@+id/connected_load_pieChart"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </ScrollView>
+
+            <LinearLayout
+                android:id="@+id/showProgress"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorBlackTransparent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <ProgressBar
+                    android:id="@+id/progressBar1"
+                    android:layout_width="@dimen/padding_30"
+                    android:layout_height="@dimen/padding_30" />
+            </LinearLayout>
+        </FrameLayout>
+
+    </LinearLayout>
+</com.cris.cmsm.widget.JitinRLSlidingLayout>

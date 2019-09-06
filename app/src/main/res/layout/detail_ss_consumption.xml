@@ -1,0 +1,968 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/actionbar_layout" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorGrayBackground">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorGrayBackground"
+            android:padding="@dimen/padding_10">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/drop_shadow"
+                android:orientation="vertical"
+                android:padding="@dimen/padding_10">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorBlack"
+                    android:orientation="vertical"
+                    android:padding="@dimen/padding_1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorWhite"
+                        android:orientation="vertical">
+
+
+                        <TextView
+                            android:id="@+id/tv_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/colorWhite"
+                            android:padding="@dimen/padding_10"
+                            android:text="1.11 KV Sub-Station (Abna), Khandwa"
+                            android:textColor="@color/colorBlueText"
+                            android:textSize="@dimen/text_12" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/padding_1"
+                            android:background="@color/colorBlack" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/colorWhite"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:weightSum="10">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="@dimen/padding_5"
+                                android:text="RlyCode"
+                                android:textColor="@color/colorDarkBlack"
+                                android:textSize="@dimen/text_8" />
+
+                            <View
+                                android:layout_width="@dimen/padding_1"
+                                android:layout_height="match_parent"
+                                android:background="@color/colorBlack" />
+
+
+                            <TextView
+                                android:id="@+id/tv_rly"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="@dimen/padding_5"
+                                android:textColor="@color/colorDarkBlack"
+                                android:textSize="@dimen/text_8" />
+
+
+                            <View
+                                android:layout_width="@dimen/padding_1"
+                                android:layout_height="match_parent"
+                                android:background="@color/colorBlack" />
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="@dimen/padding_5"
+                                android:text="DivCode"
+                                android:textColor="@color/colorDarkBlack"
+                                android:textSize="@dimen/text_8" />
+
+
+                            <View
+                                android:layout_width="@dimen/padding_1"
+                                android:layout_height="match_parent"
+                                android:background="@color/colorBlack" />
+
+
+                            <TextView
+                                android:id="@+id/tv_divCode"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:padding="@dimen/padding_5"
+                                android:textColor="@color/colorDarkBlack"
+                                android:textSize="@dimen/text_8" />
+
+
+                            <View
+                                android:layout_width="@dimen/padding_1"
+                                android:layout_height="match_parent"
+                                android:background="@color/colorBlack" />
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="@dimen/padding_5"
+                                android:text="Name"
+                                android:textColor="@color/colorDarkBlack"
+                                android:textSize="@dimen/text_8" />
+
+
+                            <View
+                                android:layout_width="@dimen/padding_1"
+                                android:layout_height="match_parent"
+                                android:background="@color/colorBlack" />
+
+
+                            <TextView
+                                android:id="@+id/tv_name"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:padding="@dimen/padding_5"
+                                android:textColor="@color/colorDarkBlack"
+                                android:textSize="@dimen/text_8" />
+
+
+                            <View
+                                android:layout_width="@dimen/padding_1"
+                                android:layout_height="match_parent"
+                                android:background="@color/colorBlack" />
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="@dimen/padding_5"
+                                android:text="SEB"
+                                android:textColor="@color/colorDarkBlack"
+                                android:textSize="@dimen/text_8" />
+
+
+                            <View
+                                android:layout_width="@dimen/padding_1"
+                                android:layout_height="match_parent"
+                                android:background="@color/colorBlack" />
+
+
+                            <TextView
+                                android:id="@+id/tv_seb"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="@dimen/padding_5"
+                                android:textColor="@color/colorDarkBlack"
+                                android:textSize="@dimen/text_8" />
+
+                            <View
+                                android:layout_width="@dimen/padding_1"
+                                android:layout_height="match_parent"
+                                android:background="@color/colorBlack" />
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="@dimen/padding_5"
+                                android:text="State"
+                                android:textColor="@color/colorDarkBlack"
+                                android:textSize="@dimen/text_8" />
+
+
+                            <View
+                                android:layout_width="@dimen/padding_1"
+                                android:layout_height="match_parent"
+                                android:background="@color/colorBlack" />
+
+
+                            <TextView
+                                android:id="@+id/tv_state"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:padding="@dimen/padding_5"
+                                android:textColor="@color/colorDarkBlack"
+                                android:textSize="@dimen/text_8" />
+
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/padding_1"
+                            android:background="@color/colorBlack" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/colorWhite"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:weightSum="10">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="@dimen/padding_5"
+                                android:text="SSE Incharge"
+                                android:textColor="@color/colorDarkBlack"
+                                android:textSize="@dimen/text_8" />
+
+                            <View
+                                android:layout_width="@dimen/padding_1"
+                                android:layout_height="match_parent"
+                                android:background="@color/colorBlack" />
+
+
+                            <TextView
+                                android:id="@+id/tv_sse"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="@dimen/padding_5"
+                                android:textColor="@color/colorDarkBlack"
+                                android:textSize="@dimen/text_8" />
+
+
+                            <View
+                                android:layout_width="@dimen/padding_1"
+                                android:layout_height="match_parent"
+                                android:background="@color/colorBlack" />
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="@dimen/padding_5"
+                                android:text="Incoming Voltage"
+                                android:textColor="@color/colorDarkBlack"
+                                android:textSize="@dimen/text_8" />
+
+
+                            <View
+                                android:layout_width="@dimen/padding_1"
+                                android:layout_height="match_parent"
+                                android:background="@color/colorBlack" />
+
+
+                            <TextView
+                                android:id="@+id/tv_iv"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:padding="@dimen/padding_5"
+                                android:textColor="@color/colorDarkBlack"
+                                android:textSize="@dimen/text_8" />
+
+
+                            <View
+                                android:layout_width="@dimen/padding_1"
+                                android:layout_height="match_parent"
+                                android:background="@color/colorBlack" />
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="@dimen/padding_5"
+                                android:text="Connected Load"
+                                android:textColor="@color/colorDarkBlack"
+                                android:textSize="@dimen/text_8" />
+
+
+                            <View
+                                android:layout_width="@dimen/padding_1"
+                                android:layout_height="match_parent"
+                                android:background="@color/colorBlack" />
+
+
+                            <TextView
+                                android:id="@+id/tv_connected_load"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:padding="@dimen/padding_5"
+                                android:textColor="@color/colorDarkBlack"
+                                android:textSize="@dimen/text_8" />
+
+
+                            <View
+                                android:layout_width="@dimen/padding_1"
+                                android:layout_height="match_parent"
+                                android:background="@color/colorBlack" />
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="@dimen/padding_5"
+                                android:text="Contract Demand"
+                                android:textColor="@color/colorDarkBlack"
+                                android:textSize="@dimen/text_8" />
+
+
+                            <View
+                                android:layout_width="@dimen/padding_1"
+                                android:layout_height="match_parent"
+                                android:background="@color/colorBlack" />
+
+
+                            <TextView
+                                android:id="@+id/tv_contract_demand"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="@dimen/padding_5"
+                                android:textColor="@color/colorDarkBlack"
+                                android:textSize="@dimen/text_8" />
+
+                            <View
+                                android:layout_width="@dimen/padding_1"
+                                android:layout_height="match_parent"
+                                android:background="@color/colorBlack" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="@dimen/padding_5"
+                                android:text="Metered Substation"
+                                android:textColor="@color/colorDarkBlack"
+                                android:textSize="@dimen/text_8" />
+
+
+                            <View
+                                android:layout_width="@dimen/padding_1"
+                                android:layout_height="match_parent"
+                                android:background="@color/colorBlack" />
+
+
+                            <TextView
+                                android:id="@+id/ty_meter_type"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:padding="@dimen/padding_5"
+                                android:textColor="@color/colorDarkBlack"
+                                android:textSize="@dimen/text_8" />
+
+
+                        </LinearLayout>
+
+                        <View
+                            android:id="@+id/view_trd"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/padding_1"
+                            android:background="@color/colorBlack" />
+
+
+                        <LinearLayout
+                            android:id="@+id/linear_trd"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/colorWhite"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:weightSum="10">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="@dimen/padding_5"
+                                android:text="Date of Commissioning"
+                                android:textColor="@color/colorDarkBlack"
+                                android:textSize="@dimen/text_8" />
+
+                            <View
+                                android:layout_width="@dimen/padding_1"
+                                android:layout_height="match_parent"
+                                android:background="@color/colorBlack" />
+
+
+                            <TextView
+                                android:id="@+id/tv_date"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="@dimen/padding_5"
+                                android:textColor="@color/colorDarkBlack"
+                                android:textSize="@dimen/text_8" />
+
+
+                            <View
+                                android:layout_width="@dimen/padding_1"
+                                android:layout_height="match_parent"
+                                android:background="@color/colorBlack" />
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="@dimen/padding_5"
+                                android:text="Transmission Line Length"
+                                android:textColor="@color/colorDarkBlack"
+                                android:textSize="@dimen/text_8" />
+
+
+                            <View
+                                android:layout_width="@dimen/padding_1"
+                                android:layout_height="match_parent"
+                                android:background="@color/colorBlack" />
+
+
+                            <TextView
+                                android:id="@+id/tv_trans_line"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:padding="@dimen/padding_5"
+                                android:textColor="@color/colorDarkBlack"
+                                android:textSize="@dimen/text_8" />
+
+
+                            <View
+                                android:layout_width="@dimen/padding_1"
+                                android:layout_height="match_parent"
+                                android:background="@color/colorBlack" />
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="@dimen/padding_5"
+                                android:text="Transmission Line owned by Rly"
+                                android:textColor="@color/colorDarkBlack"
+                                android:textSize="@dimen/text_8" />
+
+
+                            <View
+                                android:layout_width="@dimen/padding_1"
+                                android:layout_height="match_parent"
+                                android:background="@color/colorBlack" />
+
+
+                            <TextView
+                                android:id="@+id/tv_transline_rly"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:padding="@dimen/padding_5"
+                                android:textColor="@color/colorDarkBlack"
+                                android:textSize="@dimen/text_8" />
+
+
+                            <View
+                                android:layout_width="@dimen/padding_1"
+                                android:layout_height="match_parent"
+                                android:background="@color/colorBlack" />
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="@dimen/padding_5"
+                                android:text="No. of Transformers"
+                                android:textColor="@color/colorDarkBlack"
+                                android:textSize="@dimen/text_8" />
+
+
+                            <View
+                                android:layout_width="@dimen/padding_1"
+                                android:layout_height="match_parent"
+                                android:background="@color/colorBlack" />
+
+
+                            <TextView
+                                android:id="@+id/tv_no_transformer"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="@dimen/padding_5"
+                                android:textColor="@color/colorDarkBlack"
+                                android:textSize="@dimen/text_8" />
+
+                            <View
+                                android:layout_width="@dimen/padding_1"
+                                android:layout_height="match_parent"
+                                android:background="@color/colorBlack" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="@dimen/padding_5"
+                                android:text="No. of Capaitors"
+                                android:textColor="@color/colorDarkBlack"
+                                android:textSize="@dimen/text_8" />
+
+
+                            <View
+                                android:layout_width="@dimen/padding_1"
+                                android:layout_height="match_parent"
+                                android:background="@color/colorBlack" />
+
+
+                            <TextView
+                                android:id="@+id/tv_no_capacitor"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:padding="@dimen/padding_5"
+                                android:textColor="@color/colorDarkBlack"
+                                android:textSize="@dimen/text_8" />
+
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/padding_1"
+                            android:background="@color/colorBlack" />
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/colorWhite"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:weightSum="10">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="@dimen/padding_5"
+                                android:text="No. of Outgoing Feeders"
+                                android:textColor="@color/colorDarkBlack"
+                                android:textSize="@dimen/text_8" />
+
+                            <View
+                                android:layout_width="@dimen/padding_1"
+                                android:layout_height="match_parent"
+                                android:background="@color/colorBlack" />
+
+
+                            <TextView
+                                android:id="@+id/tv_out_feeder"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="@dimen/padding_5"
+                                android:textColor="@color/colorDarkBlack"
+                                android:textSize="@dimen/text_8" />
+
+
+                            <View
+                                android:layout_width="@dimen/padding_1"
+                                android:layout_height="match_parent"
+                                android:background="@color/colorBlack" />
+
+
+                            <TextView
+                                android:id="@+id/tv_conn_type"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="@dimen/padding_5"
+                                android:text="Location"
+                                android:textColor="@color/colorDarkBlack"
+                                android:textSize="@dimen/text_8" />
+
+
+                            <View
+                                android:layout_width="@dimen/padding_1"
+                                android:layout_height="match_parent"
+                                android:background="@color/colorBlack" />
+
+                            <View
+                                android:layout_width="@dimen/padding_1"
+                                android:layout_height="match_parent" />
+
+                            <TextView
+                                android:id="@+id/tv_location"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="@dimen/margin_1"
+                                android:layout_weight="3.5"
+                                android:padding="@dimen/padding_5"
+                                android:textColor="@color/colorDarkBlack"
+                                android:textSize="@dimen/text_8" />
+
+                            <View
+                                android:layout_width="@dimen/padding_1"
+                                android:layout_height="match_parent"
+                                android:background="@color/colorBlack" />
+
+                            <View
+                                android:layout_width="@dimen/padding_2"
+                                android:layout_height="match_parent" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="@dimen/margin_1"
+                                android:layout_weight="3.5"
+                                android:padding="@dimen/padding_5"
+                                android:textColor="@color/colorDarkBlack"
+                                android:textSize="@dimen/text_8" />
+
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/padding_1"
+                            android:background="@color/colorBlack" />
+
+                        <LinearLayout
+                            android:id="@+id/linear_gen"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/margin_10"
+                            android:layout_marginTop="@dimen/margin_15"
+                            android:orientation="vertical">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/padding_1"
+                                android:background="@color/colorBlack" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/colorWhite"
+                                android:orientation="horizontal"
+                                android:weightSum="8">
+
+                                <TextView
+                                    android:id="@+id/tv_dgset"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:padding="@dimen/padding_5"
+                                    android:text="Dgset"
+                                    android:textColor="@color/colorDarkBlack"
+                                    android:textSize="@dimen/text_8" />
+
+
+                                <View
+                                    android:layout_width="@dimen/padding_1"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/colorDarkBlack" />
+
+                                <TextView
+                                    android:id="@+id/tv_transfr"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:padding="@dimen/padding_5"
+                                    android:text="Transformer"
+                                    android:textColor="@color/colorDarkBlack"
+                                    android:textSize="@dimen/text_8" />
+
+
+                                <View
+                                    android:layout_width="@dimen/padding_1"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/colorDarkBlack" />
+
+                                <TextView
+                                    android:id="@+id/tv_fireextinguisher"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:padding="@dimen/padding_5"
+                                    android:text="Fire Extinguisher"
+                                    android:textColor="@color/colorDarkBlack"
+                                    android:textSize="@dimen/text_8" />
+
+                                <View
+                                    android:layout_width="@dimen/padding_1"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/colorDarkBlack" />
+
+                                <TextView
+                                    android:id="@+id/tv_earthing"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:padding="@dimen/padding_5"
+                                    android:text="Earthing"
+                                    android:textColor="@color/colorDarkBlack"
+                                    android:textSize="@dimen/text_8" />
+
+
+                                <View
+                                    android:layout_width="@dimen/padding_1"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/colorDarkBlack" />
+
+                                <TextView
+                                    android:id="@+id/tv_apfc"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:padding="@dimen/padding_5"
+                                    android:text="APFC Panel"
+                                    android:textColor="@color/colorDarkBlack"
+                                    android:textSize="@dimen/text_8" />
+
+
+                                <View
+                                    android:layout_width="@dimen/padding_1"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/colorDarkBlack" />
+
+
+                                <TextView
+                                    android:id="@+id/tv_ltpanel"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:padding="@dimen/padding_5"
+                                    android:text="LT Panel"
+                                    android:textColor="@color/colorDarkBlack"
+                                    android:textSize="@dimen/text_8" />
+
+                                <View
+                                    android:layout_width="@dimen/padding_1"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/colorDarkBlack" />
+
+                                <TextView
+                                    android:id="@+id/tv_htpanel"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:padding="@dimen/padding_5"
+                                    android:text="HT Panel"
+                                    android:textColor="@color/colorDarkBlack"
+                                    android:textSize="@dimen/text_8" />
+
+                                <View
+                                    android:layout_width="@dimen/padding_1"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/colorDarkBlack" />
+
+                                <TextView
+                                    android:id="@+id/tv_servostabilizer"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:padding="@dimen/padding_5"
+                                    android:text="Servo Stabilizer"
+                                    android:textColor="@color/colorDarkBlack"
+                                    android:textSize="@dimen/text_8" />
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/padding_1"
+                                android:background="@color/colorBlack" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+
+                            <LinearLayout
+                                android:id="@+id/ll_feeder"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@color/colorWhite"
+                                android:orientation="vertical"
+                                android:padding="@dimen/padding_10"
+                                android:visibility="gone">
+
+                                <TextView
+                                    android:id="@+id/tv_feeders"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@color/colorWhite"
+                                    android:text="Feeders"
+                                    android:textColor="@color/colorBlueText"
+                                    android:textSize="@dimen/text_12" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@color/colorWhite"
+                                    android:orientation="horizontal"
+                                    android:padding="@dimen/padding_10">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="@color/colorBlack"
+                                        android:paddingBottom="@dimen/margin_half"
+                                        android:paddingTop="@dimen/margin_half">
+
+                                        <com.cris.cmsm.widget.NonScrollListView
+                                            android:id="@+id/lv_feeder"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:divider="@null"
+                                            android:dividerHeight="0dp" />
+                                    </LinearLayout>
+
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/ll_transformer"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@color/colorWhite"
+                                android:orientation="vertical"
+                                android:padding="@dimen/padding_10"
+                                android:visibility="gone">
+
+                                <TextView
+                                    android:id="@+id/tv_transformer"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@color/colorWhite"
+                                    android:text="Transformer"
+                                    android:textColor="@color/colorBlueText"
+                                    android:textSize="@dimen/text_12" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@color/colorWhite"
+                                    android:orientation="horizontal"
+                                    android:padding="@dimen/padding_10">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="@color/colorBlack"
+                                        android:paddingBottom="@dimen/margin_half"
+                                        android:paddingTop="@dimen/margin_half">
+
+                                        <com.cris.cmsm.widget.NonScrollListView
+                                            android:id="@+id/lv_transformer"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:divider="@null"
+                                            android:dividerHeight="0dp" />
+                                    </LinearLayout>
+
+                                </LinearLayout>
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_capacitor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/colorWhite"
+                            android:orientation="vertical"
+                            android:padding="@dimen/padding_10"
+                            android:visibility="gone">
+
+                            <TextView
+                                android:id="@+id/tv_capacitor"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/colorWhite"
+                                android:text="Capacitor Banks"
+                                android:textColor="@color/colorBlueText"
+                                android:textSize="@dimen/text_12" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/colorWhite"
+                                android:orientation="horizontal"
+                                android:padding="@dimen/padding_10">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@color/colorBlack"
+                                    android:paddingBottom="@dimen/margin_half"
+                                    android:paddingTop="@dimen/margin_half">
+
+                                    <com.cris.cmsm.widget.NonScrollListView
+                                        android:id="@+id/lv_capacitor"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:divider="@null"
+                                        android:dividerHeight="0dp" />
+                                </LinearLayout>
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
