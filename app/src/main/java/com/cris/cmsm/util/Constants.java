@@ -40,7 +40,7 @@ public class Constants {
     public static final int SLOT_OVERTIME_DETAILS= 202;
     public static final int CREW_AVAILABILITY_DETAIL= 203;
     public static final int Report_Abnormality= 204;
-    public static final int IRREGULAR_CREW= 205;
+    public static final int Grading=205;
     public static final int Loginot=44;
     public static final int ABNORMALITYLIST=41;
     public static final int ABNORMALITY_DETAILS=45;
@@ -50,10 +50,18 @@ public class Constants {
     public static final int GETABNORMALITYLISTSUBMITTED=48;
     public static final int CHANGEPASSWORD=49;
     public static final int SUBHEADLIST=51;
+    public static final int CrewCounselling=206;
+    public static final int CREWCURRENTSTATUS=207;
+    public static final int LICREWSTATUS=208;
 
     public static final int SAVEABNORMALITY=52;
+    public static final int ABNORMALITYANALYSISCOUNT=53;
+    public static final int ABNORMALITYANALYSISCOUNTWITHPARAM=54;
 
-
+    public static final int GET_SECTIONS=55;
+    public static final int GET_CREWLIST=56;
+    public static final int SAVE_LI_GRADING = 57;
+    public static final int SAVE_LI_COUNSELLING= 58;
     /**********
      * Web Services
      *********/
@@ -126,7 +134,8 @@ public class Constants {
     public static final int CONS_SEB_WISE = 1;
     public static final int CONS_STATE_WISE = 2;
     public static final int CONS_DIVISION_WISE = 3;
-
+    public static final int Abnrcount= 16;
+    public static final int Abnrcountparam= 17;
     /****************
      * Billing Value
      ****************/
@@ -177,6 +186,7 @@ public class Constants {
     public static final int TABULAR_SUMMARY_REPORT = 11;
     public static final int ASSETS_REPORT_SUMMARY = 12;
     public static final int ASSETS_REPORT_DETAILS = 13;
+
 
     public static final String note = "Division wise data not filled status is available in month wise report.";
 
