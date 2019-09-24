@@ -47,6 +47,7 @@ public class CommonClass {
     }
 
 
+
     public void showProgressBar(String msg) {
         if (progressDialog == null || (progressDialog != null && !progressDialog.isShowing())) {
             progressDialog = new ProgressDialog(context);
@@ -488,47 +489,4 @@ public class CommonClass {
             return index;
         }
     }
-
-
-
-    public static List<KeyValue> getCrewAvailabilityType() {
-
-        List<KeyValue> keyValueList = new ArrayList<>();
-        keyValueList.add(new KeyValue("HQ Crew FIFO", "CrewAvailableFIFO"));
-        keyValueList.add(new KeyValue("HQ Crew FAFO", "CrewAvailableFAFO"));
-        keyValueList.add(new KeyValue("HQ Crew Prgs Hrs", "CrewAvailablePrg"));
-        keyValueList.add(new KeyValue("HQ Crew at OS", "HQCREWATOS"));
-        keyValueList.add(new KeyValue("OS Crew at HQ", "OSCREWATHQ"));
-        keyValueList.add(new KeyValue("All Crew at HQ", "AllCrewatHQ"));
-
-
-        return keyValueList;
-    }
-
-
-    public static List<KeyValue> getCadre() {
-
-        List<KeyValue> keyValueList = new ArrayList<>();
-        keyValueList.add(new KeyValue("All", "E','M','B"));
-        keyValueList.add(new KeyValue("Electrical", "E"));
-        keyValueList.add(new KeyValue("Mechnical", "M"));
-
-        return keyValueList;
-    }
-
-
-    public static List<KeyValue> getTraction() {
-
-        List<KeyValue> keyValueList = new ArrayList<>();
-        keyValueList.add(new KeyValue("All", "ALL"));
-        keyValueList.add(new KeyValue("Elec", "ELEC"));
-        keyValueList.add(new KeyValue("Dsl", "DSL"));
-
-
-        return keyValueList;
-    }
-
-
-
-
 }
