@@ -13,6 +13,7 @@ import com.cris.cmsm.models.request.SaveConsumption;
 import com.cris.cmsm.models.request.SubStationConsumption;
 import com.cris.cmsm.models.response.AbnormalityResponse;
 import com.cris.cmsm.models.response.CrewAvailabilityDetailResponse;
+import com.cris.cmsm.models.response.IrregularCrewResponse;
 import com.cris.cmsm.models.response.Paramresponse;
 import com.cris.cmsm.models.response.VcdStatusResponse;
 import com.cris.cmsm.models.response.BillingResponse;
@@ -175,6 +176,7 @@ public class DataHolder {
     private CrewMileageDetailsVO crewMileageDetailsVO;
     private EnergyConsumptionRequest energyConsumptionRequest;
     private CrewAvailabilityDetailResponse crewAvailabilityDetailResponse;
+    private IrregularCrewResponse irregularCrewResponse;
 
     public static String getUserid(){ return userid;}
     public static void setUserid(String userid){DataHolder.userid=userid;}
@@ -244,6 +246,13 @@ public class DataHolder {
         this.abnormalityResponse = abnormalityResponse;
     }
 
+    public IrregularCrewResponse getIrregularCrewResponse() {
+        return irregularCrewResponse;
+    }
+
+    public void setIrregularCrewResponse(IrregularCrewResponse irregularCrewResponse) {
+        this.irregularCrewResponse = irregularCrewResponse;
+    }
 
     public VcdStatusResponse getVcdStatusResponse() {
         return vcdStatusResponse;
