@@ -41,6 +41,7 @@ public class Constants {
     public static final int CREW_AVAILABILITY_DETAIL= 203;
     public static final int Report_Abnormality= 204;
     public static final int IRREGULAR_CREW= 205;
+
     public static final int Loginot=44;
     public static final int ABNORMALITYLIST=41;
     public static final int ABNORMALITY_DETAILS=45;
