@@ -6,6 +6,8 @@ package com.cris.cmsm.util;
 public class URLS {
 
     public static final String BASE_URL = "https://cms.indianrail.gov.in/CMSWEBSERVICE/";
+
+    //public static final String BASE_URL = "https://203.176.113.112/CMSWEBSERVICE/";
     //public static final String BASE_URL = "http://172.16.25.45:9080/CMSWEBSERVICE/";
     public static final String LOGIN = "master/validateuser";
     public static final String CREW_UTILIZATION = "master/getCrewUtilizationEDW";
@@ -23,7 +25,6 @@ public class URLS {
     public static final String ENERGY_REGENERATION = "master/getEnergyRegenerationEDW";
     public static final String SEC_SFC = "master/getSecSfcEDW";
     public static final String ABNORMALITY = "master/getAbnormalityEDW";
-    public static final String IRREGULAR_CREW = "master/getIrregularCrewSummary";
     public static final String LI_CREW_MONITORED = "master/getLICrewMonitored";
     public static final String KEY_VALUE = "master/getKeyValue";
     public static final String CREW_BIODATA = "master/getCrewBiodata";
@@ -87,5 +88,11 @@ public class URLS {
     public static final String SECTION="master/getSectionList";
     public static final String SUBHEADLIST="master/getAbnrSubheadList";
     public static final String SAVEABNORMALITY="master/saveAbnormality";
-
+    public static final String ABNORMALITYANALYSISCOUNT="master/getAbnormalityAnalysisCount";
+    public static final String ABNORMALITYANALYSISCOUNTWITHPARAM="master/getAbnormalityAnalysisCountWithParam";
+    public static final String GET_SECTIONS="master/getDivisionSectionList";
+    public static final String GET_CREWLIST="master/getCrewListLI";
+    public static final String SAVE_LI_GRADING = "master/saveLIgrading";
+    public static final String SAVE_LI_COUNSELLING = "master/saveCrewConsFP";
+    public static final String LICREWSTATUS="master/getLICrewMonitoredstatus";
 }
