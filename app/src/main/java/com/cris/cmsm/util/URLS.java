@@ -95,4 +95,5 @@ public class URLS {
     public static final String SAVE_LI_GRADING = "master/saveLIgrading";
     public static final String SAVE_LI_COUNSELLING = "master/saveCrewConsFP";
     public static final String LICREWSTATUS="master/getLICrewMonitoredstatus";
+
 }
