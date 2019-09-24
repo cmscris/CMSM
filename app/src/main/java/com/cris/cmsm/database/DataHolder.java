@@ -13,8 +13,6 @@ import com.cris.cmsm.models.request.SaveConsumption;
 import com.cris.cmsm.models.request.SubStationConsumption;
 import com.cris.cmsm.models.response.AbnormalityResponse;
 import com.cris.cmsm.models.response.CrewAvailabilityDetailResponse;
-import com.cris.cmsm.models.response.IrregularCrew;
-import com.cris.cmsm.models.response.IrregularCrewResponse;
 import com.cris.cmsm.models.response.Paramresponse;
 import com.cris.cmsm.models.response.VcdStatusResponse;
 import com.cris.cmsm.models.response.BillingResponse;
@@ -37,7 +35,9 @@ import com.cris.cmsm.models.response.SubStationResponse;
 import com.cris.cmsm.models.response.SubstationResponseVO;
 import com.cris.cmsm.models.response.TabularReportVO;
 import com.cris.cmsm.models.response.ThreeYearData;
+import com.cris.cmsm.models.response.VosList;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -47,6 +47,11 @@ public class DataHolder {
 
 
     private static int level = 0;
+
+
+
+
+
     private static int global_level = 0;
     private static String zone = "";
     private static String division = "";
@@ -62,64 +67,27 @@ public class DataHolder {
     public static String roleid="";
     public static String rlycode="";
     public static String fname="";
+    public static String AbnrType="";
+    public static ArrayList<String> limovlist;
+    public static ArrayList<ArrayList<String>> limovmainlist;
 
-    private static DataHolder instance = null;
-    private ConsumptionResponse railWayConsumption;
-    private BillingResponse railWayBilling;
-    private ResMonthlyCons resMonthlyCons;
-    private ResMonthlyBill resMonthlyBill;
-    private Object misResponse;
-    private ThreeYearData threeYearData;
-    private BoardStateModel boardStateModel;
-    private ConSummaryRequest conSummaryRequest;
-    private SubStationResponse subStationResponse;
-    private SaveConsumption saveConsumption;
-    private SubStationConsumption consumption;
-    private MISReportRequest misReportRequest;
-    private BillingResponse billingResponse;
-    private ConsumptionResponse consumptionResponse;
-    private SubStationRes subStationRes;
-    private TabularReportVO tabularReportVO;
-    private ResponseAssetDetails summaryResponse;
-    private RequestSSAssets summaryRequest;
-    private List<CrewPositionSummaryResponse> CrewPositionSummaryResponses;
-    private Paramresponse paramresponse;
-
-
-
-    private CrewUtilResponse crewUtilResponse;
-    private GraphAPIRequest graphAPIRequest;
-    private AbnormalityResponse abnormalityResponse;
-    private IrregularCrewResponse irregularCrewResponse;
-    private VcdStatusResponse vcdStatusResponse;
-    private LICrewMonitoredResponse liCrewMonitoredResponse;
-    private CrewMileageDetailsVO crewMileageDetailsVO;
-    private EnergyConsumptionRequest energyConsumptionRequest;
-    private CrewAvailabilityDetailResponse crewAvailabilityDetailResponse;
-
-
-    public static String getUserid(){ return userid;}
-    public static void setUserid(String userid){DataHolder.userid=userid;}
-    public static String getPassword(){return password;}
-    public static void setPassword(String password){DataHolder.password=password;}
-    public Paramresponse getParamresponse() {
-        return paramresponse;
+    public static ArrayList <ArrayList <String>> getLimovmainlist() {
+        return limovmainlist;
     }
-    public static String getCrewId(){return crewId;}
-    public static void setCrewId(String crewId){DataHolder.crewId=crewId;}
-    public static String getAbnrNumber(){return abnrNumber;}
-    public static void setAbnrNumber(String abnrNumber){DataHolder.abnrNumber=abnrNumber;}
-    public static String getRoleid(){return roleid;}
-    public static void setRoleid(String roleid){DataHolder.roleid=roleid;}
-    public static String getRlycode(){return rlycode;}
-    public static void setRlycode(String rlycode){DataHolder.rlycode=rlycode;}
+
+    public static void setLimovmainlist(ArrayList <ArrayList <String>> limovmainlist) {
+        DataHolder.limovmainlist = limovmainlist;
+    }
 
 
 
+    public static ArrayList <String> getLimovlist() {
+        return limovlist;
+    }
 
-
-
-
+    public static void setLimovlist(ArrayList <String> limovlist) {
+        DataHolder.limovlist = limovlist;
+    }
 
 
     public static String getLoginid() {
@@ -152,7 +120,7 @@ public class DataHolder {
         AbnrType = abnrType;
     }
 
-    public static String AbnrType="";
+
 
     public static String getFname() {
         return fname;
@@ -162,6 +130,67 @@ public class DataHolder {
         DataHolder.fname = fname;
     }
 
+
+
+    private static DataHolder instance = null;
+    private ConsumptionResponse railWayConsumption;
+    private BillingResponse railWayBilling;
+    private ResMonthlyCons resMonthlyCons;
+    private ResMonthlyBill resMonthlyBill;
+    private Object misResponse;
+    private ThreeYearData threeYearData;
+    private BoardStateModel boardStateModel;
+    private ConSummaryRequest conSummaryRequest;
+    private SubStationResponse subStationResponse;
+    private SaveConsumption saveConsumption;
+    private SubStationConsumption consumption;
+    private MISReportRequest misReportRequest;
+    private BillingResponse billingResponse;
+    private ConsumptionResponse consumptionResponse;
+    private SubStationRes subStationRes;
+    private TabularReportVO tabularReportVO;
+    private ResponseAssetDetails summaryResponse;
+    private RequestSSAssets summaryRequest;
+    private List<CrewPositionSummaryResponse> CrewPositionSummaryResponses;
+    private Paramresponse paramresponse;
+
+
+
+    public List <VosList> getVosLists() {
+        return vosLists;
+    }
+
+    public void setVosLists(List <VosList> vosLists) {
+        this.vosLists = vosLists;
+    }
+
+    private List<VosList> vosLists;
+
+
+    private CrewUtilResponse crewUtilResponse;
+    private GraphAPIRequest graphAPIRequest;
+    private AbnormalityResponse abnormalityResponse;
+    private VcdStatusResponse vcdStatusResponse;
+    private LICrewMonitoredResponse liCrewMonitoredResponse;
+    private CrewMileageDetailsVO crewMileageDetailsVO;
+    private EnergyConsumptionRequest energyConsumptionRequest;
+    private CrewAvailabilityDetailResponse crewAvailabilityDetailResponse;
+
+    public static String getUserid(){ return userid;}
+    public static void setUserid(String userid){DataHolder.userid=userid;}
+    public static String getPassword(){return password;}
+    public static void setPassword(String password){DataHolder.password=password;}
+    public Paramresponse getParamresponse() {
+        return paramresponse;
+    }
+    public static String getCrewId(){return crewId;}
+    public static void setCrewId(String crewId){DataHolder.crewId=crewId;}
+    public static String getAbnrNumber(){return abnrNumber;}
+    public static void setAbnrNumber(String abnrNumber){DataHolder.abnrNumber=abnrNumber;}
+    public static String getRoleid(){return roleid;}
+    public static void setRoleid(String roleid){DataHolder.roleid=roleid;}
+    public static String getRlycode(){return rlycode;}
+    public static void setRlycode(String rlycode){DataHolder.rlycode=rlycode;}
 
     public static String getTraction() {
         return traction;
@@ -215,13 +244,6 @@ public class DataHolder {
         this.abnormalityResponse = abnormalityResponse;
     }
 
-    public IrregularCrewResponse getIrregularCrewResponse() {
-        return irregularCrewResponse;
-    }
-
-    public void setIrregularCrewResponse(IrregularCrewResponse irregularCrewResponse) {
-        this.irregularCrewResponse = irregularCrewResponse;
-    }
 
     public VcdStatusResponse getVcdStatusResponse() {
         return vcdStatusResponse;
@@ -331,7 +353,13 @@ public class DataHolder {
         this.summaryRequest = summaryRequest;
     }
 
+    public CrewAvailabilityDetailResponse getCrewAvailabilityDetailResponse() {
+        return crewAvailabilityDetailResponse;
+    }
 
+    public void setCrewAvailabilityDetailResponse(CrewAvailabilityDetailResponse crewAvailabilityDetailResponse) {
+        this.crewAvailabilityDetailResponse = crewAvailabilityDetailResponse;
+    }
     public ResponseAssetDetails getSummaryResponse() {
         return summaryResponse;
     }
@@ -633,13 +661,6 @@ public class DataHolder {
         this.resMonthlyCons = resMonthlyCons;
     }
 
-    public CrewAvailabilityDetailResponse getCrewAvailabilityDetailResponse() {
-        return crewAvailabilityDetailResponse;
-    }
-
-    public void setCrewAvailabilityDetailResponse(CrewAvailabilityDetailResponse crewAvailabilityDetailResponse) {
-        this.crewAvailabilityDetailResponse = crewAvailabilityDetailResponse;
-    }
 
     public void AssignNull() {
         DataHolder.getInstance().setConsumptionResponse(null);
