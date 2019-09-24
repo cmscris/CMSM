@@ -155,6 +155,10 @@ public class HomeActivity extends AppCompatActivity implements ResponseView, Rec
                 list.add(new MenuModel(R.color.colorCardOrange, R.drawable.crew_position, res.getString(R.string.crew_monitored)));
                 list.add(new MenuModel(R.color.colorCardFive, R.drawable.consumption_analytics, res.getString(R.string.crew_availability_detail)));
                 list.add(new MenuModel(R.color.colorCardFive, R.drawable.abnormality,"Report Abnormality"));
+                list.add(new MenuModel(R.color.colorCardOrange,R.drawable.consumption_analytics,res.getString(R.string.grading)));
+                list.add(new MenuModel(R.color.colorCardOrange,R.drawable.crew_position,res.getString(R.string.crew_counselling)));
+                list.add(new MenuModel(R.color.colorCardFive,R.drawable.crew_position,"Crew Current Status"));
+                list.add(new MenuModel(R.color.colorCardFive, R.drawable.consumption_analytics,"LI Movement"));
                 //list.add(new MenuModel(R.color.colorTeal, R.drawable.feedback, res.getString(R.string.feedback)));
             }
             else
@@ -234,6 +238,28 @@ public class HomeActivity extends AppCompatActivity implements ResponseView, Rec
             DataHolder.setType(Constants.Report_Abnormality);
             System.out.println(">>>>>>>>>>>>>>step1 for abnoramlity fill>>>>>>>>>>>>>>>>>>>>>>>> ");
             CommonClass.goToNextScreen(HomeActivity.this, Abnormality_fill_activity.class, true, false);
+        }
+        else if(model.getMenuTitle().equals("Grading")){
+            DataHolder.setType(Constants.Grading);
+            System.out.println(">>>>>>>>>>>>>>step1 for crew grading>>>>>>>>>>>>>>>>>>>>>>>> ");
+            CommonClass.goToNextScreen(HomeActivity.this, Grading.class, true, false);
+        }
+        else if(model.getMenuTitle().equals("Crew Counselling")){
+            DataHolder.setType(Constants.CrewCounselling);
+            System.out.println(">>>>>>>>>>>>>>step1 for crew Counselling>>>>>>>>>>>>>>>>>>>>>>>> ");
+            CommonClass.goToNextScreen(HomeActivity.this, Grading.class, true, false);
+        }
+        else if(model.getMenuTitle().equals("Crew Current Status")){
+            DataHolder.setType(Constants.CREWCURRENTSTATUS);
+            System.out.println(">>>>>>>>>>>>>>step1 for crew current status>>>>>>>>>>>>>>>>>>>>>>>> ");
+            CommonClass.goToNextScreen(HomeActivity.this, Crew_Current_Status.class, true, false);
+            // CommonClass.goToNextScreen(HomeActivity.this, LICrewsttstable.class, true, false);
+        }
+        else if(model.getMenuTitle().equals("LI Movement")){
+            DataHolder.setType(Constants.CREWCURRENTSTATUS);
+            System.out.println(">>>>>>>>>>>>>>step1 for crew current status>>>>>>>>>>>>>>>>>>>>>>>> ");
+            CommonClass.goToNextScreen(HomeActivity.this,LImovement.class, true, false);
+            // CommonClass.goToNextScreen(HomeActivity.this, LICrewsttstable.class, true, false);
         }
         else if (model.getMenuTitle().equals(res.getString(R.string.sfoorti))) {
 
