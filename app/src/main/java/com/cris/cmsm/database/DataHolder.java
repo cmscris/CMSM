@@ -1,5 +1,6 @@
 package com.cris.cmsm.database;
 
+import com.cris.cmsm.Limovdraftresponse;
 import com.cris.cmsm.models.BoardStateModel;
 import com.cris.cmsm.models.request.AssetManagementModel;
 import com.cris.cmsm.models.request.ConSummaryRequest;
@@ -70,13 +71,13 @@ public class DataHolder {
     public static String fname="";
     public static String AbnrType="";
     public static ArrayList<String> limovlist;
-    public static ArrayList<ArrayList<String>> limovmainlist;
+    public static ArrayList<Limovdraftresponse> limovmainlist;
 
-    public static ArrayList <ArrayList <String>> getLimovmainlist() {
+    public static ArrayList <Limovdraftresponse> getLimovmainlist() {
         return limovmainlist;
     }
 
-    public static void setLimovmainlist(ArrayList <ArrayList <String>> limovmainlist) {
+    public static void setLimovmainlist(ArrayList <Limovdraftresponse> limovmainlist) {
         DataHolder.limovmainlist = limovmainlist;
     }
 
