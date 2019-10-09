@@ -1,11 +1,10 @@
 package com.cris.cmsm.presenter;
 
-import com.cris.cmsm.models.request.ConSummaryRequest;
+import com.cris.cmsm.models.KeyValue;
 import com.cris.cmsm.models.request.GraphAPIRequest;
 import com.cris.cmsm.models.response.AbnormalityResponse;
-import com.cris.cmsm.models.response.IrregularCrewResponse;
+import com.cris.cmsm.models.response.KeyValueResponse;
 import com.cris.cmsm.models.response.VcdStatusResponse;
-import com.cris.cmsm.models.response.ConsumptionResponse;
 import com.cris.cmsm.models.response.CrewUtilResponse;
 import com.google.gson.Gson;
 import com.cris.cmsm.database.DataHolder;
@@ -120,19 +119,19 @@ public class MonthlyRequestPresenter implements RequestView {
 
 
             case Constants.IRREGULAR_CREW:
-                graphAPIRequest = (GraphAPIRequest) object;
+                KeyValue keyValue = (KeyValue) object;
                 showProgress(msg);
-                System.out.println("Request is " + new Gson().toJson(graphAPIRequest));
-                WebServices.getInstance().getService().getIrregularCrew(graphAPIRequest).enqueue(new Callback<IrregularCrewResponse>() {
+                System.out.println("Request is " + new Gson().toJson(keyValue));
+                WebServices.getInstance().getService().getIrregularCrew(keyValue).enqueue(new Callback<KeyValueResponse>() {
                     @Override
-                    public void onResponse(Call<IrregularCrewResponse> call, Response<IrregularCrewResponse> response) {
+                    public void onResponse(Call<KeyValueResponse> call, Response<KeyValueResponse> response) {
                         dismissProgress();
                         // System.out.println("Response is " + new Gson().toJson(response));
                         view.ResponseOk(response.body(), position);
                     }
 
                     @Override
-                    public void onFailure(Call<IrregularCrewResponse> call, Throwable t) {
+                    public void onFailure(Call<KeyValueResponse> call, Throwable t) {
                         dismissProgress();
                         view.Error();
                     }

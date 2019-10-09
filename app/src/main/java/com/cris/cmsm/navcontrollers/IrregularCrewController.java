@@ -5,7 +5,6 @@ package com.cris.cmsm.navcontrollers;
         import android.support.annotation.Nullable;
         import android.support.v7.widget.AppCompatSpinner;
         import android.text.TextUtils;
-        import android.util.Log;
         import android.view.View;
         import android.widget.AdapterView;
         import android.widget.Button;
@@ -17,21 +16,15 @@ package com.cris.cmsm.navcontrollers;
         import com.cris.cmsm.R;
         import com.cris.cmsm.adapter.DivisonAdapter;
         import com.cris.cmsm.adapter.LobbyAdapter;
-        import com.cris.cmsm.adapter.MonthAdapter;
         import com.cris.cmsm.adapter.RailwayAdapter;
-        import com.cris.cmsm.adapter.SpinnerAdapter;
         import com.cris.cmsm.database.DataBaseManager;
         import com.cris.cmsm.database.DataHolder;
         import com.cris.cmsm.models.Division;
+        import com.cris.cmsm.models.KeyValue;
         import com.cris.cmsm.models.Lobby;
-        import com.cris.cmsm.models.Month;
         import com.cris.cmsm.models.Railway;
         import com.cris.cmsm.models.request.ConSummaryRequest;
-        import com.cris.cmsm.models.request.GraphAPIRequest;
-        import com.cris.cmsm.models.request.RequestSSERole;
-        import com.cris.cmsm.models.response.AbnormalityResponse;
-        import com.cris.cmsm.models.response.CrewUtilResponse;
-        import com.cris.cmsm.models.response.IrregularCrewResponse;
+        import com.cris.cmsm.models.response.KeyValueResponse;
         import com.cris.cmsm.models.response.LoginIfoVO;
         import com.cris.cmsm.prefrences.UserLoginPreferences;
         import com.cris.cmsm.presenter.MonthlyRequestPresenter;
@@ -40,6 +33,7 @@ package com.cris.cmsm.navcontrollers;
         import com.cris.cmsm.util.CommonClass;
         import com.cris.cmsm.util.Constants;
         import com.cris.cmsm.util.FontFamily;
+        import com.google.gson.Gson;
 
         import java.util.ArrayList;
         import java.util.List;
@@ -100,10 +94,10 @@ public class IrregularCrewController extends BaseActivity implements View.OnClic
         action_bar_title = findViewById(R.id.action_bar_title);
         iv_title_icon = findViewById(R.id.iv_title_icon);
         iv_title_icon.setImageResource(R.drawable.iv_back);
-        action_bar_title.setText(getResources().getString(R.string.abnormality));
+        action_bar_title.setText(getResources().getString(R.string.irregular_crew));
         tv_filters.setTypeface(font);
         action_bar_title.setTypeface(font);
-        tv_filters.setText("Abnormality");
+        tv_filters.setText("Irregular Crew");
 
         iv_title_icon.setOnClickListener(this);
         btn_filter.setOnClickListener(this);
@@ -187,18 +181,66 @@ public class IrregularCrewController extends BaseActivity implements View.OnClic
             case R.id.btn_filter:
 
 
-                if( spn_lobbyCode.getSelectedItem().equals("All Lobby"))
-                {
-                    commonClass.showToast("Please select a Lobby");
-                }
-                else
-                {
-                    if (CommonClass.checkInternetConnection(IrregularCrewController.this)) {
-                        callWebService(Constants.IRREGULAR_CREW);
+                // GET THE SELECTED DATA
+                String zone = ((Railway) spn_ryCode.getSelectedItem()).getRlycode();
+                String division = ((Division) spn_divCode.getSelectedItem()).getDivcode();
+                String lobby = ((Lobby) spn_lobbyCode.getSelectedItem()).getLobbycode();
+
+
+                System.out.println("Zone : >> " + zone);
+                System.out.println("Division : >> " + division);
+                System.out.println("Lobby : >> " + lobby);
+
+
+
+                    if (CommonClass.checkInternetConnection(IrregularCrewController.this))
+                    {
+                        //callWebService(Constants.IRREGULAR_CREW);
+
+                        KeyValue request = new KeyValue();
+
+
+
+
+                            if(zone.trim().equals(""))  // FOR ALL IR
+                            {
+                                request.setKey("IR");
+                                request.setValue("IR");
+                            }
+                            else
+                            {
+                                if(division.trim().equals("")) // FOR ALL DIVISIONS OF THE SELECTED ZONE
+                                {
+                                    request.setKey("ZONE");
+                                    request.setValue(zone);
+                                }
+                                else
+                                {
+                                    if(lobby.trim().equals(""))    // FOR ALL LOBBIES OF THE SELECTED DIVISION
+                                    {
+                                        request.setKey("DIV");
+                                        request.setValue(division);
+                                    }
+                                    else    // FOR THE SELECTED LOBBY
+                                    {
+                                        request.setKey("LOBBY");
+                                        request.setValue(lobby);
+                                    }
+                                }
+                            }
+
+                        System.out.println("Zone : >> " + zone);
+                        System.out.println("Division : >> " + division);
+                        System.out.println("Lobby : >> " + lobby);
+
+                        DataHolder.getInstance().setKeyValue(request);
+                            CommonClass.goToNextScreen(IrregularCrewController.this, IrregularCrewReportController.class, false, false);
+
+
                     } else {
                         commonClass.showToast("No internet available.");
                     }
-                }
+
 
                 break;
         }
@@ -248,25 +290,15 @@ public class IrregularCrewController extends BaseActivity implements View.OnClic
     private void callWebService(int cat) {
         try {
 
-            GraphAPIRequest request = new GraphAPIRequest();
 
-            if(cat == Constants.IRREGULAR_CREW)
-            {
-                // GET THE LOBBY CODE
-                request.setLobbyCode(((Lobby) spn_lobbyCode.getSelectedItem()).getLobbycode());
+            // GET THE LIST OF LOBBIES
 
-                DataHolder.getInstance().setGraphAPIRequest(request);
-                monthlyRequestPresenter.Request(request, "Getting Abnormality Report", Constants.IRREGULAR_CREW);
-
-            }
-            else    // GET THE LIST OF LOBBIES
-            {
                 ConSummaryRequest conrequest = new ConSummaryRequest();
                 conrequest.setRailway(((Railway) spn_ryCode.getSelectedItem()).getRlycode());
                 conrequest.setDivision(((Division) spn_divCode.getSelectedItem()).getDivcode());
 
                 requestPresenter.Request(conrequest, "Getting Lobby List", Constants.LOBBY_LIST);
-            }
+
 
 
         } catch (Exception e) {
@@ -292,14 +324,6 @@ public class IrregularCrewController extends BaseActivity implements View.OnClic
                 break;
 
 
-            case Constants.IRREGULAR_CREW:
-                IrregularCrewResponse irregularCrewResponse = (IrregularCrewResponse) object;
-                if (irregularCrewResponse != null && irregularCrewResponse.getIrregularCrewList() != null) {
-                    DataHolder.getInstance().setIrregularCrewResponse(irregularCrewResponse);
-                    CommonClass.goToNextScreen(IrregularCrewController.this, AbnormalityReportController.class, false, false);
-                } else
-                    commonClass.showToast("No data available.");
-                break;
         }
     }
 

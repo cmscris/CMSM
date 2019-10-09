@@ -1,6 +1,7 @@
 package com.cris.cmsm.database;
 
 import com.cris.cmsm.models.BoardStateModel;
+import com.cris.cmsm.models.KeyValue;
 import com.cris.cmsm.models.request.AssetManagementModel;
 import com.cris.cmsm.models.request.ConSummaryRequest;
 import com.cris.cmsm.models.request.EnergyConsumptionRequest;
@@ -13,8 +14,7 @@ import com.cris.cmsm.models.request.SaveConsumption;
 import com.cris.cmsm.models.request.SubStationConsumption;
 import com.cris.cmsm.models.response.AbnormalityResponse;
 import com.cris.cmsm.models.response.CrewAvailabilityDetailResponse;
-import com.cris.cmsm.models.response.IrregularCrew;
-import com.cris.cmsm.models.response.IrregularCrewResponse;
+import com.cris.cmsm.models.response.KeyValueResponse;
 import com.cris.cmsm.models.response.Paramresponse;
 import com.cris.cmsm.models.response.VcdStatusResponse;
 import com.cris.cmsm.models.response.BillingResponse;
@@ -62,6 +62,7 @@ public class DataHolder {
     public static String roleid="";
     public static String rlycode="";
     public static String fname="";
+    private KeyValue keyValue;
 
     private static DataHolder instance = null;
     private ConsumptionResponse railWayConsumption;
@@ -87,10 +88,11 @@ public class DataHolder {
 
 
 
+
     private CrewUtilResponse crewUtilResponse;
     private GraphAPIRequest graphAPIRequest;
     private AbnormalityResponse abnormalityResponse;
-    private IrregularCrewResponse irregularCrewResponse;
+    private KeyValueResponse keyValueResponse;
     private VcdStatusResponse vcdStatusResponse;
     private LICrewMonitoredResponse liCrewMonitoredResponse;
     private CrewMileageDetailsVO crewMileageDetailsVO;
@@ -215,12 +217,12 @@ public class DataHolder {
         this.abnormalityResponse = abnormalityResponse;
     }
 
-    public IrregularCrewResponse getIrregularCrewResponse() {
-        return irregularCrewResponse;
+    public KeyValueResponse getKeyValueResponse() {
+        return keyValueResponse;
     }
 
-    public void setIrregularCrewResponse(IrregularCrewResponse irregularCrewResponse) {
-        this.irregularCrewResponse = irregularCrewResponse;
+    public void setKeyValueResponse(KeyValueResponse keyValueResponse) {
+        this.keyValueResponse = keyValueResponse;
     }
 
     public VcdStatusResponse getVcdStatusResponse() {
@@ -639,6 +641,14 @@ public class DataHolder {
 
     public void setCrewAvailabilityDetailResponse(CrewAvailabilityDetailResponse crewAvailabilityDetailResponse) {
         this.crewAvailabilityDetailResponse = crewAvailabilityDetailResponse;
+    }
+
+    public KeyValue getKeyValue() {
+        return keyValue;
+    }
+
+    public void setKeyValue(KeyValue keyValue) {
+        this.keyValue = keyValue;
     }
 
     public void AssignNull() {

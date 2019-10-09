@@ -100,9 +100,10 @@ public class Constants {
 
 
     public static final String KEY = "Consumption_entry";
-    public static final String PAGE_URL = "http://www.google.com";
+    public static final String PAGE_URL = "PAGE_URL";
     public static final String PAGE_TITLE = "PAGE_TITLE";
     public static final String IRGREENRI = "https://cms.indianrail.gov.in/indexAndroid.html";
+    public static final String TRAINENQUIRYFREIGHT = "https://cms.indianrail.gov.in/TRAINENQ/JSP/integrationFois/trainRunningDetailLoco.do?hmode=loadJSP&app=CMS";
     public static final String SFOORTI = "http://fois.indianrail.gov.in/foisweb/view/qry/GG_LoginCms.jsp?txtProj=CMSSFOORTI&USERID=CMSMAPP&PSWD=CMSMAPP";
     public static final String IMAGE_URL = "IMAGE_URL";
     /********************

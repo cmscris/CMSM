@@ -44,6 +44,7 @@ public class IrregularCrew {
     private String missedDutyShuntingLink48;
 
 
+
     public String getLobby() {
         return lobby;
     }
@@ -139,4 +140,5 @@ public class IrregularCrew {
     public void setMissedDutyShuntingLink48(String missedDutyShuntingLink48) {
         this.missedDutyShuntingLink48 = missedDutyShuntingLink48;
     }
+
 }

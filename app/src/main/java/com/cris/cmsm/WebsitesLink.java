@@ -53,6 +53,10 @@ public class WebsitesLink extends BaseActivity {
         } else {
             action_bar_title.setText(pageTitle);
         }
+
+        Log.d("Constants ----  ", Constants.PAGE_URL);
+        Log.d("URL ----  ", webIntent.getStringExtra(Constants.PAGE_URL));
+
         webView.loadUrl(webIntent.getStringExtra(Constants.PAGE_URL));
         action_bar_title.setTypeface(fontFamily);
         iv_title_icon.setVisibility(View.VISIBLE);
