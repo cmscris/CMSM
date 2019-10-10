@@ -72,7 +72,7 @@ public class LI_activity_detail_page extends AppCompatActivity implements
     private UserLoginPreferences userLoginPreferences;
     String Hour, Minute, id, fromdt, todt, frmsttn, tosttn, loco, train, remrk,frmmonth,tomonth,fromdttime,todttime;
     int pickfrmdt,picktodt,pickfrmyear,j,pickfrmmonth,picktomonth,picktoyear,pickfrmhour,picktohour,pickfrmmin,picktomin;
-    Button save, clear,update;
+    Button save, clear,update,btn_del;
 
     int i = 0;
     PinchRecyclerView pinchview;
@@ -101,6 +101,7 @@ public class LI_activity_detail_page extends AppCompatActivity implements
         save = (Button) findViewById(R.id.save);
         clear = (Button) findViewById(R.id.clear);
         update =(Button)findViewById(R.id.btn_updt);
+        btn_del=(Button)findViewById(R.id.btn_del);
         iv_title_icon = findViewById(R.id.iv_title_icon);
         iv_right = findViewById(R.id.iv_right);
         iv_middle = findViewById(R.id.iv_middle);
@@ -164,8 +165,19 @@ update.setVisibility(View.GONE);
         lis.setKm("KMS");
         lis.setRmk("REMARK");
         lis.setEdit("EDIT");
-        lis.setDel("DEL");
+        //lis.setDel("DEL");
         titlelist.add(lis);
+        btn_del.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int j=Integer.parseInt(sn);
+                DataHolder.getLimovmainlist().remove(j);
+                update.setVisibility(View.GONE);
+                save.setVisibility(View.VISIBLE);
+
+
+            }
+        });
         iv_title_icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -272,7 +284,7 @@ update.setVisibility(View.GONE);
                    limovdraftresponse.setKm(et_km.getText().toString());
                    limovdraftresponse.setRmk(et_remark.getText().toString());
                    limovdraftresponse.setEdit("EDIT");
-                   limovdraftresponse.setDel("DEL");
+                   //limovdraftresponse.setDel("DEL");
 
                    liresponsePrev = (ArrayList) DataHolder.getLimovmainlist();
                    System.out.println("size of liresponse list before " + liresponse.size());

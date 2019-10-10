@@ -74,7 +74,7 @@ public class LoginActivity extends AppCompatActivity implements ResponseView, Vi
         et_password.setTypeface(fontFamily.getRegular());
         btn_login.setTypeface(fontFamily.getBold());
         tv_copyright.setTypeface(fontFamily.getRegular());
-btn_reset.setVisibility(View.GONE);
+        btn_reset.setVisibility(View.GONE);
         //commonClass.showToast("Login Type : " + DataHolder.getLogin_type());
 
 
@@ -83,7 +83,7 @@ btn_reset.setVisibility(View.GONE);
 
 
 
-        if (!DataHolder.getLogin_type().equals("IR") && !DataHolder.getLogin_type().equals("ABNORMALITY USER") ) {
+        if (!DataHolder.getLogin_type().equals("IR") && !DataHolder.getLogin_type().equals("ABNORMALITY USER")) {
             et_user.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
         }
         if(DataHolder.getLogin_type().equals("ABNORMALITY USER")){
@@ -124,7 +124,7 @@ btn_reset.setVisibility(View.GONE);
             requestPresenter.Request(request, "Please wait", Constants.Loginot);
 
 
-            System.out.println("Logging in progress");
+            System.out.println("Logging in progress1111111111111");
         }
         else requestPresenter.Request(request, "Please wait", Constants.LOGIN);
     }
@@ -149,12 +149,15 @@ btn_reset.setVisibility(View.GONE);
 
     @Override
     public void ResponseOk(Object object, int position) {
+
         try {
+            if(object.equals(null)){
+                retryDialog(LoginActivity.this, "Loginid and Password not exist. Do you want to retry?");
+
+            }
             if (object instanceof LoginResponse) {
                 LoginResponse loginResponse = (LoginResponse) object;
                 if (loginResponse.getIsSuccess()) {
-
-
                     UserLoginPreferences userLoginPreferences = new UserLoginPreferences(LoginActivity.this);
                     userLoginPreferences.setLogin(loginResponse.getIsSuccess());
                     userLoginPreferences.setLoginUser(loginResponse.getLoginIfoVO());
@@ -164,24 +167,45 @@ btn_reset.setVisibility(View.GONE);
 
                     //System.out.println(" >>>>LoginId" + loginResponse.getLoginIfoVO().getCrewid());
                     DataHolder.setLoginid(loginResponse.getLoginIfoVO().getLoginid());
-                   // System.out.println(" >>>>CrewId" + loginResponse.getLoginIfoVO().getCrewid());
+                    System.out.println(" >>>>CrewId" + DataHolder.getLoginid());
+                    // System.out.println(" >>>>CrewId" + loginResponse.getLoginIfoVO().getCrewid());
                     System.out.println(" >>>>designation" + loginResponse.getLoginIfoVO().getDesignation());
                     DataHolder.setDesignation(loginResponse.getLoginIfoVO().getDesignation());
+                    String Rlycode = loginResponse.getLoginIfoVO().getRlycode();
+                    String Roleid = loginResponse.getLoginIfoVO().getRoleid();
+                    String username=loginResponse.getLoginIfoVO().getFname();
+                    /*if(DataHolder.getLogin_type().equals("Division ABNORMALITY USER")){
+                        System.out.println("Logging sucess>>>>>>>>>>ALL" + loginResponse.getLoginIfoVO().getRoleid());
+                        *//*final ArrayList <String> ablist2 = new ArrayList <>();
+                        ablist2.add(Rlycode);
+                        ablist2.add(Roleid);
+                        ablist2.add(username);*//*
+                        CommonClass.goToHome(LoginActivity.this,Abnormality_Dashboard.class, true);
+
+                    }*/
                     if (DataHolder.getLogin_type().equals("ABNORMALITY USER")) {
                         System.out.println("Logging sucess>>>>>>>>>>" + loginResponse.getLoginIfoVO().getRlycode());
                         System.out.println("Logging sucess>>>>>>>>>>" + loginResponse.getLoginIfoVO().getRoleid());
 
-                        String Rlycode = loginResponse.getLoginIfoVO().getRlycode();
-                        String Roleid = loginResponse.getLoginIfoVO().getRoleid();
-                        String username=loginResponse.getLoginIfoVO().getFname();
+
                         final ArrayList <String> ablist = new ArrayList <>();
                         ablist.add(Rlycode);
                         ablist.add(Roleid);
                         ablist.add(username);
 
-                       Intent i = new Intent(LoginActivity.this, Before_abnoresponselist_activity.class);
-                        i.putExtra("object", ablist);
-                        startActivity(i);
+                        if(loginResponse.getLoginIfoVO().getRoleid().equals("ALL")){
+                            System.out.println("Inside ALL>>>>>>>>>>");
+                            Intent i=new Intent(LoginActivity.this,Abnormality_Dashboard.class);
+                            i.putExtra("object",loginResponse.getLoginIfoVO().getRlycode());
+                            startActivity(i);
+                            //CommonClass.goToHome(LoginActivity.this,Abnormality_Dashboard.class, true);
+
+                        }else {
+
+                            Intent i = new Intent(LoginActivity.this, Before_abnoresponselist_activity.class);
+                            i.putExtra("object", ablist);
+                            startActivity(i);
+                        }
                        /*Intent i = new Intent(LoginActivity.this,abnoresponselist.class);
                         i.putExtra("object", ablist);
                         startActivity(i);
@@ -189,20 +213,15 @@ btn_reset.setVisibility(View.GONE);
                        startActivity(i);*/
                     }
 
-                    else{
+                    else {
+                        System.out.println("Logging sucess>>>>>>>>>>ALL>>>>>>>>>>>");
                         CommonClass.goToHome(LoginActivity.this,HomeActivity.class, true);
 
 
-                } }
-                if(loginResponse.getIsSuccess().booleanValue()==false){
-                    retryDialog(LoginActivity.this, "Loginid and Password not exist. Do you want to retry?");
-
+                    }
                 }
-                else
-                {
-                    retryDialog(LoginActivity.this, "Unable to Login. Do you want to retry?");
-                } }
-    } catch (Exception e) {
+            }
+        } catch (Exception e) {
             retryDialog(LoginActivity.this, "Unable to Login. Do you want to retry?");
             e.printStackTrace();
         }

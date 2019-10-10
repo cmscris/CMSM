@@ -88,7 +88,7 @@ public class Limovadapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             item.tv_tran.setText(model.getTrain());
             item.tv_rmk.setText(model.getRmk());
             item.tv_edit.setText(model.getEdit());
-            item.tv_del.setText(model.getDel());
+            //item.tv_del.setText(model.getDel());
             item.tv_edit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -120,7 +120,7 @@ public class Limovadapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
                 }
             });
-item.tv_del.setOnClickListener(new View.OnClickListener() {
+/*item.tv_del.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
         System.out.println(">>>>>>>>>>>id"+v.getId());
@@ -130,7 +130,7 @@ item.tv_del.setOnClickListener(new View.OnClickListener() {
 removeItem(pos);
         System.out.println(">>>>>>>>>>>id"+pos);
     }
-});
+});*/
 
             if (pos == 0) {
 
@@ -144,7 +144,7 @@ removeItem(pos);
                 item.tv_tran.setTypeface(null, Typeface.BOLD);
                 item.tv_rmk.setTypeface(null, Typeface.BOLD);
                 item.tv_edit.setTypeface(null, Typeface.BOLD);
-                item.tv_del.setTypeface(null, Typeface.BOLD);
+               // item.tv_del.setTypeface(null, Typeface.BOLD);
                 item.tv_via1.setTypeface(null, Typeface.BOLD);
                 item.tv_via2.setTypeface(null, Typeface.BOLD);
 
@@ -180,7 +180,7 @@ removeItem(pos);
     }
     public void removeItem(int position) {
         System.out.println(">>>>>>>>>Inside Removeitem>>>>>>>>>>>>>"+position);
-        int indrem=position-1;
+        int indrem=position;
 
         //list.remove(position);
         DataHolder.getLimovmainlist().remove(indrem);
@@ -212,7 +212,7 @@ removeItem(pos);
             tv_tran = (TextView) itemView.findViewById(R.id.tv_tran);
             tv_rmk = (TextView) itemView.findViewById(R.id.tv_rmk);
             tv_edit = (TextView) itemView.findViewById(R.id.tv_edit);
-            tv_del = (TextView) itemView.findViewById(R.id.tv_del);
+           // tv_del = (TextView) itemView.findViewById(R.id.tv_del);
 
 
 

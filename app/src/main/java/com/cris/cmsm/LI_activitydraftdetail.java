@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -29,11 +30,12 @@ import java.util.ArrayList;
 public class LI_activitydraftdetail extends AppCompatActivity implements OnItemClickListener  {
 
  PinchRecyclerView pinchRecyclerView;
+ Button bt_submit;
 
     private LoginIfoVO loginInfoModel;
     private UserLoginPreferences userLoginPreferences;
     TableLayout tableLayout;
-
+    ArrayList innerList;
 ArrayList<String> itemdatalist,listitem;
     ArrayList<Limovdraftresponse> senditemdatalist,senditemdatalist1;
     int i = 0;
@@ -43,6 +45,7 @@ ArrayList<String> itemdatalist,listitem;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_li_activitydraftdetail);
+        bt_submit=(Button)findViewById(R.id.btn_submit);
         pinchRecyclerView=(PinchRecyclerView)findViewById(R.id.pinchrecview);
        pinchRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         tableLayout = (TableLayout) findViewById(R.id.tablelayout);
@@ -52,7 +55,8 @@ ArrayList<String> itemdatalist,listitem;
         listitem=new ArrayList <>();
         senditemdatalist=new ArrayList<>();
         senditemdatalist1=new ArrayList <>();
-        ArrayList innerList = new ArrayList();
+        innerList = new ArrayList();
+
         ReportHeaderView reportHeaderView = new ReportHeaderView();
         String header_str = "LI : " + loginInfoModel.getLoginid();
 
@@ -78,7 +82,12 @@ ArrayList<String> itemdatalist,listitem;
 
         pinchRecyclerView.setAdapter(new Limovadapter(LI_activitydraftdetail.this,reportHeaderView,LI_activitydraftdetail.this,innerList));
 
-
+        bt_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("Fianal List to submit--->>>>>>>>"+innerList);
+            }
+        });
 
            }
 
