@@ -15,7 +15,6 @@ import com.cris.cmsm.models.request.SaveConsumption;
 import com.cris.cmsm.models.request.SubStationConsumption;
 import com.cris.cmsm.models.response.AbnormalityResponse;
 import com.cris.cmsm.models.response.CrewAvailabilityDetailResponse;
-import com.cris.cmsm.models.response.IrregularCrewResponse;
 import com.cris.cmsm.models.response.KeyValueResponse;
 import com.cris.cmsm.models.response.Paramresponse;
 import com.cris.cmsm.models.response.VcdStatusResponse;
@@ -204,13 +203,7 @@ public class DataHolder {
         this.abnormalityResponse = abnormalityResponse;
     }
 
-    public IrregularCrewResponse getIrregularCrewResponse() {
-        return irregularCrewResponse;
-    }
 
-    public void setIrregularCrewResponse(IrregularCrewResponse irregularCrewResponse) {
-        this.irregularCrewResponse = irregularCrewResponse;
-    }
     public VcdStatusResponse getVcdStatusResponse() {
         return vcdStatusResponse;
     }
