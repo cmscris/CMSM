@@ -29,16 +29,11 @@ import com.cris.cmsm.navcontrollers.AssetsReportController;
 import com.cris.cmsm.navcontrollers.BoardController;
 import com.cris.cmsm.navcontrollers.CompareConsumController;
 import com.cris.cmsm.navcontrollers.CrewAvailabilityController;
-import com.cris.cmsm.navcontrollers.CrewAvailabilityDetailController;
 import com.cris.cmsm.navcontrollers.CrewAvailabilityDetailFilterController;
 import com.cris.cmsm.navcontrollers.CrewDetailsController;
 import com.cris.cmsm.navcontrollers.CrewPositionController;
-import com.cris.cmsm.navcontrollers.CrewUtilizationController;
 import com.cris.cmsm.navcontrollers.DetailController;
-import com.cris.cmsm.navcontrollers.EnergyConsumptionController;
-import com.cris.cmsm.navcontrollers.GraphController;
 import com.cris.cmsm.navcontrollers.IrregularCrewController;
-import com.cris.cmsm.navcontrollers.KeyValueController;
 import com.cris.cmsm.navcontrollers.LICrewMonitoredReportController;
 import com.cris.cmsm.navcontrollers.MonthGraphController;
 import com.cris.cmsm.navcontrollers.SubStationConsController;
@@ -142,7 +137,7 @@ public class HomeActivity extends AppCompatActivity implements ResponseView, Rec
             list.add(new MenuModel(R.color.colorCardOrange, R.drawable.mis_reporting, res.getString(R.string.energy_consumption)));
             list.add(new MenuModel(R.color.colorCardFive, R.drawable.abnormality, res.getString(R.string.abnormality)));
             list.add(new MenuModel(R.color.colorCardFive, R.drawable.vcd_status, res.getString(R.string.vcd_status)));
-            list.add(new MenuModel(R.color.colorCardOrange, R.drawable.abnormality, res.getString(R.string.irregular_crew)));
+            list.add(new MenuModel(R.color.colorCardOrange, R.drawable.irregular, res.getString(R.string.irregular_crew)));
             //list.add(new MenuModel(R.color.colorCardOrange, R.drawable.ir, res.getString(R.string.sfoorti)));
             list.add(new MenuModel(R.color.colorCardSix, R.drawable.photo_gallery, res.getString(R.string.photo_gallery)));
             //list.add(new MenuModel(R.color.colorTeal, R.drawable.feedback, res.getString(R.string.feedback)));
@@ -186,6 +181,7 @@ public class HomeActivity extends AppCompatActivity implements ResponseView, Rec
         }
 
 
+        list.add(new MenuModel(R.color.colorCardOrange, R.drawable.icon_websites,res.getString(R.string.train_enquiry_freight)));
         return list;
 
     }
@@ -236,8 +232,10 @@ public class HomeActivity extends AppCompatActivity implements ResponseView, Rec
             CommonClass.goToNextScreen(HomeActivity.this, CrewAvailabilityDetailFilterController.class, true, false);
         }else if(model.getMenuTitle().equals(res.getString(R.string.abnormality_report))){
             DataHolder.setType(Constants.Report_Abnormality);
-            System.out.println(">>>>>>>>>>>>>>step1 for abnoramlity fill>>>>>>>>>>>>>>>>>>>>>>>> ");
             CommonClass.goToNextScreen(HomeActivity.this, Abnormality_fill_activity.class, true, false);
+        }
+        else if(model.getMenuTitle().equals(res.getString(R.string.train_enquiry_freight))){
+            CommonClass.goToNextScreen(HomeActivity.this, WebsitesLink.class, true, res.getString(R.string.train_enquiry_freight), Constants.TRAINENQUIRYFREIGHT);
         }
         else if(model.getMenuTitle().equals("Grading")){
             DataHolder.setType(Constants.Grading);

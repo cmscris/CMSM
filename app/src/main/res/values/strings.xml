@@ -66,6 +66,7 @@
     <string name="crew_mileage">Mileage\nDetails</string>
     <string name="overtime">Overtime\nDetails</string>
     <string name="crew_availability_detail">Crew Availability\nDetail</string>
+    <string name="train_enquiry_freight">Train Enquiry\n(Freight)</string>
     <string name="Future_Use">Future Use</string>
 
     <string name="train_no">Train No</string>

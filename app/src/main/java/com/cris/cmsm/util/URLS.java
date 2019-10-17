@@ -97,6 +97,5 @@ public class URLS {
     public static final String LICREWSTATUS="master/getLICrewMonitoredstatus";
 
 
-    public static final String IRREGULAR_CREW = "master/getIrregularCrewSummary";
-
+    public static final String IRREGULAR_CREW = "master/getIrregularCrewSummaryForChalakDal";
 }

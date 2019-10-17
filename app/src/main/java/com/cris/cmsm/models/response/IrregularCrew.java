@@ -135,6 +135,7 @@ public class IrregularCrew extends AbnormalityResponseVO {
 
 
 
+
     public String getLobby() {
         return lobby;
     }
@@ -230,4 +231,5 @@ public class IrregularCrew extends AbnormalityResponseVO {
     public void setMissedDutyShuntingLink48(String missedDutyShuntingLink48) {
         this.missedDutyShuntingLink48 = missedDutyShuntingLink48;
     }
+
 }

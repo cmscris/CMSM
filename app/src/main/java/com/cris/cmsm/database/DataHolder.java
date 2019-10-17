@@ -2,6 +2,7 @@ package com.cris.cmsm.database;
 
 import com.cris.cmsm.Limovdraftresponse;
 import com.cris.cmsm.models.BoardStateModel;
+import com.cris.cmsm.models.KeyValue;
 import com.cris.cmsm.models.request.AssetManagementModel;
 import com.cris.cmsm.models.request.ConSummaryRequest;
 import com.cris.cmsm.models.request.EnergyConsumptionRequest;
@@ -15,6 +16,7 @@ import com.cris.cmsm.models.request.SubStationConsumption;
 import com.cris.cmsm.models.response.AbnormalityResponse;
 import com.cris.cmsm.models.response.CrewAvailabilityDetailResponse;
 import com.cris.cmsm.models.response.IrregularCrewResponse;
+import com.cris.cmsm.models.response.KeyValueResponse;
 import com.cris.cmsm.models.response.Paramresponse;
 import com.cris.cmsm.models.response.VcdStatusResponse;
 import com.cris.cmsm.models.response.BillingResponse;
@@ -49,11 +51,6 @@ public class DataHolder {
 
 
     private static int level = 0;
-
-
-
-
-
     private static int global_level = 0;
     private static String zone = "";
     private static String division = "";
@@ -133,6 +130,7 @@ public class DataHolder {
     }
 
 
+    private KeyValue keyValue;
 
     private static DataHolder instance = null;
     private ConsumptionResponse railWayConsumption;
@@ -172,12 +170,13 @@ public class DataHolder {
     private CrewUtilResponse crewUtilResponse;
     private GraphAPIRequest graphAPIRequest;
     private AbnormalityResponse abnormalityResponse;
+    private KeyValueResponse keyValueResponse;
     private VcdStatusResponse vcdStatusResponse;
     private LICrewMonitoredResponse liCrewMonitoredResponse;
     private CrewMileageDetailsVO crewMileageDetailsVO;
     private EnergyConsumptionRequest energyConsumptionRequest;
     private CrewAvailabilityDetailResponse crewAvailabilityDetailResponse;
-    private IrregularCrewResponse irregularCrewResponse;
+
 
     public static String getUserid(){ return userid;}
     public static void setUserid(String userid){DataHolder.userid=userid;}
@@ -194,6 +193,55 @@ public class DataHolder {
     public static void setRoleid(String roleid){DataHolder.roleid=roleid;}
     public static String getRlycode(){return rlycode;}
     public static void setRlycode(String rlycode){DataHolder.rlycode=rlycode;}
+
+
+
+
+
+
+
+
+
+    public static String getLoginid() {
+        return loginid;
+    }
+
+    public static void setLoginid(String loginid) {
+        DataHolder.loginid = loginid;
+    }
+
+    public static String loginid="";
+
+
+    public static String Designation="";
+
+    public static String getDesignation() {
+        return Designation;
+    }
+
+    public static void setDesignation(String designation) {
+        Designation = designation;
+    }
+
+
+    public static String getAbnrType() {
+        return AbnrType;
+    }
+
+    public static void setAbnrType(String abnrType) {
+        AbnrType = abnrType;
+    }
+
+    public static String AbnrType="";
+
+    public static String getFname() {
+        return fname;
+    }
+
+    public static void setFname(String fname) {
+        DataHolder.fname = fname;
+    }
+
 
     public static String getTraction() {
         return traction;
@@ -671,6 +719,21 @@ public class DataHolder {
         this.resMonthlyCons = resMonthlyCons;
     }
 
+    public CrewAvailabilityDetailResponse getCrewAvailabilityDetailResponse() {
+        return crewAvailabilityDetailResponse;
+    }
+
+    public void setCrewAvailabilityDetailResponse(CrewAvailabilityDetailResponse crewAvailabilityDetailResponse) {
+        this.crewAvailabilityDetailResponse = crewAvailabilityDetailResponse;
+    }
+
+    public KeyValue getKeyValue() {
+        return keyValue;
+    }
+
+    public void setKeyValue(KeyValue keyValue) {
+        this.keyValue = keyValue;
+    }
 
     public void AssignNull() {
         DataHolder.getInstance().setConsumptionResponse(null);

@@ -5,6 +5,10 @@ package com.cris.cmsm.models;
  */
 
 public class KeyValue {
+
+    String key;
+    String value;
+
     public String getKey() {
         return key;
     }
@@ -21,9 +25,8 @@ public class KeyValue {
         this.value = value;
     }
 
-    String key;
-    String value;
 
+    public KeyValue(){}
     public KeyValue(String key, String value) {
         this.key = key;
         this.value = value;

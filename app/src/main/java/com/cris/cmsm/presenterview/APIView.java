@@ -23,7 +23,7 @@ import com.cris.cmsm.models.request.SubStationRequest;
 import com.cris.cmsm.models.request.SubmitLTConnection;
 import com.cris.cmsm.models.response.AbnormalityResponse;
 import com.cris.cmsm.models.response.CrewAvailabilityDetailResponse;
-import com.cris.cmsm.models.response.IrregularCrewResponse;
+import com.cris.cmsm.models.response.KeyValueResponse;
 import com.cris.cmsm.models.response.Paramresponse;
 import com.cris.cmsm.models.response.Passwordresponse;
 import com.cris.cmsm.models.response.Remarksresponse;
@@ -105,7 +105,7 @@ public interface APIView {
     Call<AbnormalityResponse> getAbnormality(@Body GraphAPIRequest request);
 
     @POST(URLS.IRREGULAR_CREW)
-    Call<IrregularCrewResponse> getIrregularCrew(@Body GraphAPIRequest request);
+    Call<KeyValueResponse> getIrregularCrew(@Body KeyValue request);
 
 
     @POST(URLS.VCD_STATUS)

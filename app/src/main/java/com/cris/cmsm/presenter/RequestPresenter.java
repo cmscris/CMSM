@@ -20,6 +20,7 @@ import com.cris.cmsm.models.response.CrewAvailabilityDetailResponse;
 import com.cris.cmsm.models.response.CrewDetailsResponse;
 import com.cris.cmsm.models.response.CrewPositionSummaryResponse;
 import com.cris.cmsm.models.response.FeedbackResponse;
+import com.cris.cmsm.models.response.KeyValueResponse;
 import com.cris.cmsm.models.response.LICrewMonitoredResponse;
 import com.cris.cmsm.models.response.LoginResponse;
 import com.cris.cmsm.models.response.MISReportResponse;
@@ -467,7 +468,7 @@ public class RequestPresenter implements RequestView {
                 break;
 
 
-
+            // Key Value Report
             case Constants.CREW_BIODATA:
                 showProgress(msg);
                 kvrequest = (KeyValueRequest) object;
@@ -489,6 +490,27 @@ public class RequestPresenter implements RequestView {
                 break;
 
 
+            // Key Value Report
+            case Constants.IRREGULAR_CREW:
+
+                showProgress(msg);
+                KeyValue keyValueRequest = (KeyValue) object;
+                System.out.println("Request is " + new Gson().toJson(keyValueRequest));
+                WebServices.getInstance().getService().getIrregularCrew(keyValueRequest).enqueue(new Callback<KeyValueResponse>() {
+                    @Override
+                    public void onResponse(Call<KeyValueResponse> call, Response<KeyValueResponse> response) {
+                        //  System.out.println("Response is " + new Gson().toJson(response.body()));
+                        dismissProgress();
+                        view.ResponseOk(response.body(), position);
+                    }
+
+                    @Override
+                    public void onFailure(Call<KeyValueResponse> call, Throwable t) {
+                        dismissProgress();
+                        view.Error();
+                    }
+                });
+                break;
 
             case Constants.TRAINING_DETAILS:
                 showProgress(msg);
