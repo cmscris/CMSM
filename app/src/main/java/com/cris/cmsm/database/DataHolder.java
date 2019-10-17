@@ -15,7 +15,6 @@ import com.cris.cmsm.models.request.SaveConsumption;
 import com.cris.cmsm.models.request.SubStationConsumption;
 import com.cris.cmsm.models.response.AbnormalityResponse;
 import com.cris.cmsm.models.response.CrewAvailabilityDetailResponse;
-import com.cris.cmsm.models.response.IrregularCrewResponse;
 import com.cris.cmsm.models.response.KeyValueResponse;
 import com.cris.cmsm.models.response.Paramresponse;
 import com.cris.cmsm.models.response.VcdStatusResponse;
@@ -200,23 +199,21 @@ public class DataHolder {
     public AbnormalityResponse getAbnormalityResponse() {
         return abnormalityResponse;
     }
+
     public void setAbnormalityResponse(AbnormalityResponse abnormalityResponse) {
         this.abnormalityResponse = abnormalityResponse;
     }
 
-    public IrregularCrewResponse getIrregularCrewResponse() {
-        return irregularCrewResponse;
-    }
 
-    public void setIrregularCrewResponse(IrregularCrewResponse irregularCrewResponse) {
-        this.irregularCrewResponse = irregularCrewResponse;
-    }
+
     public VcdStatusResponse getVcdStatusResponse() {
         return vcdStatusResponse;
     }
+
     public void setVcdStatusResponse(VcdStatusResponse vcdStatusResponse) {
         this.vcdStatusResponse = vcdStatusResponse;
     }
+
     public static String getLogin_type() {
         return login_type;
     }
@@ -315,6 +312,14 @@ public class DataHolder {
 
     public void setSummaryRequest(RequestSSAssets summaryRequest) {
         this.summaryRequest = summaryRequest;
+    }
+
+    public CrewAvailabilityDetailResponse getCrewAvailabilityDetailResponse() {
+        return crewAvailabilityDetailResponse;
+    }
+
+    public void setCrewAvailabilityDetailResponse(CrewAvailabilityDetailResponse crewAvailabilityDetailResponse) {
+        this.crewAvailabilityDetailResponse = crewAvailabilityDetailResponse;
     }
     public ResponseAssetDetails getSummaryResponse() {
         return summaryResponse;
@@ -616,13 +621,6 @@ public class DataHolder {
         this.resMonthlyCons = resMonthlyCons;
     }
 
-    public CrewAvailabilityDetailResponse getCrewAvailabilityDetailResponse() {
-        return crewAvailabilityDetailResponse;
-    }
-
-    public void setCrewAvailabilityDetailResponse(CrewAvailabilityDetailResponse crewAvailabilityDetailResponse) {
-        this.crewAvailabilityDetailResponse = crewAvailabilityDetailResponse;
-    }
 
     public KeyValue getKeyValue() {
         return keyValue;
