@@ -69,67 +69,6 @@ public class DataHolder {
     public static String AbnrType="";
     public static ArrayList<String> limovlist;
     public static ArrayList<Limovdraftresponse> limovmainlist;
-
-    public static ArrayList <Limovdraftresponse> getLimovmainlist() {
-        return limovmainlist;
-    }
-
-    public static void setLimovmainlist(ArrayList <Limovdraftresponse> limovmainlist) {
-        DataHolder.limovmainlist = limovmainlist;
-    }
-
-
-
-    public static ArrayList <String> getLimovlist() {
-        return limovlist;
-    }
-
-    public static void setLimovlist(ArrayList <String> limovlist) {
-        DataHolder.limovlist = limovlist;
-    }
-
-
-    public static String getLoginid() {
-        return loginid;
-    }
-
-    public static void setLoginid(String loginid) {
-        DataHolder.loginid = loginid;
-    }
-
-    public static String loginid="";
-
-
-    public static String Designation="";
-
-    public static String getDesignation() {
-        return Designation;
-    }
-
-    public static void setDesignation(String designation) {
-        Designation = designation;
-    }
-
-
-    public static String getAbnrType() {
-        return AbnrType;
-    }
-
-    public static void setAbnrType(String abnrType) {
-        AbnrType = abnrType;
-    }
-
-
-
-    public static String getFname() {
-        return fname;
-    }
-
-    public static void setFname(String fname) {
-        DataHolder.fname = fname;
-    }
-
-
     private KeyValue keyValue;
 
     private static DataHolder instance = null;
@@ -153,20 +92,9 @@ public class DataHolder {
     private RequestSSAssets summaryRequest;
     private List<CrewPositionSummaryResponse> CrewPositionSummaryResponses;
     private Paramresponse paramresponse;
-
-
-
-    public List <VosList> getVosLists() {
-        return vosLists;
-    }
-
-    public void setVosLists(List <VosList> vosLists) {
-        this.vosLists = vosLists;
-    }
-
+    public static String loginid="";
+    public static String Designation="";
     private List<VosList> vosLists;
-
-
     private CrewUtilResponse crewUtilResponse;
     private GraphAPIRequest graphAPIRequest;
     private AbnormalityResponse abnormalityResponse;
@@ -177,7 +105,49 @@ public class DataHolder {
     private EnergyConsumptionRequest energyConsumptionRequest;
     private CrewAvailabilityDetailResponse crewAvailabilityDetailResponse;
 
+    public static ArrayList <Limovdraftresponse> getLimovmainlist() {
+        return limovmainlist;
+    }
+    public static void setLimovmainlist(ArrayList <Limovdraftresponse> limovmainlist) {
+        DataHolder.limovmainlist = limovmainlist;
+    }
+    public static ArrayList <String> getLimovlist() {
+        return limovlist;
+    }
+    public static void setLimovlist(ArrayList <String> limovlist) {
+        DataHolder.limovlist = limovlist;
+    }
+    public static String getLoginid() {
+        return loginid;
+    }
+    public static void setLoginid(String loginid) {
+        DataHolder.loginid = loginid;
+    }
 
+    public static String getDesignation() {
+        return Designation;
+    }
+    public static void setDesignation(String designation) {
+        Designation = designation;
+    }
+    public static String getAbnrType() {
+        return AbnrType;
+    }
+    public static void setAbnrType(String abnrType) {
+        AbnrType = abnrType;
+    }
+    public static String getFname() {
+        return fname;
+    }
+    public static void setFname(String fname) {
+        DataHolder.fname = fname;
+    }
+    public List <VosList> getVosLists() {
+        return vosLists;
+    }
+    public void setVosLists(List <VosList> vosLists) {
+        this.vosLists = vosLists;
+    }
     public static String getUserid(){ return userid;}
     public static void setUserid(String userid){DataHolder.userid=userid;}
     public static String getPassword(){return password;}
@@ -193,76 +163,21 @@ public class DataHolder {
     public static void setRoleid(String roleid){DataHolder.roleid=roleid;}
     public static String getRlycode(){return rlycode;}
     public static void setRlycode(String rlycode){DataHolder.rlycode=rlycode;}
-
-
-
-
-
-
-
-
-
-    public static String getLoginid() {
-        return loginid;
-    }
-
-    public static void setLoginid(String loginid) {
-        DataHolder.loginid = loginid;
-    }
-
-    public static String loginid="";
-
-
-    public static String Designation="";
-
-    public static String getDesignation() {
-        return Designation;
-    }
-
-    public static void setDesignation(String designation) {
-        Designation = designation;
-    }
-
-
-    public static String getAbnrType() {
-        return AbnrType;
-    }
-
-    public static void setAbnrType(String abnrType) {
-        AbnrType = abnrType;
-    }
-
-    public static String AbnrType="";
-
-    public static String getFname() {
-        return fname;
-    }
-
-    public static void setFname(String fname) {
-        DataHolder.fname = fname;
-    }
-
-
-    public static String getTraction() {
+     public static String getTraction() {
         return traction;
     }
-
     public static void setTraction(String traction) {
         DataHolder.traction = traction;
     }
-
     public EnergyConsumptionRequest getEnergyConsumptionRequest() {
         return energyConsumptionRequest;
     }
-
     public void setEnergyConsumptionRequest(EnergyConsumptionRequest energyConsumptionRequest) {
         this.energyConsumptionRequest = energyConsumptionRequest;
     }
-
     public CrewMileageDetailsVO getCrewMileageDetailsVO() {
         return crewMileageDetailsVO;
     }
-
     public void setCrewMileageDetailsVO(CrewMileageDetailsVO crewMileageDetailsVO) {
         this.crewMileageDetailsVO = crewMileageDetailsVO;
     }
@@ -270,27 +185,21 @@ public class DataHolder {
     public static String getCrewid() {
         return crewid;
     }
-
     public static void setCrewid(String crewid) {
         DataHolder.crewid = crewid;
     }
-
     public LICrewMonitoredResponse getLiCrewMonitoredResponse() {
         return liCrewMonitoredResponse;
     }
-
     public void setLiCrewMonitoredResponse(LICrewMonitoredResponse liCrewMonitoredResponse) {
         this.liCrewMonitoredResponse = liCrewMonitoredResponse;
     }
-
     public static void setInstance(DataHolder instance) {
         DataHolder.instance = instance;
     }
-
     public AbnormalityResponse getAbnormalityResponse() {
         return abnormalityResponse;
     }
-
     public void setAbnormalityResponse(AbnormalityResponse abnormalityResponse) {
         this.abnormalityResponse = abnormalityResponse;
     }
@@ -302,15 +211,12 @@ public class DataHolder {
     public void setIrregularCrewResponse(IrregularCrewResponse irregularCrewResponse) {
         this.irregularCrewResponse = irregularCrewResponse;
     }
-
     public VcdStatusResponse getVcdStatusResponse() {
         return vcdStatusResponse;
     }
-
     public void setVcdStatusResponse(VcdStatusResponse vcdStatusResponse) {
         this.vcdStatusResponse = vcdStatusResponse;
     }
-
     public static String getLogin_type() {
         return login_type;
     }
@@ -410,14 +316,6 @@ public class DataHolder {
     public void setSummaryRequest(RequestSSAssets summaryRequest) {
         this.summaryRequest = summaryRequest;
     }
-
-    public CrewAvailabilityDetailResponse getCrewAvailabilityDetailResponse() {
-        return crewAvailabilityDetailResponse;
-    }
-
-    public void setCrewAvailabilityDetailResponse(CrewAvailabilityDetailResponse crewAvailabilityDetailResponse) {
-        this.crewAvailabilityDetailResponse = crewAvailabilityDetailResponse;
-    }
     public ResponseAssetDetails getSummaryResponse() {
         return summaryResponse;
     }
@@ -439,7 +337,6 @@ public class DataHolder {
    /* public boolean isHTPanel() {
         return isHTPanel;
     }
-
     public void setHTPanel(boolean HTPanel) {
         isHTPanel = HTPanel;
     }*/
