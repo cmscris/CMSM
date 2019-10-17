@@ -256,9 +256,11 @@ public class HomeActivity extends AppCompatActivity implements ResponseView, Rec
             // CommonClass.goToNextScreen(HomeActivity.this, LICrewsttstable.class, true, false);
         }
         else if(model.getMenuTitle().equals("LI Movement")){
-            DataHolder.setType(Constants.CREWCURRENTSTATUS);
-            System.out.println(">>>>>>>>>>>>>>step1 for crew current status>>>>>>>>>>>>>>>>>>>>>>>> ");
-            CommonClass.goToNextScreen(HomeActivity.this,LImovement.class, true, false);
+            DataHolder.setType(Constants.LI_MOVEMENT);
+            System.out.println(">>>>>>>>>>>>>>step1 for LI_MOVEMENT>>>>>>>>>>>>>>>>>>>>>>> ");
+            Intent i=new Intent(HomeActivity.this,LImovement.class);
+            startActivity(i);
+            //CommonClass.goToNextScreen(HomeActivity.this,CalendarCustomView.class, true, false);
             // CommonClass.goToNextScreen(HomeActivity.this, LICrewsttstable.class, true, false);
         }
         else if (model.getMenuTitle().equals(res.getString(R.string.sfoorti))) {

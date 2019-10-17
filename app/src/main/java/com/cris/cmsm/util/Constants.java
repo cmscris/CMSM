@@ -55,6 +55,8 @@ public class Constants {
     public static final int CrewCounselling=206;
     public static final int CREWCURRENTSTATUS=207;
     public static final int LICREWSTATUS=208;
+    public static final int LI_MOVEMENT=209;
+
 
     public static final int SAVEABNORMALITY=52;
     public static final int ABNORMALITYANALYSISCOUNT=53;

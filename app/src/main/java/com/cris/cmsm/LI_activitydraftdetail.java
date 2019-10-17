@@ -23,6 +23,7 @@ import com.cris.cmsm.models.ReportHeaderView;
 import com.cris.cmsm.models.response.LICrewMonitoredResponseVO;
 import com.cris.cmsm.models.response.LoginIfoVO;
 import com.cris.cmsm.prefrences.UserLoginPreferences;
+import com.cris.cmsm.util.CommonClass;
 import com.cris.cmsm.widget.PinchRecyclerView;
 
 import java.util.ArrayList;
@@ -31,12 +32,14 @@ public class LI_activitydraftdetail extends AppCompatActivity implements OnItemC
 
  PinchRecyclerView pinchRecyclerView;
  Button bt_submit;
+ CommonClass commonClass;
 
     private LoginIfoVO loginInfoModel;
     private UserLoginPreferences userLoginPreferences;
     TableLayout tableLayout;
     ArrayList innerList;
-ArrayList<String> itemdatalist,listitem;
+    ArrayList<ArrayList<String>>listitem;
+
     ArrayList<Limovdraftresponse> senditemdatalist,senditemdatalist1;
     int i = 0;
 
@@ -51,7 +54,7 @@ ArrayList<String> itemdatalist,listitem;
         tableLayout = (TableLayout) findViewById(R.id.tablelayout);
         userLoginPreferences=new UserLoginPreferences(LI_activitydraftdetail.this);
         loginInfoModel = userLoginPreferences.getLoginUser();
-        itemdatalist=new ArrayList <>();
+commonClass=new CommonClass(LI_activitydraftdetail.this);
         listitem=new ArrayList <>();
         senditemdatalist=new ArrayList<>();
         senditemdatalist1=new ArrayList <>();
@@ -85,7 +88,33 @@ ArrayList<String> itemdatalist,listitem;
         bt_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("Fianal List to submit--->>>>>>>>"+innerList);
+                System.out.println("INNERLISTSIZE>>>>>>>>>>>"+innerList.size());
+                System.out.println("INNERLISTSIZE>>>>>>>>>>>"+innerList);
+                i=0;
+                ArrayList item;
+                for(i=1;i<innerList.size();i++) {
+                    item = new ArrayList();
+                    Limovdraftresponse li = (Limovdraftresponse) innerList.get(i);
+                    item.add(li.getFrmdttm());
+                    item.add(li.getTodttm());
+                    item.add(li.getDutytyp());
+                    item.add(li.getFrmsttn());
+                    item.add(li.getTosttn());
+                    item.add(li.getVia1());
+                    item.add(li.getVia2());
+                    item.add(li.getLoco());
+                    item.add(li.getTrain());
+                    item.add(li.getKm());
+                    item.add(li.getRmk());
+                    listitem.add(item);
+
+
+                    }
+                System.out.println("Fianal List--->>>>>>>>"+listitem);
+                 System.out.println("Fianal List to submit--->>>>>>>>"+listitem.size());
+                 commonClass.showToast("Data Submitted Sucessfully");
+                 finish();
+
             }
         });
 

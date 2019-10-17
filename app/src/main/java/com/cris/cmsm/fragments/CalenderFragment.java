@@ -32,7 +32,7 @@ public class CalenderFragment extends Fragment {
         for(int i=0;i<=31;i++){
             number.add(i);
         }
-        Dateadapter adapter= new Dateadapter(getContext(), number);
+        //Dateadapter adapter= new Dateadapter(getContext(), number);
         //gridview.setAdapter(adapter);
 
 return null;

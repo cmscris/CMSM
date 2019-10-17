@@ -124,6 +124,7 @@ update.setVisibility(View.GONE);
         format=new DecimalFormat("00");
         et_From_sttn.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
         et_to_sttn.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
+        et_train.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
         et_via1.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
         et_via2.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
         et_loco.setFilters(new InputFilter[]{new InputFilter.LengthFilter(5)});
@@ -138,8 +139,8 @@ update.setVisibility(View.GONE);
         Savedatalist.add("AMBUSH CHECK ");
         Savedatalist.add("VIP MOVEMENT ");
         Savedatalist.add("AS PER SR. DEETRO");
-        Savedatalist.add("LIRD CREW FP");
-        Savedatalist.add("CT CREW FP");
+        Savedatalist.add("LIRD CREW ");
+        Savedatalist.add("CT CREW ");
         Savedatalist.add("HANDLING CREW ");
         Savedatalist.add("PRACTICAL TRG");
         Savedatalist.add("INSPECTION");
@@ -174,6 +175,17 @@ update.setVisibility(View.GONE);
                 DataHolder.getLimovmainlist().remove(j);
                 update.setVisibility(View.GONE);
                 save.setVisibility(View.VISIBLE);
+                et_dt.setText("");
+                et_todt.setText("");
+                et_From_sttn.setText("");
+                et_to_sttn.setText("");
+                et_via1.setText("");
+                et_via2.setText("");
+                et_train.setText("");
+                et_loco.setText("");
+                et_remark.setText("");
+                et_km.setText("");
+                commonClass.showToast("Data Deleted Sucessfully");
 
 
             }
@@ -248,7 +260,7 @@ update.setVisibility(View.GONE);
 
 
                 i++;
-               list = new ArrayList <>();
+               list = new ArrayList < >();
                /* list.add(id);
 
                 list.add(et_dt.getText().toString());

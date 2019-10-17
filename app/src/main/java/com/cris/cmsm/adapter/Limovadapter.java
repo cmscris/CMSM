@@ -75,7 +75,7 @@ public class Limovadapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             final Limovdraftresponse model = getItem(pos);
 
 
-            item.tv_id.setText(model.getId());
+            item.tv_id.setText(""+pos);
             item.tv_frmdttim.setText(model.getFrmdttm());
             item.tv_todttim.setText(model.getTodttm());
             item.tv_fromsttn.setText(model.getFrmsttn());
@@ -133,7 +133,7 @@ removeItem(pos);
 });*/
 
             if (pos == 0) {
-
+                item.tv_id.setText("SN");
                 item.tv_id.setTypeface(null, Typeface.BOLD);
                 item.tv_frmdttim.setTypeface(null, Typeface.BOLD);
                 item.tv_todttim.setTypeface(null, Typeface.BOLD);
@@ -144,6 +144,7 @@ removeItem(pos);
                 item.tv_tran.setTypeface(null, Typeface.BOLD);
                 item.tv_rmk.setTypeface(null, Typeface.BOLD);
                 item.tv_edit.setTypeface(null, Typeface.BOLD);
+                item.tv_km.setTypeface(null,Typeface.BOLD);
                // item.tv_del.setTypeface(null, Typeface.BOLD);
                 item.tv_via1.setTypeface(null, Typeface.BOLD);
                 item.tv_via2.setTypeface(null, Typeface.BOLD);
