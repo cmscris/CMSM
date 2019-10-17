@@ -105,8 +105,7 @@ public interface APIView {
     Call<AbnormalityResponse> getAbnormality(@Body GraphAPIRequest request);
 
     @POST(URLS.IRREGULAR_CREW)
-    Call<KeyValueResponse> getIrregularCrew(@Body KeyValue request);
-
+    Call<KeyValueResponse> getIrregularCrew(@Body GraphAPIRequest request);
 
     @POST(URLS.VCD_STATUS)
     Call<VcdStatusResponse> getVcdStatus(@Body GraphAPIRequest request);
@@ -335,25 +334,4 @@ public interface APIView {
     Call<Sectionresponse> getpa(@Body GraphAPIRequest graphreq);
     @POST(URLS.SAVEABNORMALITY)
     Call<Paramresponse> getparas(@Body GraphAPIRequest graphreq);
-    @POST(URLS.ABNORMALITYANALYSISCOUNT)
-    Call<Paramresponse> getparanaly(@Body GraphAPIRequest graphreq);
-    @POST(URLS.ABNORMALITYANALYSISCOUNTWITHPARAM)
-    Call<Remarksresponse> getparanal(@Body GraphAPIRequest graphreq);
-
-    @POST(URLS.GET_SECTIONS)
-    Call<Sectionresponse> getparana(@Body GraphAPIRequest graphreq);
-
-    @POST(URLS.GET_CREWLIST)
-    Call<Paramresponse> getcrewgrade(@Body GraphAPIRequest graphreq2);
-
-    @POST(URLS.SAVE_LI_GRADING)
-    Call<Remarksresponse> getsavermk(@Body GraphAPIRequest saveli);
-
-    @POST(URLS.SAVE_LI_COUNSELLING)
-    Call<Remarksresponse> getsaveconsrmk(@Body GraphAPIRequest savelicons);
-
-    @POST(URLS.LICREWSTATUS)
-    Call<LICrewMonitoredResponse> getlicrewstts(@Body GraphAPIRequest lireq);
-
-
 }
