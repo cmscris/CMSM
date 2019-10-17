@@ -56,6 +56,7 @@
 
     <string name="crew_monitored">Crew \n Monitored</string>
     <string name="grading">Grading</string>
+    <string name="crew_counselling">Crew Counselling</string>
 
     <string name="biodata">Biodata</string>
     <string name="training_details">Training\nDetails</string>

@@ -156,26 +156,26 @@ public class RequestPresenter implements RequestView {
 
                 });
                 break;
-           case Constants.GETREMARKS:
-            showProgress(msg);
-            GraphAPIRequest graphrequest = (GraphAPIRequest) object;
-            System.out.println("Request is >>" + new Gson().toJson(graphrequest));
-            WebServices.getInstance().getService().getparams(graphrequest).enqueue(new Callback<Remarksresponse>() {
-                @Override
-                public void onResponse(Call<Remarksresponse> call,Response<Remarksresponse> response) {
-                    dismissProgress();
-                    System.out.println("Response is " + new Gson().toJson(response));
-                    view.ResponseOk(response.body(), position);
-                }
+            case Constants.GETREMARKS:
+                showProgress(msg);
+                GraphAPIRequest graphrequest = (GraphAPIRequest) object;
+                System.out.println("Request is >>" + new Gson().toJson(graphrequest));
+                WebServices.getInstance().getService().getparams(graphrequest).enqueue(new Callback<Remarksresponse>() {
+                    @Override
+                    public void onResponse(Call<Remarksresponse> call,Response<Remarksresponse> response) {
+                        dismissProgress();
+                        System.out.println("Response is " + new Gson().toJson(response));
+                        view.ResponseOk(response.body(), position);
+                    }
 
-                @Override
-                public void onFailure(Call <Remarksresponse> call, Throwable t) {
-                    System.out.println("Error in Response");
-                }
+                    @Override
+                    public void onFailure(Call <Remarksresponse> call, Throwable t) {
+                        System.out.println("Error in Response");
+                    }
 
 
-            });
-            break;
+                });
+                break;
             case Constants.GETABNORMALITYCOUNT:
                 showProgress(msg);
                 GraphAPIRequest APIreq = (GraphAPIRequest) object;
@@ -196,6 +196,27 @@ public class RequestPresenter implements RequestView {
 
                 });
                 break;
+            case Constants.GET_SECTIONS:
+                showProgress(msg);
+                GraphAPIRequest reqs = (GraphAPIRequest) object;
+                System.out.println("Request is >>" + new Gson().toJson(reqs));
+                WebServices.getInstance().getService().getparana(reqs).enqueue(new Callback<Sectionresponse>() {
+                    @Override
+                    public void onResponse(Call<Sectionresponse> call,Response<Sectionresponse> response) {
+                        dismissProgress();
+                        System.out.println("Response is " + new Gson().toJson(response));
+                        view.ResponseOk(response.body(), position);
+                    }
+
+                    @Override
+                    public void onFailure(Call <Sectionresponse> call, Throwable t) {
+                        System.out.println("Error in Response");
+                    }
+
+
+                });
+                break;
+
             case Constants.GETABNORMALITYLISTSUBMITTED:
                 showProgress(msg);
                 GraphAPIRequest req = (GraphAPIRequest) object;
@@ -216,6 +237,91 @@ public class RequestPresenter implements RequestView {
 
                 });
                 break;
+
+            case Constants.GET_CREWLIST:
+                showProgress(msg);
+                GraphAPIRequest graphreq2 = (GraphAPIRequest) object;
+                System.out.println("Request is >>" + new Gson().toJson(graphreq2));
+                WebServices.getInstance().getService().getcrewgrade(graphreq2).enqueue(new Callback<Paramresponse>() {
+                    @Override
+                    public void onResponse(Call<Paramresponse> call,Response<Paramresponse> response) {
+                        dismissProgress();
+                        System.out.println("Response is " + new Gson().toJson(response));
+                        view.ResponseOk(response.body(), position);
+                    }
+
+                    @Override
+                    public void onFailure(Call <Paramresponse> call, Throwable t) {
+                        System.out.println("Error in Response");
+                    }
+
+
+                });
+                break;
+            case Constants.SAVE_LI_GRADING:
+                showProgress(msg);
+                GraphAPIRequest saveli = (GraphAPIRequest) object;
+                System.out.println("Request is >>" + new Gson().toJson(saveli));
+                WebServices.getInstance().getService().getsavermk(saveli).enqueue(new Callback<Remarksresponse>() {
+                    @Override
+                    public void onResponse(Call<Remarksresponse> call,Response<Remarksresponse> response) {
+                        dismissProgress();
+                        System.out.println("Response is " + new Gson().toJson(response));
+                        view.ResponseOk(response.body(), position);
+                    }
+
+                    @Override
+                    public void onFailure(Call <Remarksresponse> call, Throwable t) {
+                        System.out.println("Error in Response");
+                    }
+
+
+                });
+                break;
+            case Constants.SAVE_LI_COUNSELLING:
+                showProgress(msg);
+                GraphAPIRequest savelicons = (GraphAPIRequest) object;
+                System.out.println("Request is >>" + new Gson().toJson(savelicons));
+                WebServices.getInstance().getService().getsaveconsrmk(savelicons).enqueue(new Callback<Remarksresponse>() {
+                    @Override
+                    public void onResponse(Call<Remarksresponse> call,Response<Remarksresponse> response) {
+                        dismissProgress();
+                        System.out.println("Response is " + new Gson().toJson(response));
+                        view.ResponseOk(response.body(), position);
+                    }
+
+                    @Override
+                    public void onFailure(Call <Remarksresponse> call, Throwable t) {
+                        System.out.println("Error in Response");
+                    }
+
+
+                });
+                break;
+
+            case Constants.LICREWSTATUS:
+                showProgress(msg);
+                GraphAPIRequest lireq = (GraphAPIRequest) object;
+                System.out.println("Request is >>" + new Gson().toJson(lireq));
+                WebServices.getInstance().getService().getlicrewstts(lireq).enqueue(new Callback<LICrewMonitoredResponse>() {
+                    @Override
+                    public void onResponse(Call<LICrewMonitoredResponse> call,Response<LICrewMonitoredResponse> response) {
+                        dismissProgress();
+                        System.out.println("Response is " + new Gson().toJson(response));
+                        view.ResponseOk(response.body(), position);
+                    }
+
+                    @Override
+                    public void onFailure(Call <LICrewMonitoredResponse> call, Throwable t) {
+                        System.out.println("Error in Response");
+                    }
+
+
+                });
+                break;
+
+
+
             case Constants.CHANGEPASSWORD:
                 showProgress(msg);
                 GraphAPIRequest graphreq = (GraphAPIRequest) object;
@@ -297,6 +403,48 @@ public class RequestPresenter implements RequestView {
 
                 });
                 break;
+            case Constants.ABNORMALITYANALYSISCOUNT:
+                showProgress(msg);
+                GraphAPIRequest abnranalyisrequest = (GraphAPIRequest) object;
+                System.out.println("Request is >>" + new Gson().toJson(abnranalyisrequest));
+                WebServices.getInstance().getService().getparanaly(abnranalyisrequest).enqueue(new Callback<Paramresponse>() {
+                    @Override
+                    public void onResponse(Call<Paramresponse> call,Response<Paramresponse> response) {
+                        dismissProgress();
+                        System.out.println("Response is " + new Gson().toJson(response));
+                        view.ResponseOk(response.body(), position);
+                    }
+
+                    @Override
+                    public void onFailure(Call <Paramresponse> call, Throwable t) {
+                        System.out.println("Error in Response");
+                    }
+
+
+                });
+                break;
+            case Constants.ABNORMALITYANALYSISCOUNTWITHPARAM:
+                showProgress(msg);
+                GraphAPIRequest abnranalysisrequest = (GraphAPIRequest) object;
+                System.out.println("Request is >>" + new Gson().toJson(abnranalysisrequest));
+                WebServices.getInstance().getService().getparanal(abnranalysisrequest).enqueue(new Callback<Remarksresponse>() {
+                    @Override
+                    public void onResponse(Call<Remarksresponse> call,Response<Remarksresponse> response) {
+                        dismissProgress();
+                        System.out.println("Response is " + new Gson().toJson(response));
+                        view.ResponseOk(response.body(), position);
+                    }
+
+                    @Override
+                    public void onFailure(Call <Remarksresponse> call, Throwable t) {
+                        System.out.println("Error in Response");
+                    }
+
+
+                });
+                break;
+
+
 
 
             case Constants.KEY_VALUE:
@@ -553,7 +701,7 @@ public class RequestPresenter implements RequestView {
                 showProgress(msg);
                 ConSummaryRequest conSummaryRequest = (ConSummaryRequest) object;
 
-                 //System.out.println("Request is " + new Gson().toJson(conSummaryRequest));
+                //System.out.println("Request is " + new Gson().toJson(conSummaryRequest));
 
                 WebServices.getInstance().getService().getCrewAvailability(conSummaryRequest).enqueue(new Callback<ConsumptionResponse>() {
                     @Override
@@ -577,7 +725,7 @@ public class RequestPresenter implements RequestView {
                 showProgress(msg);
                 CrewAvailabilityDetailRequest conSummaryRequestNew = (CrewAvailabilityDetailRequest) object;
 
-                System.out.println("Request here is " + new Gson().toJson(conSummaryRequestNew));
+                //System.out.println("Request is " + new Gson().toJson(conSummaryRequest));
 
                 WebServices.getInstance().getService().getCrewAvailabilityDetail(conSummaryRequestNew).enqueue(new Callback<CrewAvailabilityDetailResponse>() {
                     @Override
@@ -684,23 +832,23 @@ public class RequestPresenter implements RequestView {
 
             case Constants.LOBBY_LIST:
 
-                    showProgress(msg);
-                    ConSummaryRequest request = (ConSummaryRequest) object;
-                    // System.out.println("Request is " + new Gson().toJson(conSummaryRequest));
-                    WebServices.getInstance().getService().getLobbyList(request).enqueue(new Callback<List<Lobby>>() {
-                        @Override
-                        public void onResponse(Call<List<Lobby>> call, Response<List<Lobby>> response) {
-                            dismissProgress();
-                            // System.out.println("Response is " + new Gson().toJson(response.body()));
-                            view.ResponseOk(response.body(), position);
-                        }
+                showProgress(msg);
+                ConSummaryRequest request = (ConSummaryRequest) object;
+                // System.out.println("Request is " + new Gson().toJson(conSummaryRequest));
+                WebServices.getInstance().getService().getLobbyList(request).enqueue(new Callback<List<Lobby>>() {
+                    @Override
+                    public void onResponse(Call<List<Lobby>> call, Response<List<Lobby>> response) {
+                        dismissProgress();
+                        // System.out.println("Response is " + new Gson().toJson(response.body()));
+                        view.ResponseOk(response.body(), position);
+                    }
 
-                        @Override
-                        public void onFailure(Call<List<Lobby>> call, Throwable t) {
-                            dismissProgress();
-                            view.Error();
-                        }
-                    });
+                    @Override
+                    public void onFailure(Call<List<Lobby>> call, Throwable t) {
+                        dismissProgress();
+                        view.Error();
+                    }
+                });
 
                 break;
 
@@ -1275,7 +1423,7 @@ public class RequestPresenter implements RequestView {
             case Constants.THREE_YEAR_DETAIL:
                 showProgress(msg);
                 conSummaryRequest = (ConSummaryRequest) object;
-               //   System.out.println("Request is " + new Gson().toJson(conSummaryRequest));
+                //   System.out.println("Request is " + new Gson().toJson(conSummaryRequest));
                 WebServices.getInstance().getService().compareDetailsConsumption(conSummaryRequest).enqueue(new Callback<ThreeYearData>() {
                     @Override
                     public void onResponse(Call<ThreeYearData> call, Response<ThreeYearData> response) {

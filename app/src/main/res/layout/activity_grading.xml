@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+        <include layout="@layout/actionbar_layout" />
+        <FrameLayout
+            android:id="@+id/parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/padding_10">
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="@color/colorBlueGrey"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="8dp"
+                        android:layout_marginLeft="3dp"
+                        android:layout_marginRight="3dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="5dp">
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TableRow>
+                            <TextView
+                                android:layout_width="100dp"
+                                android:layout_height="40dp"
+                                android:layout_column="0"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="15dp"
+                                android:gravity="center_vertical"
+                                android:text="Crew Name"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="14sp"
+                                android:textStyle="bold"/>/>
+                            <Spinner
+                                android:id="@+id/spn_CrewName"
+                                android:layout_column="1"
+                                android:layout_width="150dp"
+                                android:layout_height="40dp"
+                                android:layout_marginTop="@dimen/margin_10"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@drawable/shape" />
+
+                        </TableRow>
+                    </TableLayout>
+                    </android.support.v7.widget.CardView>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="vertical">
+                 <android.support.v7.widget.CardView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     app:cardElevation="8dp"
+                     app:cardCornerRadius="15dp"
+                   app:cardBackgroundColor="@color/colorBlueText"
+                     android:layout_marginLeft="5dp"
+                     android:layout_marginRight="5dp"
+                     android:layout_marginBottom="10dp"
+                     android:layout_marginTop="5dp">
+
+                     <TableLayout
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:id="@+id/gradingdetail_layout">
+
+                         <TableRow>
+
+                             <TextView
+                                 android:id="@+id/crew_name"
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:layout_column="0"
+                                 android:layout_marginLeft="10dp"
+                                 android:layout_marginRight="10dp"
+                                 android:text=""
+                                 android:textColor="@color/colorWhite"
+                                 android:textSize="14sp"
+                                 android:textStyle="bold"/>
+
+                             <TextView />
+                         </TableRow>
+                         <TableRow>
+                             <TextView
+                                 android:id="@+id/crew_id"
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:layout_column="0"
+                                 android:layout_marginLeft="10dp"
+                                 android:layout_marginRight="5dp"
+                                 android:textColor="@color/colorWhite"
+                                 android:textSize="14sp"
+                                 android:textStyle="bold"/>
+                         </TableRow>
+                     <TableRow>
+                         <TextView
+                             android:id="@+id/crewTotal"
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:layout_column="0"
+                             android:layout_marginLeft="10dp"
+                             android:layout_marginRight="10dp"
+                             android:textColor="@color/colorWhite"
+                             android:textSize="14sp"
+                             android:textStyle="bold"
+                             />
+                     </TableRow>
+                         <TableRow>
+                             <TextView
+                                 android:id="@+id/crewgrade"
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:layout_column="0"
+                                 android:layout_marginLeft="10dp"
+                                 android:layout_marginRight="10dp"
+                                 android:textColor="@color/colorWhite"
+                                 android:textSize="14sp"
+                                 android:textStyle="bold"/>
+                             </TableRow>
+
+                             <TableRow>
+                             <TextView
+                                 android:id="@+id/duedatehead"
+                                 android:layout_height="wrap_content"
+                                 android:layout_column="0"
+                                 android:layout_marginLeft="12dp"
+                                 android:layout_marginRight="10dp"
+                                 android:text=""
+                                 android:textColor="@color/colorWhite"
+                                 android:textSize="14sp"
+                                 android:textStyle="bold"/>
+                    </TableRow>
+                </TableLayout>
+                 </android.support.v7.widget.CardView>
+                 <android.support.v7.widget.CardView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     app:cardBackgroundColor="@color/colorBlueGrey"
+                     app:cardCornerRadius="10dp"
+                     app:cardElevation="8dp"
+                     android:layout_marginLeft="3dp"
+                     android:layout_marginRight="3dp"
+                     android:layout_marginBottom="10dp"
+                     android:layout_marginTop="5dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:id="@+id/gradingformlayout">
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TableRow>
+
+                            <TextView
+                                android:id="@+id/Date_Monitored"
+                                android:layout_width="130dp"
+                                android:layout_height="wrap_content"
+                                android:layout_column="0"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="8dp"
+                                android:text="Select Date"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/ondate1"
+                                android:layout_width="100dp"
+                                android:layout_height="40dp"
+                                android:layout_column="1"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginTop="5dp"
+                                android:calendarViewShown="false"
+                                android:layout_marginBottom="5dp"
+                                android:background="@drawable/shape"
+                                android:layout_gravity="center_vertical"
+                                android:text="dd-mm-yyyy"
+                                android:textAlignment="center"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/maxmark"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_column="2"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginBottom="5dp"
+                                android:text="Max Mark"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+                        </TableRow>
+                    </TableLayout>
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/formtablelayout">
+
+                        <TableRow>
+
+                            <TextView
+                                android:id="@+id/DrivingOperatingTechnique"
+                                android:layout_width="150dp"
+                                android:layout_height="50dp"
+                                android:layout_column="0"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="8dp"
+                                android:text="Driving/Operating Technique"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+
+                            <EditText
+                                android:id="@+id/score"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_column="1"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@drawable/shape"
+                                android:inputType="number"
+                                android:text=""
+                                android:textAlignment="center"/>
+
+                            <TextView
+                                android:id="@+id/marks"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_column="2"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="15dp"
+                                android:background="@drawable/shape"
+                                android:text="25"
+                                android:textAlignment="center"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="18sp" />
+                        </TableRow>
+
+                        <TableRow>
+
+                            <TextView
+                                android:id="@+id/Knowledge"
+                                android:layout_width="150dp"
+                                android:layout_height="wrap_content"
+                                android:layout_column="0"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="8dp"
+                                android:text="Knowledge of safety and operation rules"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+
+                            <EditText
+                                android:id="@+id/score2"
+                                android:layout_width="80dp"
+                                android:layout_height="40dp"
+                                android:layout_column="1"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@drawable/shape"
+                                android:inputType="number"
+                                android:textAlignment="center"
+                                android:text="" />
+
+                            <TextView
+                                android:id="@+id/marks2"
+                                android:layout_width="40dp"
+                                android:layout_height="30dp"
+                                android:layout_column="2"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginRight="15dp"
+                                android:background="@drawable/shape"
+                                android:text="30"
+                                android:textAlignment="center"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="18sp" />
+                        </TableRow>
+
+                        <TableRow>
+
+                            <TextView
+                                android:id="@+id/Technical"
+                                android:layout_width="150dp"
+                                android:layout_height="wrap_content"
+                                android:layout_column="0"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="8dp"
+                                android:text="Technical knowledge and troubleshooting"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+
+                            <EditText
+                                android:id="@+id/score3"
+                                android:layout_width="80dp"
+                                android:layout_height="40dp"
+                                android:layout_column="1"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="10dp"
+                                android:textAlignment="center"
+                                android:layout_marginRight="10dp"
+                                android:background="@drawable/shape"
+                                android:inputType="number"
+                                android:text="" />
+
+                            <TextView
+                                android:id="@+id/marks3"
+                                android:layout_width="40dp"
+                                android:layout_height="25dp"
+                                android:layout_column="2"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginRight="15dp"
+                                android:background="@drawable/shape"
+                                android:text="15"
+                                android:textAlignment="center"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="15sp" />
+                        </TableRow>
+
+                        <TableRow>
+
+                            <TextView
+                                android:id="@+id/Personal"
+                                android:layout_width="153dp"
+                                android:layout_height="28dp"
+                                android:layout_column="0"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="8dp"
+                                android:text="Personal Habits"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+
+                            <EditText
+                                android:id="@+id/score4"
+                                android:layout_width="80dp"
+                                android:layout_height="40dp"
+                                android:layout_column="1"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="10dp"
+                                android:textAlignment="center"
+                                android:layout_marginRight="10dp"
+                                android:background="@drawable/shape"
+                                android:inputType="number"
+                                android:text="" />
+
+                            <TextView
+                                android:id="@+id/marks4"
+                                android:layout_width="40dp"
+                                android:layout_height="30dp"
+                                android:layout_column="2"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginRight="15dp"
+                                android:background="@drawable/shape"
+                                android:text="10"
+                                android:textAlignment="center"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="18sp" />
+                        </TableRow>
+
+                        <TableRow>
+
+                            <TextView
+                                android:id="@+id/Accident"
+                                android:layout_width="135dp"
+                                android:layout_height="30dp"
+                                android:layout_column="0"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginRight="8dp"
+                                android:layout_marginBottom="5dp"
+                                android:text="Accident Record"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+
+                            <EditText
+                                android:id="@+id/score5"
+                                android:layout_width="80dp"
+                                android:layout_height="40dp"
+                                android:layout_column="1"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="10dp"
+                                android:textAlignment="center"
+                                android:layout_marginRight="10dp"
+                                android:background="@drawable/shape"
+                                android:inputType="number"
+                                android:text="" />
+
+                            <TextView
+                                android:id="@+id/marks5"
+                                android:layout_width="40dp"
+                                android:layout_height="30dp"
+                                android:layout_column="2"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginRight="15dp"
+                                android:background="@drawable/shape"
+                                android:text="20"
+                                android:textAlignment="center"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="18sp" />
+                        </TableRow>
+                        </TableLayout>
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:id="@+id/formtotallayout">
+
+                        <TableRow>
+
+                            <TextView
+                                android:id="@+id/total"
+                                android:layout_width="100dp"
+                                android:layout_height="40dp"
+                                android:layout_column="0"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginRight="8dp"
+                                android:layout_marginBottom="5dp"
+                                android:gravity="center_vertical"
+                                android:text="Total"
+                                android:textAlignment="center"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/score6"
+                                android:layout_width="80dp"
+                                android:layout_height="40dp"
+                                android:layout_column="1"
+                                android:layout_marginLeft="70dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginRight="8dp"
+                                android:layout_marginBottom="5dp"
+                                android:background="@drawable/shape"
+                                android:text=""
+                                android:textAlignment="center"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="18sp" />
+                        </TableRow>
+
+                    </TableLayout>
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/consformlayout">
+                        <TableRow>
+                            <TextView
+                                android:id="@+id/constype"
+                                android:layout_width="130dp"
+                                android:layout_height="wrap_content"
+                                android:text="TYPE"
+                                android:textAlignment="center"
+                                android:layout_column="0"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="8dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginTop="10dp"
+                                android:textStyle="bold"
+                                android:textSize="16sp"
+                                android:textColor="@color/colorWhite"/>
+                            <Spinner
+                                android:id="@+id/spn_constype"
+                                android:layout_column="1"
+                                android:layout_width="100dp"
+                                android:layout_height="40dp"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginTop="5dp"
+                                android:background="@drawable/shape"/>
+
+                        </TableRow>
+                    </TableLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/Remark"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:theme="@style/TextLabel">
+
+                        <EditText
+                            android:id="@+id/score8"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="@dimen/padding_10"
+                            android:hint="Enter Remarks here"
+                            android:inputType="textMultiLine"
+                            android:scrollHorizontally="false"
+                            android:scrollbars="vertical"
+                            android:lines="4"
+                            android:paddingBottom="@dimen/padding_15"
+                            android:textColor="@color/colorWhite"
+                            android:textColorHint="@color/colorWhite"
+                            android:textSize="@dimen/text_16" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TableRow>
+
+                            <Button
+                                android:id="@+id/clear"
+                                android:layout_width="120dp"
+                                android:layout_height="wrap_content"
+                                android:layout_column="0"
+                                android:layout_marginLeft="25dp"
+                                android:layout_marginTop="15dp"
+                                android:layout_marginRight="15dp"
+                                android:layout_marginBottom="5dp"
+                                android:textColor="@color/colorWhite"
+                                android:background="@color/colorBlueText"
+                                android:text="Clear" />
+
+                            <Button
+                                android:id="@+id/save"
+                                android:layout_width="120dp"
+                                android:layout_height="wrap_content"
+                                android:layout_column="0"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="15dp"
+                                android:layout_marginRight="15dp"
+                                android:layout_marginBottom="5dp"
+                                android:textColor="@color/colorWhite"
+                                android:background="@color/colorBlueText"
+                                android:text="Save" />
+
+                        </TableRow>
+                    </TableLayout>
+
+
+                </LinearLayout>
+                 </android.support.v7.widget.CardView>
+        </LinearLayout>
+
+                </LinearLayout>
+            </ScrollView>
+        </FrameLayout>
+</LinearLayout>
