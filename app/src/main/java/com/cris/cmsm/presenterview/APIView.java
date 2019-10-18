@@ -28,6 +28,7 @@ import com.cris.cmsm.models.response.Paramresponse;
 import com.cris.cmsm.models.response.Passwordresponse;
 import com.cris.cmsm.models.response.Remarksresponse;
 import com.cris.cmsm.models.response.Sectionresponse;
+import com.cris.cmsm.models.response.ValidateFromToLocoResponse;
 import com.cris.cmsm.models.response.VcdStatusResponse;
 import com.cris.cmsm.models.response.Annexure14CRes;
 import com.cris.cmsm.models.response.BillingResponse;
@@ -354,6 +355,9 @@ public interface APIView {
 
     @POST(URLS.LICREWSTATUS)
     Call<LICrewMonitoredResponse> getlicrewstts(@Body GraphAPIRequest lireq);
+
+    @POST(URLS.VALIDATE_FROM_TO_STTN_LOCO)
+    Call<ValidateFromToLocoResponse> getmsg(@Body GraphAPIRequest req);
 
 
 }

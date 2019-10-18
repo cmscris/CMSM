@@ -49,6 +49,7 @@ import com.cris.cmsm.models.response.ResAnnexureRB6;
 import com.cris.cmsm.models.response.ResAnnexureRB7;
 import com.cris.cmsm.models.response.Sectionresponse;
 import com.cris.cmsm.models.response.ThreeYearData;
+import com.cris.cmsm.models.response.ValidateFromToLocoResponse;
 import com.cris.cmsm.presenterview.RequestView;
 import com.cris.cmsm.presenterview.ResponseView;
 import com.cris.cmsm.util.Constants;
@@ -313,6 +314,26 @@ public class RequestPresenter implements RequestView {
 
                     @Override
                     public void onFailure(Call <LICrewMonitoredResponse> call, Throwable t) {
+                        System.out.println("Error in Response");
+                    }
+
+
+                });
+                break;
+            case Constants.VALIDATE_FROM_TO_STTN_LOCO:
+                showProgress(msg);
+                GraphAPIRequest reqst = (GraphAPIRequest) object;
+                System.out.println("Request is >>" + new Gson().toJson(reqst));
+                WebServices.getInstance().getService().getmsg(reqst).enqueue(new Callback<ValidateFromToLocoResponse>() {
+                    @Override
+                    public void onResponse(Call<ValidateFromToLocoResponse> call,Response<ValidateFromToLocoResponse> response) {
+                        dismissProgress();
+                        System.out.println("Response is " + new Gson().toJson(response));
+                        view.ResponseOk(response.body(), position);
+                    }
+
+                    @Override
+                    public void onFailure(Call <ValidateFromToLocoResponse> call, Throwable t) {
                         System.out.println("Error in Response");
                     }
 
