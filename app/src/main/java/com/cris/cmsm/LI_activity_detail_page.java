@@ -108,7 +108,7 @@ public class LI_activity_detail_page extends AppCompatActivity implements
         iv_right.setImageResource(R.drawable.icon_logout);
         iv_right.setVisibility(View.VISIBLE);
         iv_title_icon.setImageResource(R.drawable.iv_back);
-        iv_middle.setImageResource(R.drawable.availability_list);
+        iv_middle.setImageResource(R.mipmap.ic_launcher_list);
         iv_middle.setVisibility(View.VISIBLE);
 update.setVisibility(View.GONE);
         save.setVisibility(View.VISIBLE);
