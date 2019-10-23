@@ -32,5 +32,7 @@
     <color name="colorBlueGrey">#607D8B</color>
     <color name="colorCyan">#00B8D4</color>
     <color name="colorLime">#827717</color>
+    <color name="colorLightYellow">#FF9933</color>
+    <color name="colorDarkGrey">#818383</color>
 
 </resources>

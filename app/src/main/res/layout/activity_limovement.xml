@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_custom_calendar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,20 +8,20 @@
     <include layout="@layout/actionbar_layout"/>
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="wrap_content"
         android:textAlignment="center"
         android:id="@+id/heading"
-        android:text="Click on Calender Cell to fill/Edit or View Activity"
+        android:text="Click on Calender Cell to fill Activity"
         android:textStyle="bold"
         android:textSize="20sp"
-        android:background="@color/colorBlueText"
+        android:background="@color/colorCyan"
         android:textColor="@color/colorWhite"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
-        android:background="@color/colorAccent"
+        android:background="@color/colorBlueText"
         android:orientation="horizontal">
         <ImageView
             android:id="@+id/previous_month"
@@ -35,8 +36,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textColor="@color/colorGrayBackground"
-            android:text="October,2019"
+            android:text=" "
+            android:textColor="@color/colorWhite"
             android:layout_marginTop="4dp"
             android:textStyle="bold"
             android:layout_weight="3"/>
@@ -130,6 +131,35 @@
     <GridView
         android:id="@+id/calendar_grid"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:numColumns="7"/>
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="center"
+        app:cardBackgroundColor="@color/colorBlueText">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="5dp"
+        android:layout_margin="5dp">
+        <Button
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_curr_mn_actvty"
+            android:layout_gravity="center"
+            android:background="@color/colorBlueText"
+          android:drawableRight="@mipmap/ic_launcher_submitlist"
+            android:text="Get Sumitted LI Movement"
+            android:textColor="@color/colorWhite"
+           />
+
+    </LinearLayout>
+    </android.support.v7.widget.CardView>
 </LinearLayout>
