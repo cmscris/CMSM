@@ -40,6 +40,7 @@ public class LI_activitydraftdetail extends AppCompatActivity implements OnItemC
     ArrayList innerList;
     ArrayList<ArrayList<String>>listitem;
 
+
     ArrayList<Limovdraftresponse> senditemdatalist,senditemdatalist1;
     int i = 0;
 
@@ -91,10 +92,12 @@ commonClass=new CommonClass(LI_activitydraftdetail.this);
                 System.out.println("INNERLISTSIZE>>>>>>>>>>>"+innerList.size());
                 System.out.println("INNERLISTSIZE>>>>>>>>>>>"+innerList);
                 i=0;
-                ArrayList item;
+                ArrayList   item = new ArrayList();
+                item.add(loginInfoModel.getLoginid());
                 for(i=1;i<innerList.size();i++) {
-                    item = new ArrayList();
+
                     Limovdraftresponse li = (Limovdraftresponse) innerList.get(i);
+
                     item.add(li.getFrmdttm());
                     item.add(li.getTodttm());
                     item.add(li.getDutytyp());
@@ -106,12 +109,10 @@ commonClass=new CommonClass(LI_activitydraftdetail.this);
                     item.add(li.getTrain());
                     item.add(li.getKm());
                     item.add(li.getRmk());
-                    listitem.add(item);
-
-
+                    //listitem.add(item);
                     }
-                System.out.println("Fianal List--->>>>>>>>"+listitem);
-                 System.out.println("Fianal List to submit--->>>>>>>>"+listitem.size());
+                System.out.println("Final List--->>>>>>>>"+item);
+                 System.out.println("Final List to submit--->>>>>>>>"+item.size());
                  commonClass.showToast("Data Submitted Sucessfully");
                  finish();
 

@@ -22,6 +22,7 @@ import com.cris.cmsm.models.response.CrewPositionSummaryResponse;
 import com.cris.cmsm.models.response.FeedbackResponse;
 import com.cris.cmsm.models.response.KeyValueResponse;
 import com.cris.cmsm.models.response.LICrewMonitoredResponse;
+import com.cris.cmsm.models.response.Limovementresponse;
 import com.cris.cmsm.models.response.LoginResponse;
 import com.cris.cmsm.models.response.MISReportResponse;
 import com.cris.cmsm.models.response.MasterData;
@@ -340,6 +341,27 @@ public class RequestPresenter implements RequestView {
 
                 });
                 break;
+           case Constants.LIMOVEMENTDETAILS:
+                showProgress(msg);
+                GraphAPIRequest reqst1 = (GraphAPIRequest) object;
+                System.out.println("Request is >>" + new Gson().toJson(reqst1));
+                WebServices.getInstance().getService().getmssg(reqst1).enqueue(new Callback<Limovementresponse>() {
+                    @Override
+                    public void onResponse(Call<Limovementresponse> call,Response<Limovementresponse> response) {
+                        dismissProgress();
+                        System.out.println("Response is " + new Gson().toJson(response));
+                        view.ResponseOk(response.body(), position);
+                    }
+
+                    @Override
+                    public void onFailure(Call <Limovementresponse> call, Throwable t) {
+                        System.out.println("Error in Response");
+                    }
+
+
+                });
+                break;
+
 
 
 
