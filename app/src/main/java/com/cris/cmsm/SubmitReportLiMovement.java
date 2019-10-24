@@ -64,7 +64,7 @@ public class SubmitReportLiMovement extends AppCompatActivity implements OnItemC
                 ReportHeaderView reportHeaderView = new ReportHeaderView();
                 String header_str= "LI Movement Report";
 
-                header_str += "\nMonth -" +loginInfoModel.getLoginid();
+                header_str += "\nLI :" +loginInfoModel.getLoginid();
                 reportHeaderView.setEnergyConsume(header_str );
                 LiMovementVOsResponse liMovementVOsResponse=new LiMovementVOsResponse();
                 liMovementVOsResponse.setSno("SN");

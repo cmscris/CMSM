@@ -58,6 +58,7 @@ public class Constants {
     public static final int LI_MOVEMENT=209;
     public static final int VALIDATE_FROM_TO_STTN_LOCO=210;
     public static final int LIMOVEMENTDETAILS =211;
+    public static final int SAVE_LI_MOVEMENT_DETAIL=212;
 
 
     public static final int SAVEABNORMALITY=52;

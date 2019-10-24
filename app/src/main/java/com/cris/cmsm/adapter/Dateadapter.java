@@ -50,6 +50,7 @@ public class Dateadapter extends ArrayAdapter {
 
     @Override
     public View getView(int i, View convertView, ViewGroup parent) {
+
         Date mDate = monthlyDates.get(i);
         Calendar dateCal = Calendar.getInstance();
         dateCal.setTime(mDate);
@@ -64,6 +65,14 @@ public class Dateadapter extends ArrayAdapter {
         }
         if(displayMonth == currentMonth && displayYear == currentYear){
             view.setBackgroundColor(Color.parseColor("#00B8D4"));
+
+
+            if(i%2==0){
+                view.setBackgroundColor(Color.parseColor("#8BD8BD"));
+            }
+            else{
+                view.setBackgroundColor(Color.parseColor("#00B8D4"));
+            }
         }else{
             view.setBackgroundColor(Color.parseColor("#E0E0E0"));
         }

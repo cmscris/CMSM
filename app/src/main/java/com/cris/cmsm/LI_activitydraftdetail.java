@@ -20,15 +20,20 @@ import com.cris.cmsm.adapter.Limovadapter;
 import com.cris.cmsm.database.DataHolder;
 import com.cris.cmsm.interfaces.OnItemClickListener;
 import com.cris.cmsm.models.ReportHeaderView;
+import com.cris.cmsm.models.request.GraphAPIRequest;
 import com.cris.cmsm.models.response.LICrewMonitoredResponseVO;
+import com.cris.cmsm.models.response.LimMovementSubmitResponse;
 import com.cris.cmsm.models.response.LoginIfoVO;
 import com.cris.cmsm.prefrences.UserLoginPreferences;
+import com.cris.cmsm.presenter.RequestPresenter;
+import com.cris.cmsm.presenterview.ResponseView;
 import com.cris.cmsm.util.CommonClass;
+import com.cris.cmsm.util.Constants;
 import com.cris.cmsm.widget.PinchRecyclerView;
 
 import java.util.ArrayList;
 
-public class LI_activitydraftdetail extends AppCompatActivity implements OnItemClickListener  {
+public class LI_activitydraftdetail extends AppCompatActivity implements OnItemClickListener, ResponseView {
 
  PinchRecyclerView pinchRecyclerView;
  Button bt_submit;
@@ -39,6 +44,8 @@ public class LI_activitydraftdetail extends AppCompatActivity implements OnItemC
     TableLayout tableLayout;
     ArrayList innerList;
     ArrayList<ArrayList<String>>listitem;
+    private RequestPresenter requestPresenter;
+    GraphAPIRequest request;
 
 
     ArrayList<Limovdraftresponse> senditemdatalist,senditemdatalist1;
@@ -55,7 +62,9 @@ public class LI_activitydraftdetail extends AppCompatActivity implements OnItemC
         tableLayout = (TableLayout) findViewById(R.id.tablelayout);
         userLoginPreferences=new UserLoginPreferences(LI_activitydraftdetail.this);
         loginInfoModel = userLoginPreferences.getLoginUser();
-commonClass=new CommonClass(LI_activitydraftdetail.this);
+        commonClass=new CommonClass(LI_activitydraftdetail.this);
+        requestPresenter=new RequestPresenter(LI_activitydraftdetail.this);
+        request=new GraphAPIRequest();
         listitem=new ArrayList <>();
         senditemdatalist=new ArrayList<>();
         senditemdatalist1=new ArrayList <>();
@@ -89,10 +98,12 @@ commonClass=new CommonClass(LI_activitydraftdetail.this);
         bt_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 System.out.println("INNERLISTSIZE>>>>>>>>>>>"+innerList.size());
                 System.out.println("INNERLISTSIZE>>>>>>>>>>>"+innerList);
                 i=0;
                 ArrayList   item = new ArrayList();
+                item.clear();
                 item.add(loginInfoModel.getLoginid());
                 for(i=1;i<innerList.size();i++) {
 
@@ -113,8 +124,9 @@ commonClass=new CommonClass(LI_activitydraftdetail.this);
                     }
                 System.out.println("Final List--->>>>>>>>"+item);
                  System.out.println("Final List to submit--->>>>>>>>"+item.size());
-                 commonClass.showToast("Data Submitted Sucessfully");
-                 finish();
+           request.setparamlist(item);
+           requestPresenter.Request(request,"Saving Data !!!!!!", Constants.SAVE_LI_MOVEMENT_DETAIL);
+
 
             }
         });
@@ -158,4 +170,32 @@ commonClass=new CommonClass(LI_activitydraftdetail.this);
         }
     }
 
+    @Override
+    public void ResponseOk(Object object, int position) {
+        if(object instanceof LimMovementSubmitResponse){
+            LimMovementSubmitResponse limMovementSubmitResponse=(LimMovementSubmitResponse)object;
+            if(limMovementSubmitResponse.getMessage().equals("Record Successfully Saved.")){
+                commonClass.showToast(limMovementSubmitResponse.getMessage());
+              DataHolder.getLimovmainlist().clear();
+                finish();
+
+            }
+        }
+
+    }
+
+    @Override
+    public void Error() {
+
+    }
+
+    @Override
+    public void dismissProgress() {
+
+    }
+
+    @Override
+    public void showProgress(String msg) {
+
+    }
 }

@@ -415,6 +415,7 @@ public class LI_activity_detail_page extends AppCompatActivity implements
         mHour = c.get(Calendar.HOUR_OF_DAY);
         mMinute = c.get(Calendar.MINUTE);
 
+
         // Launch Time Picker Dialog
         TimePickerDialog timePickerDialog = new TimePickerDialog(this,
                 new TimePickerDialog.OnTimeSetListener() {
@@ -425,24 +426,29 @@ public class LI_activity_detail_page extends AppCompatActivity implements
                         picktomin=minute;
                         Hour=format.format(hourOfDay);
                         Minute=format.format(minute);
-                        mHour = hourOfDay;
-                        mMinute = minute;
+
 
                         if(pickfrmdt>=picktodt && pickfrmyear>=picktoyear &&pickfrmmonth>=picktomonth){
                             if(pickfrmhour>=picktohour&&pickfrmmin>=picktomin){
                                 et_todt.setText("Invalid Time");
                             }
                             else{
+                                System.out.println("Inside else");
                                 todttime=to_date_time+" "+Hour + ":" + Minute;
                                 et_todt.setText(to_date_time+" "+Hour + ":" + Minute);
                             }
 
+                        }else if(picktodt>=pickfrmdt && picktoyear>=pickfrmyear && picktomonth>=pickfrmmonth){
+                            if(picktohour<=mHour && picktomin<=mMinute){
+                                todttime=to_date_time+" "+Hour + ":" + Minute;
+                                System.out.println("totime"+todttime+"currenthr"+mHour);
+                                et_todt.setText(to_date_time+" "+Hour + ":" + Minute);
+                            }
+                            else{
+                                et_todt.setText("Invalid Time");
+                            }
                         }
-                        else{
-                            todttime=to_date_time+" "+Hour + ":" + Minute;
-                            et_todt.setText(to_date_time+" "+Hour + ":" + Minute);
 
-                        }
                     }
                 }, mHour, mMinute, false);
         timePickerDialog.show();
@@ -583,7 +589,7 @@ public class LI_activity_detail_page extends AppCompatActivity implements
                     limovdraftresponse.setEdit("EDIT");
                     liresponsePrev = (ArrayList) DataHolder.getLimovmainlist();
                     System.out.println("size of liresponse list before " + liresponse.size());
-                    if (liresponsePrev == null) {
+                    if (liresponsePrev == null || liresponsePrev.size()==0) {
                         liresponse.add(0, lis);
                         liresponse.add(limovdraftresponse);
                         DataHolder.setLimovmainlist(liresponse);
@@ -629,16 +635,19 @@ public class LI_activity_detail_page extends AppCompatActivity implements
 
     @Override
     public void Error() {
+        commonClass.showToast("No Record Found");
 
     }
 
     @Override
     public void dismissProgress() {
+        commonClass.dismissDialog();
 
     }
 
     @Override
     public void showProgress(String msg) {
+        commonClass.showProgressBar(msg);
 
     }
 }

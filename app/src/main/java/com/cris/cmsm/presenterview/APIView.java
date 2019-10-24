@@ -24,6 +24,7 @@ import com.cris.cmsm.models.request.SubmitLTConnection;
 import com.cris.cmsm.models.response.AbnormalityResponse;
 import com.cris.cmsm.models.response.CrewAvailabilityDetailResponse;
 import com.cris.cmsm.models.response.KeyValueResponse;
+import com.cris.cmsm.models.response.LimMovementSubmitResponse;
 import com.cris.cmsm.models.response.Limovementresponse;
 import com.cris.cmsm.models.response.Paramresponse;
 import com.cris.cmsm.models.response.Passwordresponse;
@@ -362,6 +363,9 @@ public interface APIView {
 
   @POST(URLS.LIMOVEMENTDETAILS)
     Call<Limovementresponse> getmssg(@Body GraphAPIRequest req);
+
+    @POST(URLS.SAVE_LI_MOVEMENT_DETAIL)
+    Call<LimMovementSubmitResponse> getres(@Body GraphAPIRequest req);
 
 
 
