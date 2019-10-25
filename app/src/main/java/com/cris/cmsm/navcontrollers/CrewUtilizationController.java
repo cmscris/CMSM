@@ -222,7 +222,7 @@ public class CrewUtilizationController extends BaseActivity implements View.OnCl
                 break;
             case R.id.btn_filter:
 
-                if(DataHolder.getType() == 1)
+                if(getIntent().getIntExtra(Constants.KEY, -1) == Constants.CREW_UTILIZATION)
                 {
                     if( spn_fYear.getSelectedItem().equals("Select Year"))
                     {
@@ -318,12 +318,15 @@ public class CrewUtilizationController extends BaseActivity implements View.OnCl
             if(cat == Constants.CREW_UTILIZATION)
             {
 
-               request.setRailwayCode(((Railway) spn_ryCode.getSelectedItem()).getRlycode());
-               request.setDivisionCode(((Division) spn_divCode.getSelectedItem()).getDivcode());
-               request.setLobbyCode(((Lobby) spn_lobbyCode.getSelectedItem()).getLobbycode());
-                request.setDesignation(((Designation) spn_desigCode.getSelectedItem()).getDesignationCode());
-               request.setMonth(((Month) spn_month.getSelectedItem()).getMonthCode());
-               request.setFYYear((String) spn_fYear.getSelectedItem());
+               request.setRailwayCode(((Railway) spn_ryCode.getSelectedItem()).getRlycode().trim());
+
+                System.out.println("Division Code :>>> " + ((Division) spn_divCode.getSelectedItem()).getDivcode());
+                System.out.println("Division Code Trim :>>> " + ((Division) spn_divCode.getSelectedItem()).getDivcode().trim());
+               request.setDivisionCode(((Division) spn_divCode.getSelectedItem()).getDivcode().trim());
+               request.setLobbyCode(((Lobby) spn_lobbyCode.getSelectedItem()).getLobbycode().trim());
+                request.setDesignation(((Designation) spn_desigCode.getSelectedItem()).getDesignationCode().trim());
+               request.setMonth(((Month) spn_month.getSelectedItem()).getMonthCode().trim());
+               request.setFYYear(((String) spn_fYear.getSelectedItem()).trim());
 
                 DataHolder.getInstance().setGraphAPIRequest(request);
                 monthlyRequestPresenter.Request(request, "Getting Crew Utilization Report", Constants.CREW_UTILIZATION);
@@ -332,6 +335,9 @@ public class CrewUtilizationController extends BaseActivity implements View.OnCl
             {
 
                 request.setRailwayCode(((Railway) spn_ryCode.getSelectedItem()).getRlycode());
+
+                System.out.println("Fort Division Code :>>> " + ((Division) spn_divCode.getSelectedItem()).getDivcode());
+                System.out.println(" Fort Division Code Trim :>>> " + ((Division) spn_divCode.getSelectedItem()).getDivcode().trim());
                 request.setDivisionCode(((Division) spn_divCode.getSelectedItem()).getDivcode());
                 request.setLobbyCode(((Lobby) spn_lobbyCode.getSelectedItem()).getLobbycode());
                 request.setDesignation(((Designation) spn_desigCode.getSelectedItem()).getDesignationCode());

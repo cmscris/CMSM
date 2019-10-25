@@ -23,6 +23,7 @@ import com.cris.cmsm.presenterview.ResponseView;
 import com.cris.cmsm.util.CommonClass;
 import com.cris.cmsm.util.Constants;
 import com.cris.cmsm.util.FontFamily;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -151,6 +152,7 @@ public class LoginActivity extends AppCompatActivity implements ResponseView, Vi
     public void ResponseOk(Object object, int position) {
 
         try {
+
             if(object.equals(null)){
                 retryDialog(LoginActivity.this, "Loginid and Password not exist. Do you want to retry?");
 
