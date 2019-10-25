@@ -2,46 +2,42 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cris.cmsm">
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <supports-screens
-        android:resizeable="true"
-        android:smallScreens="true"
-        android:normalScreens="true"
-        android:largeScreens="true"
-        android:anyDensity="true"
-        />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Subhead_abnormality_activity"></activity>
-        <activity android:name=".Abnormality_department"
+        <activity android:name=".SubmitReportLiMovement"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateHidden" ></activity>
+        <activity android:name=".Subhead_abnormality_activity" />
+        <activity
+            android:name=".Abnormality_department"
             android:screenOrientation="landscape"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Abnormality_fill_activity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".Grading"
+        <activity
+            android:name=".Grading"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".LImovement"/>
-        <activity android:name=".CalendarCustomView"/>
-        <activity android:name=".LI_activitydraftdetail"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".LImovement" />
+        <activity
+            android:name=".LI_activitydraftdetail"
             android:screenOrientation="landscape"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".LI_activity_detail_page"/>
-        <activity android:name=".Crew_Current_Status"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".LI_activity_detail_page" />
+        <activity
+            android:name=".Crew_Current_Status"
             android:screenOrientation="landscape"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".Abnormality_Dashboard"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Abnormality_Dashboard"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Password_reset_activity"
             android:screenOrientation="portrait"
@@ -241,35 +237,42 @@
             android:screenOrientation="landscape"
             android:theme="@style/AppThemeFullScreen"
             android:windowSoftInputMode="stateHidden" /> <!-- Zoom Activity -->
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-
         <activity android:name=".abnorresponse_activity" />
+
         <activity
             android:name=".Responsedetail"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".navcontrollers.CrewAvailabilityDetailFilterController"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen"
-            android:windowSoftInputMode="stateHidden" /> <!-- Zoom Activity -->
-
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".navcontrollers.IrregularCrewController"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen"
-            android:windowSoftInputMode="stateHidden" />
-
+            android:windowSoftInputMode="stateHidden" /> <!-- Zoom Activity -->
         <activity
             android:name=".navcontrollers.IrregularCrewReportController"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen"
             android:windowSoftInputMode="stateHidden" />
-
-
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
     </application>
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
 </manifest>

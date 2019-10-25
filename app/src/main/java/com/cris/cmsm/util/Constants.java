@@ -56,6 +56,8 @@ public class Constants {
     public static final int CREWCURRENTSTATUS=207;
     public static final int LICREWSTATUS=208;
     public static final int LI_MOVEMENT=209;
+    public static final int VALIDATE_FROM_TO_STTN_LOCO=210;
+    public static final int LIMOVEMENTDETAILS =211;
 
 
     public static final int SAVEABNORMALITY=52;

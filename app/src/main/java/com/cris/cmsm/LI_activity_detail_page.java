@@ -32,9 +32,11 @@ import com.cris.cmsm.database.DataHolder;
 import com.cris.cmsm.interfaces.OnItemClickListener;
 import com.cris.cmsm.models.request.GraphAPIRequest;
 import com.cris.cmsm.models.response.LoginIfoVO;
+import com.cris.cmsm.models.response.ValidateFromToLocoResponse;
 import com.cris.cmsm.navcontrollers.DetailController;
 import com.cris.cmsm.prefrences.UserLoginPreferences;
 import com.cris.cmsm.presenter.RequestPresenter;
+import com.cris.cmsm.presenterview.ResponseView;
 import com.cris.cmsm.util.CommonClass;
 import com.cris.cmsm.util.Constants;
 import com.cris.cmsm.widget.PinchRecyclerView;
@@ -48,37 +50,29 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class LI_activity_detail_page extends AppCompatActivity implements
-        AdapterView.OnItemSelectedListener {
+        AdapterView.OnItemSelectedListener, ResponseView {
 
-    /*ArrayList<String>list;
-     String id, name, phone;
-     TextView ids,phones,names;
-     EditText et_id,et_name,et_phone;
-     Button btn_clk;*/
-    TextView tv_dt, tv_todt, tv_From_sttn, tv_to_sttn, tv_loco, tv_train, tv_remark, et_dt, et_todt;
-
+   TextView  et_dt, et_todt;
     private TextView action_bar_title;
     EditText et_From_sttn, et_to_sttn, et_loco, et_train, et_remark,et_km,et_via1,et_via2;
     private ImageView iv_title_icon, iv_right, iv_middle;
-    private ArrayList <String> list,transferlist;
     ArrayList <ArrayList <String>> Mainlist;
     private LoginIfoVO loginInfoModel;
     String from_date_time, to_date_time;
+    private RequestPresenter requestPresenter;
+    GraphAPIRequest request;
     String sn;
     int mHour, mMinute;
     Spinner spn_dutytype;
     NumberFormat format;
     String slectspn,slectspn2;
     private UserLoginPreferences userLoginPreferences;
-    String Hour, Minute, id, fromdt, todt, frmsttn, tosttn, loco, train, remrk,frmmonth,tomonth,fromdttime,todttime;
+    String Hour, Minute, id, fromdt, todt,frmmonth,tomonth,fromdttime,todttime;
     int pickfrmdt,picktodt,pickfrmyear,j,pickfrmmonth,picktomonth,picktoyear,pickfrmhour,picktohour,pickfrmmin,picktomin;
     Button save, clear,update,btn_del;
 
     int i = 0;
-    PinchRecyclerView pinchview;
     ArrayList <String> Savedatalist;
-    TableLayout tableLayout;
-    TableRow tableRow, tableRow2;
     CommonClass commonClass;
     private ArrayList <Limovdraftresponse> liresponse,liresponsePrev,titlelist;
 
@@ -108,19 +102,19 @@ public class LI_activity_detail_page extends AppCompatActivity implements
         iv_right.setImageResource(R.drawable.icon_logout);
         iv_right.setVisibility(View.VISIBLE);
         iv_title_icon.setImageResource(R.drawable.iv_back);
-        iv_middle.setImageResource(R.drawable.availability_list);
+        iv_middle.setImageResource(R.mipmap.ic_launcher_list);
         iv_middle.setVisibility(View.VISIBLE);
-update.setVisibility(View.GONE);
+        update.setVisibility(View.GONE);
         save.setVisibility(View.VISIBLE);
         action_bar_title = findViewById(R.id.action_bar_title);
         userLoginPreferences = new UserLoginPreferences(LI_activity_detail_page.this);
         loginInfoModel = userLoginPreferences.getLoginUser();
         commonClass=new CommonClass(LI_activity_detail_page.this);
         action_bar_title.setText("CMS- " + loginInfoModel.getFname());
-        list=new ArrayList <>();
         titlelist=new ArrayList <>();
         Mainlist = new ArrayList <>();
-        transferlist=new ArrayList <>();
+        requestPresenter=new RequestPresenter(LI_activity_detail_page.this);
+        request=new GraphAPIRequest();
         format=new DecimalFormat("00");
         et_From_sttn.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
         et_to_sttn.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
@@ -152,22 +146,7 @@ update.setVisibility(View.GONE);
         spn_dutytype.setAdapter(dept);
      spn_dutytype.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
 
-        Limovdraftresponse lis=new Limovdraftresponse();
-        lis.setId("SN");
-        lis.setFrmdttm("FROM  DT-TM");
-        lis.setTodttm("To DT-TM");
-        lis.setFrmsttn("FROM STTN");
-        lis.setTosttn("TO STTN");
-        lis.setVia1("VIA-1 STTN");
-        lis.setVia2("VIA-2 STTN");
-        lis.setDutytyp("DUTY TYPE");
-        lis.setLoco("LOCO No.");
-        lis.setTrain("TRAIN NO.");
-        lis.setKm("KMS");
-        lis.setRmk("REMARK");
-        lis.setEdit("EDIT");
-        //lis.setDel("DEL");
-        titlelist.add(lis);
+
         btn_del.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -250,97 +229,24 @@ update.setVisibility(View.GONE);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-                j = i + 1;
-                id=""+j;
-
-
-
-
-
-                i++;
-               list = new ArrayList < >();
-               /* list.add(id);
-
-                list.add(et_dt.getText().toString());
-                list.add(et_todt.getText().toString());
-                list.add(et_From_sttn.getText().toString());
-                list.add(et_to_sttn.getText().toString());
-                list.add(slectspn2);
-                list.add(et_loco.getText().toString());
-                list.add(et_train.getText().toString());
-                list.add(et_remark.getText().toString());
-                list.add("-");*/
-               if(et_dt.getText().toString().equals("")||et_todt.getText().toString().equals("")||et_From_sttn.getText().toString().equals("") || et_to_sttn.getText().toString().equals("")||et_loco.getText().toString().equals("")||
-                       et_train.getText().toString().equals("")||et_km.getText().toString().equals("")){
-                   commonClass.showToast("Please fill complete detail");
+                ArrayList validate=new ArrayList();
+                validate.add(et_From_sttn.getText().toString());
+                validate.add(et_to_sttn.getText().toString());
+                validate.add(et_loco.getText().toString());
+                if(et_dt.getText().toString().equals("")||et_todt.getText().toString().equals("")||et_From_sttn.getText().toString().equals("") || et_to_sttn.getText().toString().equals("")||et_loco.getText().toString().equals("")||
+                        et_train.getText().toString().equals("")||et_km.getText().toString().equals("")){
+                    commonClass.showToast("Please fill complete detail");
 
                 }
-               else if(et_remark.getText().toString().equals("")){
-                   commonClass.showToast("Please enter Remarks");
-               }
-               else {
-                   liresponse = new ArrayList <>();
-                   Limovdraftresponse limovdraftresponse = new Limovdraftresponse();
-                   limovdraftresponse.setId(id);
-                   limovdraftresponse.setFrmdttm(et_dt.getText().toString());
-                   limovdraftresponse.setTodttm(et_todt.getText().toString());
-                   limovdraftresponse.setFrmsttn(et_From_sttn.getText().toString());
-                   limovdraftresponse.setTosttn(et_to_sttn.getText().toString());
-                   limovdraftresponse.setVia1(et_via1.getText().toString());
-                   limovdraftresponse.setVia2(et_via2.getText().toString());
-                   limovdraftresponse.setDutytyp(slectspn2);
-                   limovdraftresponse.setLoco(et_loco.getText().toString());
-                   limovdraftresponse.setTrain(et_train.getText().toString());
-                   limovdraftresponse.setKm(et_km.getText().toString());
-                   limovdraftresponse.setRmk(et_remark.getText().toString());
-                   limovdraftresponse.setEdit("EDIT");
-                   //limovdraftresponse.setDel("DEL");
-
-                   liresponsePrev = (ArrayList) DataHolder.getLimovmainlist();
-                   System.out.println("size of liresponse list before " + liresponse.size());
-                   if (liresponsePrev == null) {
-                       liresponse.add(0, lis);
-                       liresponse.add(limovdraftresponse);
-                       DataHolder.setLimovmainlist(liresponse);
-                       System.out.println("inside null");
-                       System.out.println("size of liresponse list " + DataHolder.getLimovmainlist());
-                       System.out.println("size of liresponse list before " + liresponse.size());
-                   } else {
-                       liresponsePrev.add(limovdraftresponse);
-                       DataHolder.setLimovmainlist(liresponsePrev);
-                       System.out.println("inside not  null");
-                       System.out.println("size of liresponse list after" + liresponsePrev.size());
-                       System.out.println("size of liresponse list " + DataHolder.getLimovmainlist());
-                   }
-                   commonClass.showToast("Data Saved as a Draft");
-
-                   //DataHolder.setLimovlist(list);
-                   // DataHolder.setLevel(1);
-
-                /*if (DataHolder.getLevel() == 1) {
-                    System.out.println("LIST DATA>>>>>>" + DataHolder.getLimovlist());
-                    Mainlist.add(list);
-                    DataHolder.setLimovmainlist(Mainlist);
-                    System.out.println("LIST DATA>>>>>>" + Mainlist);
-                    DataHolder.setLevel(0);
-                } else {
-                    list.clear();
-                }*/
+                else if(et_remark.getText().toString().equals("")){
+                    commonClass.showToast("Please enter Remarks");
+                }
+                else {
+                    request.setparamlist(validate);
+                    requestPresenter.Request(request, "Validating!!!!!!!", Constants.VALIDATE_FROM_TO_STTN_LOCO);
+                }
 
 
-                   et_dt.setText("");
-                   et_todt.setText("");
-                   et_From_sttn.setText("");
-                   et_to_sttn.setText("");
-                   et_via1.setText("");
-                   et_via2.setText("");
-                   et_train.setText("");
-                   et_loco.setText("");
-                   et_remark.setText("");
-                   et_km.setText("");
-               }
             }
         });
 
@@ -399,7 +305,6 @@ update.setVisibility(View.GONE);
     }
 
     private void logOut () {
-        //userLoginPreferences.clearUser();
         DataHolder.setLevel(0);
         CommonClass.goToNextScreen(LI_activity_detail_page.this, DetailController.class, true, Constants.LOGIN_OPTIONS);
 
@@ -558,7 +463,6 @@ update.setVisibility(View.GONE);
         if (requestCode == 1) {
             if(resultCode == Activity.RESULT_OK) {
                 ArrayList <String> datalist = data.getStringArrayListExtra("keyName");
-                //cardViewProductAdapter.onActivityResult(1,2,data);
                 System.out.println("Result final>>>>>>>>>>" + datalist);
                 save.setVisibility(View.GONE);
                 update.setVisibility(View.VISIBLE);
@@ -625,7 +529,6 @@ update.setVisibility(View.GONE);
                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
-                        // finish();
                     }
                 })
                 .setIcon(R.drawable.icon_logo)
@@ -635,6 +538,107 @@ update.setVisibility(View.GONE);
 
     @Override
     public void onNothingSelected(AdapterView <?> parent) {
+
+    }
+
+    @Override
+    public void ResponseOk(Object object, int position) {
+        if(object instanceof ValidateFromToLocoResponse){
+            Limovdraftresponse lis=new Limovdraftresponse();
+            lis.setId("SN");
+            lis.setFrmdttm("FROM  DT-TM");
+            lis.setTodttm("To DT-TM");
+            lis.setFrmsttn("FROM STTN");
+            lis.setTosttn("TO STTN");
+            lis.setVia1("VIA-1 STTN");
+            lis.setVia2("VIA-2 STTN");
+            lis.setDutytyp("DUTY TYPE");
+            lis.setLoco("LOCO No.");
+            lis.setTrain("TRAIN NO.");
+            lis.setKm("KMS");
+            lis.setRmk("REMARK");
+            lis.setEdit("EDIT");
+            //lis.setDel("DEL");
+            titlelist.add(lis);
+            System.out.println("Key sucess>>>>>>>>>>");
+            ValidateFromToLocoResponse valid=(ValidateFromToLocoResponse)object;
+            if(valid.getMessage().equals("ALLOK")){
+
+                j = i + 1;
+                id=""+j;
+                    liresponse = new ArrayList <>();
+                    Limovdraftresponse limovdraftresponse = new Limovdraftresponse();
+                    limovdraftresponse.setId(id);
+                    limovdraftresponse.setFrmdttm(et_dt.getText().toString());
+                    limovdraftresponse.setTodttm(et_todt.getText().toString());
+                    limovdraftresponse.setFrmsttn(et_From_sttn.getText().toString());
+                    limovdraftresponse.setTosttn(et_to_sttn.getText().toString());
+                    limovdraftresponse.setVia1(et_via1.getText().toString());
+                    limovdraftresponse.setVia2(et_via2.getText().toString());
+                    limovdraftresponse.setDutytyp(slectspn2);
+                    limovdraftresponse.setLoco(et_loco.getText().toString());
+                    limovdraftresponse.setTrain(et_train.getText().toString());
+                    limovdraftresponse.setKm(et_km.getText().toString());
+                    limovdraftresponse.setRmk(et_remark.getText().toString());
+                    limovdraftresponse.setEdit("EDIT");
+                    liresponsePrev = (ArrayList) DataHolder.getLimovmainlist();
+                    System.out.println("size of liresponse list before " + liresponse.size());
+                    if (liresponsePrev == null) {
+                        liresponse.add(0, lis);
+                        liresponse.add(limovdraftresponse);
+                        DataHolder.setLimovmainlist(liresponse);
+                        System.out.println("inside null");
+                        System.out.println("size of liresponse list " + DataHolder.getLimovmainlist());
+                        System.out.println("size of liresponse list before " + liresponse.size());
+                    } else {
+                        liresponsePrev.add(limovdraftresponse);
+                        DataHolder.setLimovmainlist(liresponsePrev);
+                        System.out.println("inside not  null");
+                        System.out.println("size of liresponse list after" + liresponsePrev.size());
+                        System.out.println("size of liresponse list " + DataHolder.getLimovmainlist());
+                    }
+                    et_dt.setText("");
+                    et_todt.setText("");
+                    et_From_sttn.setText("");
+                    et_to_sttn.setText("");
+                    et_via1.setText("");
+                    et_via2.setText("");
+                    et_train.setText("");
+                    et_loco.setText("");
+                    et_remark.setText("");
+                    et_km.setText("");
+                    commonClass.showToast("Data Saved as a Draft");
+                    i++;
+
+            }
+            else if(valid.getMessage().equals("To Station Code is not Valid !!")){
+                commonClass.showToast(valid.getMessage());
+            }
+            else if(valid.getMessage().equals("From Station Code is not Valid !!")){
+                commonClass.showToast(valid.getMessage());
+            }
+            else if(valid.getMessage().equals("Loco number is not Valid !!")){
+                commonClass.showToast(valid.getMessage());
+            }
+            else if(valid.getMessage().equals("From/To Station Code and Loco number is not Valid !!")){
+                commonClass.showToast(valid.getMessage());
+            }
+        }
+
+    }
+
+    @Override
+    public void Error() {
+
+    }
+
+    @Override
+    public void dismissProgress() {
+
+    }
+
+    @Override
+    public void showProgress(String msg) {
 
     }
 }

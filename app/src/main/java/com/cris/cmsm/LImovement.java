@@ -1,9 +1,12 @@
 package com.cris.cmsm;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -21,7 +25,12 @@ import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 import com.cris.cmsm.adapter.Dateadapter;
 import com.cris.cmsm.adapter.LImovementadapter;
+import com.cris.cmsm.database.DataHolder;
+import com.cris.cmsm.models.response.LoginIfoVO;
+import com.cris.cmsm.navcontrollers.DetailController;
+import com.cris.cmsm.prefrences.UserLoginPreferences;
 import com.cris.cmsm.util.CommonClass;
+import com.cris.cmsm.util.Constants;
 
 import java.lang.reflect.Array;
 import java.text.DateFormat;
@@ -35,21 +44,18 @@ import java.util.Locale;
 
 public class LImovement extends AppCompatActivity {
     GridView gridview;
-    TextView  display_current_date,icon;
+    TextView  display_current_date;
     ImageView previous_month,next_month;
-    ArrayList <Integer> number;
-    DateFormat dateFormat;
-    String monthname="";
+    private ImageView iv_title_icon, iv_right,iv_middle;
+    Button btn_curr_mn_actvty;
     private SimpleDateFormat formatter = new SimpleDateFormat("MMMM yyyy", Locale.ENGLISH);
     private static final int MAX_CALENDAR_COLUMN = 42;
-    Date date;
-    private Context context;
     private Dateadapter mAdapter;
-    public static String[] days;
-    public static int[] months = {31, 0, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-    int today, beginOfMonth;
-    String month, year;
+    ArrayList<String> calendarinput;
+    private UserLoginPreferences userLoginPreferences;
+    private LoginIfoVO loginInfoModel;
     CommonClass commonClass;
+    StringBuilder sb =new StringBuilder();
     private Calendar cal = Calendar.getInstance(Locale.ENGLISH);
 
 
@@ -60,11 +66,39 @@ public class LImovement extends AppCompatActivity {
         setContentView(R.layout.activity_limovement);
         previous_month=(ImageView) findViewById(R.id.previous_month);
         next_month=(ImageView) findViewById(R.id.next_month);
+        iv_right=(ImageView) findViewById(R.id.iv_right);
+        btn_curr_mn_actvty=(Button)findViewById(R.id.btn_curr_mn_actvty);
         display_current_date=(TextView)findViewById(R.id.display_current_date);
         gridview = (GridView) findViewById(R.id.calendar_grid);
+        userLoginPreferences = new UserLoginPreferences(LImovement.this);
+        loginInfoModel = userLoginPreferences.getLoginUser();
+        iv_right.setImageResource(R.drawable.icon_logout);
+        iv_right.setVisibility(View.VISIBLE);
+        calendarinput=new ArrayList <>();
         setUpCalendarAdapter();
         setPreviousButtonClickEvent();
         setNextButtonClickEvent();
+        iv_right.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (v.getId()) {
+                    case R.id.iv_right:
+                        showLogoutDialog(LImovement.this, "Do you want to logout?", true);
+                        break;
+                }
+            }
+        });
+        btn_curr_mn_actvty.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calendarinput.clear();
+                calendarinput.add(loginInfoModel.getLoginid());
+                calendarinput.add(display_current_date.getText().toString());
+                Intent i=new Intent(LImovement.this,SubmitReportLiMovement.class);
+                i.putExtra("date",calendarinput);
+                startActivity(i);
+            }
+        });
 
        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
            @Override
@@ -112,110 +146,44 @@ public class LImovement extends AppCompatActivity {
         mAdapter = new Dateadapter(LImovement.this, dayValueInCells, cal);
         gridview.setAdapter(mAdapter);
     }
-       /* dateFormat = new SimpleDateFormat("yyyy");
-        date = new Date();
-        months[1] = Feb(Integer.parseInt(dateFormat.format(date))); // Find the amount of days in Feb
-        dateFormat = new SimpleDateFormat("MM");
-        int numDays = months[Integer.parseInt(dateFormat.format(date))-1] + 6; // Number of days in the month as well as making sure not to override the day names
-        // Check which day of the month the month started on. Eg: April 1st 2016 is a Friday
-        dateFormat = new SimpleDateFormat("MM");
-        month = dateFormat.format(date);
-        dateFormat = new SimpleDateFormat("yyyy");
-        year = dateFormat.format(date);
-        try {
-            beginOfMonth = (Day("01"+month+year))-1; // Get the beginning of the month (-1 because Android recognizes Sunday as the first day)
-        } catch (ParseException pe) {
-            Toast.makeText(getApplicationContext(), pe.getMessage(), Toast.LENGTH_LONG).show();
-        }
-        if (beginOfMonth == 0) {
-            beginOfMonth = 7;
-        }
-        days = new String[numDays+beginOfMonth];
-        days[0] = "Mon";
-        days[1] = "Tue";
-        days[2] = "Wed";
-        days[3] = "Thu";
-        days[4] = "Fri";
-        days[5] = "Sat";
-        days[6] = "Sun";
-        dateFormat = new SimpleDateFormat("dd");
-        String temp = dateFormat.format(date);
-        today = Integer.parseInt(temp);
+    private void showLogoutDialog (final Activity context, String msg, final boolean isLogout){
+        new AlertDialog.Builder(context).setCancelable(isLogout)
+                .setTitle(getResources().getString(R.string.cms))
+                .setMessage(msg)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        if (isLogout) {
+                            logOut();
+                        }
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                        Toast.makeText(getApplicationContext(), "Resume your work",
+                                Toast.LENGTH_SHORT).show();
 
-        if(beginOfMonth != 0) {
-            for (int i = 7; i <= (5 + beginOfMonth); i++) {
-                days[i] = "";
-            }
-        }
-        for (int i = (6 + beginOfMonth); i <= (days.length-1); i++) {
-            days[i] = Integer.toString(i-beginOfMonth-5);
-        }
-        if(month.equals("1")){
-            monthname="January";
-        }
-        else if(month.equals("2")){
-            monthname="February";
-        }
-        else if(month.equals("3")){
-            monthname="March";
-        }
-        else if(month.equals("4")){
-            monthname="April";
-        }
-        else if(month.equals("5")){
-            monthname="May";
-        }
-        else if(month.equals("6")){
-            monthname="June";
-        }
-        else if(month.equals("7")){
-            monthname="July";
-        }
-        else if(month.equals("8")){
-            monthname="August";
-        }
-        else if(month.equals("9")){
-            monthname="September";
-        }
-        else if(month.equals("10")){
-            monthname="October";
-        } else if(month.equals("11")){
-            monthname="November";
-        }
-        else if(month.equals("12")){
-            monthname="December";
-        }
-        Dateadapter adapter=new Dateadapter(this,days);
-        gridview.setAdapter(adapter);
-        display_current_date.setText(monthname+" "+year);
-
-
+                    }
+                })
+                .setIcon(R.drawable.icon_logo)
+                .show();
     }
 
+    private void logOut () {
+        //userLoginPreferences.clearUser();
+        DataHolder.setLevel(0);
+        CommonClass.goToNextScreen(LImovement.this, DetailController.class, true, Constants.LOGIN_OPTIONS);
 
-    public int Feb(int year) {
-        int temp;
-        try {
-            temp = year / 4;
-        } catch (Exception e) {
-            return 28;
-        }
-        return 29;
+
+        Intent landing = new Intent(LImovement.this, LandingActivity.class);
+        landing.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                | Intent.FLAG_ACTIVITY_CLEAR_TASK
+                | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(landing);
+        overridePendingTransition(R.animator.slide_in_right, R.animator.slide_out_left);
+        finish();
     }
-
-    public int Day(String day) throws ParseException {
-        DateFormat df = new SimpleDateFormat("ddMMyyyy");
-        try {
-            Date d = df.parse(String.valueOf(day));
-            Calendar c = Calendar.getInstance();
-            c.setTime(d);
-            return c.get(Calendar.DAY_OF_WEEK);
-        } catch (Exception e) {
-            ParseException pe = new ParseException("There was a problem getting the date.", 0);
-            throw pe;
-        }
-    }*/
-
 
 
 }

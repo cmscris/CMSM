@@ -63,9 +63,9 @@ public class Dateadapter extends ArrayAdapter {
             view = mInflater.inflate(R.layout.griditemlayout, parent, false);
         }
         if(displayMonth == currentMonth && displayYear == currentYear){
-            view.setBackgroundColor(Color.parseColor("#FF5733"));
+            view.setBackgroundColor(Color.parseColor("#00B8D4"));
         }else{
-            view.setBackgroundColor(Color.parseColor("#cccccc"));
+            view.setBackgroundColor(Color.parseColor("#E0E0E0"));
         }
         //Add day to calendar
         TextView cellNumber = (TextView)view.findViewById(R.id.icon);

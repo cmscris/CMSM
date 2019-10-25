@@ -120,17 +120,7 @@ public class Limovadapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
                 }
             });
-/*item.tv_del.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        System.out.println(">>>>>>>>>>>id"+v.getId());
-        item.tv_del.getId();
-       int pos=Integer.parseInt(item.tv_id.getText().toString());
-        System.out.println(">>>>>>>>>>>id"+pos);
-removeItem(pos);
-        System.out.println(">>>>>>>>>>>id"+pos);
-    }
-});*/
+
 
             if (pos == 0) {
                 item.tv_id.setText("SN");
@@ -178,16 +168,6 @@ removeItem(pos);
     private void onModelClick(Limovdraftresponse model) {
 
         listener.OnItemClick(model);
-    }
-    public void removeItem(int position) {
-        System.out.println(">>>>>>>>>Inside Removeitem>>>>>>>>>>>>>"+position);
-        int indrem=position;
-
-        //list.remove(position);
-        DataHolder.getLimovmainlist().remove(indrem);
-        notifyItemRemoved(position);
-
-
     }
     @Override
     public int getItemCount() {

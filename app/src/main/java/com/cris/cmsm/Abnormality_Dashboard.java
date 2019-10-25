@@ -200,7 +200,6 @@ public class Abnormality_Dashboard<total> extends BaseActivity  implements Adapt
         request1=new ArrayList<>();
         Bundle extra = getIntent().getExtras();
         if (extra != null) {
-
             divisionname= extra.getString("object");
             request1.add(divisionname);
 
