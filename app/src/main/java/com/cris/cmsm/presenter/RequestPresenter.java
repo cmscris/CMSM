@@ -22,6 +22,7 @@ import com.cris.cmsm.models.response.CrewPositionSummaryResponse;
 import com.cris.cmsm.models.response.FeedbackResponse;
 import com.cris.cmsm.models.response.KeyValueResponse;
 import com.cris.cmsm.models.response.LICrewMonitoredResponse;
+import com.cris.cmsm.models.response.LimMovementSubmitResponse;
 import com.cris.cmsm.models.response.Limovementresponse;
 import com.cris.cmsm.models.response.LoginResponse;
 import com.cris.cmsm.models.response.MISReportResponse;
@@ -355,6 +356,26 @@ public class RequestPresenter implements RequestView {
 
                     @Override
                     public void onFailure(Call <Limovementresponse> call, Throwable t) {
+                        System.out.println("Error in Response");
+                    }
+
+
+                });
+                break;
+            case Constants.SAVE_LI_MOVEMENT_DETAIL:
+                showProgress(msg);
+                GraphAPIRequest reqlimov = (GraphAPIRequest) object;
+                System.out.println("Request is >>" + new Gson().toJson(reqlimov));
+                WebServices.getInstance().getService().getres(reqlimov).enqueue(new Callback<LimMovementSubmitResponse>() {
+                    @Override
+                    public void onResponse(Call<LimMovementSubmitResponse> call,Response<LimMovementSubmitResponse> response) {
+                        dismissProgress();
+                        System.out.println("Response is " + new Gson().toJson(response));
+                        view.ResponseOk(response.body(), position);
+                    }
+
+                    @Override
+                    public void onFailure(Call <LimMovementSubmitResponse> call, Throwable t) {
                         System.out.println("Error in Response");
                     }
 

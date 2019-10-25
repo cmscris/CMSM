@@ -98,4 +98,5 @@ public class URLS {
     public static final String VALIDATE_FROM_TO_STTN_LOCO="master/validateFromToSttnLocoNo";
     public static final String LIMOVEMENTDETAILS="master/getLiMovementDetails";
     public static final String IRREGULAR_CREW = "master/getIrregularCrewSummaryForChalakDal";
+    public static final String SAVE_LI_MOVEMENT_DETAIL = "master/saveLIMovementDetails";
 }

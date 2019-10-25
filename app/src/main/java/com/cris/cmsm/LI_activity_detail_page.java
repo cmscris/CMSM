@@ -42,12 +42,16 @@ import com.cris.cmsm.util.Constants;
 import com.cris.cmsm.widget.PinchRecyclerView;
 
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class LI_activity_detail_page extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener, ResponseView {
@@ -70,6 +74,7 @@ public class LI_activity_detail_page extends AppCompatActivity implements
     String Hour, Minute, id, fromdt, todt,frmmonth,tomonth,fromdttime,todttime;
     int pickfrmdt,picktodt,pickfrmyear,j,pickfrmmonth,picktomonth,picktoyear,pickfrmhour,picktohour,pickfrmmin,picktomin;
     Button save, clear,update,btn_del;
+
 
     int i = 0;
     ArrayList <String> Savedatalist;
@@ -126,6 +131,14 @@ public class LI_activity_detail_page extends AppCompatActivity implements
 
         et_train.setFilters(new InputFilter[]{new InputFilter.LengthFilter(10)});
         et_train.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS |InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+        Bundle extra = getIntent().getExtras();
+        if (extra != null) {
+            String dates = extra.getString("frmdate");
+                System.out.println(dates); // 2013-12-04
+            et_dt.setText(dates);
+
+        }
+
        Savedatalist=new ArrayList <>();
         Savedatalist.add("Select");
         Savedatalist.add("NOMINATED LP ");
@@ -415,6 +428,7 @@ public class LI_activity_detail_page extends AppCompatActivity implements
         mHour = c.get(Calendar.HOUR_OF_DAY);
         mMinute = c.get(Calendar.MINUTE);
 
+
         // Launch Time Picker Dialog
         TimePickerDialog timePickerDialog = new TimePickerDialog(this,
                 new TimePickerDialog.OnTimeSetListener() {
@@ -425,24 +439,29 @@ public class LI_activity_detail_page extends AppCompatActivity implements
                         picktomin=minute;
                         Hour=format.format(hourOfDay);
                         Minute=format.format(minute);
-                        mHour = hourOfDay;
-                        mMinute = minute;
+
 
                         if(pickfrmdt>=picktodt && pickfrmyear>=picktoyear &&pickfrmmonth>=picktomonth){
                             if(pickfrmhour>=picktohour&&pickfrmmin>=picktomin){
                                 et_todt.setText("Invalid Time");
                             }
                             else{
+                                System.out.println("Inside else");
                                 todttime=to_date_time+" "+Hour + ":" + Minute;
                                 et_todt.setText(to_date_time+" "+Hour + ":" + Minute);
                             }
 
+                        }else if(picktodt>=pickfrmdt && picktoyear>=pickfrmyear && picktomonth>=pickfrmmonth){
+                            if(picktohour<=mHour && picktomin<=mMinute){
+                                todttime=to_date_time+" "+Hour + ":" + Minute;
+                                System.out.println("totime"+todttime+"currenthr"+mHour);
+                                et_todt.setText(to_date_time+" "+Hour + ":" + Minute);
+                            }
+                            else{
+                                et_todt.setText("Invalid Time");
+                            }
                         }
-                        else{
-                            todttime=to_date_time+" "+Hour + ":" + Minute;
-                            et_todt.setText(to_date_time+" "+Hour + ":" + Minute);
 
-                        }
                     }
                 }, mHour, mMinute, false);
         timePickerDialog.show();
@@ -583,7 +602,7 @@ public class LI_activity_detail_page extends AppCompatActivity implements
                     limovdraftresponse.setEdit("EDIT");
                     liresponsePrev = (ArrayList) DataHolder.getLimovmainlist();
                     System.out.println("size of liresponse list before " + liresponse.size());
-                    if (liresponsePrev == null) {
+                    if (liresponsePrev == null || liresponsePrev.size()==0) {
                         liresponse.add(0, lis);
                         liresponse.add(limovdraftresponse);
                         DataHolder.setLimovmainlist(liresponse);
@@ -629,16 +648,19 @@ public class LI_activity_detail_page extends AppCompatActivity implements
 
     @Override
     public void Error() {
+        commonClass.showToast("No Record Found");
 
     }
 
     @Override
     public void dismissProgress() {
+        commonClass.dismissDialog();
 
     }
 
     @Override
     public void showProgress(String msg) {
+        commonClass.showProgressBar(msg);
 
     }
 }

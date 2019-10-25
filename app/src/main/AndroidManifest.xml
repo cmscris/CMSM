@@ -29,7 +29,9 @@
             android:name=".LI_activitydraftdetail"
             android:screenOrientation="landscape"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".LI_activity_detail_page" />
+        <activity android:name=".LI_activity_detail_page"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Crew_Current_Status"
             android:screenOrientation="landscape"
