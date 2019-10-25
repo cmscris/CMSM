@@ -60,9 +60,7 @@ public class DataBaseManager {
 
     public List<Railway> getRailwayList(boolean isBoard) {
         QueryBuilder<Railway> qb = railwayDao.queryBuilder();
-        List<Railway> list = qb.orderAsc(
-                RailwayDao.Properties.Fname)
-                .list();
+        List<Railway> list = qb.orderAsc(RailwayDao.Properties.Fname).list();
         if (isBoard) {
             Railway railway = new Railway();
             railway.setRlycode("");
