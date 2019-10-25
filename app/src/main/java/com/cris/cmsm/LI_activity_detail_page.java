@@ -42,12 +42,16 @@ import com.cris.cmsm.util.Constants;
 import com.cris.cmsm.widget.PinchRecyclerView;
 
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class LI_activity_detail_page extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener, ResponseView {
@@ -70,6 +74,7 @@ public class LI_activity_detail_page extends AppCompatActivity implements
     String Hour, Minute, id, fromdt, todt,frmmonth,tomonth,fromdttime,todttime;
     int pickfrmdt,picktodt,pickfrmyear,j,pickfrmmonth,picktomonth,picktoyear,pickfrmhour,picktohour,pickfrmmin,picktomin;
     Button save, clear,update,btn_del;
+
 
     int i = 0;
     ArrayList <String> Savedatalist;
@@ -126,6 +131,14 @@ public class LI_activity_detail_page extends AppCompatActivity implements
 
         et_train.setFilters(new InputFilter[]{new InputFilter.LengthFilter(10)});
         et_train.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS |InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+        Bundle extra = getIntent().getExtras();
+        if (extra != null) {
+            String dates = extra.getString("frmdate");
+                System.out.println(dates); // 2013-12-04
+            et_dt.setText(dates);
+
+        }
+
        Savedatalist=new ArrayList <>();
         Savedatalist.add("Select");
         Savedatalist.add("NOMINATED LP ");

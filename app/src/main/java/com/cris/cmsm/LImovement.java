@@ -103,7 +103,9 @@ public class LImovement extends AppCompatActivity {
        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
            @Override
            public void onItemClick(AdapterView <?> parent, View view, int position, long id) {
+               System.out.println("data at position>>>"+parent.getItemAtPosition(position));
                Intent i=new Intent(LImovement.this,LI_activity_detail_page.class);
+               i.putExtra("frmdate",parent.getItemAtPosition(position).toString());
                startActivity(i);
            }
        });
