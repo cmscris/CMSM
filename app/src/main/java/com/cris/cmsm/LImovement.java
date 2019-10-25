@@ -46,7 +46,7 @@ public class LImovement extends AppCompatActivity {
     GridView gridview;
     TextView  display_current_date;
     ImageView previous_month,next_month;
-    private ImageView iv_title_icon, iv_right,iv_middle;
+    private ImageView iv_right;
     Button btn_curr_mn_actvty;
     private SimpleDateFormat formatter = new SimpleDateFormat("MMMM yyyy", Locale.ENGLISH);
     private static final int MAX_CALENDAR_COLUMN = 42;
