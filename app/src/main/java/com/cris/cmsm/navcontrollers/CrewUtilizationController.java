@@ -132,12 +132,12 @@ public class CrewUtilizationController extends BaseActivity implements View.OnCl
 
         spn_desigCode.setAdapter(new DesignationAdapter(CrewUtilizationController.this, CommonClass.getDesignationList()));
         spn_lobbyCode.setAdapter(new LobbyAdapter(CrewUtilizationController.this, lobby_list_tmp));
-        spn_month.setAdapter(new MonthAdapter(CrewUtilizationController.this, CommonClass.getMonthList()));
 
 
 
         if(DataHolder.getType() == 0)
         {
+            spn_month.setAdapter(new MonthAdapter(CrewUtilizationController.this, CommonClass.getMonthList()));
             spn_fYear.setAdapter(new SpinnerAdapter(CrewUtilizationController.this, CommonClass.getYear()));
             spn_date.setEnabled(false);
             //spn_date.setVisibility(View.INVISIBLE);
@@ -317,34 +317,35 @@ public class CrewUtilizationController extends BaseActivity implements View.OnCl
 
             if(cat == Constants.CREW_UTILIZATION)
             {
+               //System.out.println("Division Code :>>> " + ((Division) spn_divCode.getSelectedItem()).getDivcode());
+               //System.out.println("Division Code Trim :>>> " + ((Division) spn_divCode.getSelectedItem()).getDivcode().trim());
 
                request.setRailwayCode(((Railway) spn_ryCode.getSelectedItem()).getRlycode().trim());
-
-                System.out.println("Division Code :>>> " + ((Division) spn_divCode.getSelectedItem()).getDivcode());
-                System.out.println("Division Code Trim :>>> " + ((Division) spn_divCode.getSelectedItem()).getDivcode().trim());
                request.setDivisionCode(((Division) spn_divCode.getSelectedItem()).getDivcode().trim());
                request.setLobbyCode(((Lobby) spn_lobbyCode.getSelectedItem()).getLobbycode().trim());
-                request.setDesignation(((Designation) spn_desigCode.getSelectedItem()).getDesignationCode().trim());
+               request.setDesignation(((Designation) spn_desigCode.getSelectedItem()).getDesignationCode().trim());
                request.setMonth(((Month) spn_month.getSelectedItem()).getMonthCode().trim());
                request.setFYYear(((String) spn_fYear.getSelectedItem()).trim());
+               request.setFlag("M");
 
-                DataHolder.getInstance().setGraphAPIRequest(request);
-                monthlyRequestPresenter.Request(request, "Getting Crew Utilization Report", Constants.CREW_UTILIZATION);
+               DataHolder.getInstance().setGraphAPIRequest(request);
+               monthlyRequestPresenter.Request(request, "Getting Crew Utilization Report", Constants.CREW_UTILIZATION);
 
             }else  if(cat == Constants.CREW_UTILIZATION_FORTNIGHT)
             {
+                //System.out.println("Fort Division Code :>>> " + ((Division) spn_divCode.getSelectedItem()).getDivcode());
+                //System.out.println(" Fort Division Code Trim :>>> " + ((Division) spn_divCode.getSelectedItem()).getDivcode().trim());
 
-                request.setRailwayCode(((Railway) spn_ryCode.getSelectedItem()).getRlycode());
-
-                System.out.println("Fort Division Code :>>> " + ((Division) spn_divCode.getSelectedItem()).getDivcode());
-                System.out.println(" Fort Division Code Trim :>>> " + ((Division) spn_divCode.getSelectedItem()).getDivcode().trim());
-                request.setDivisionCode(((Division) spn_divCode.getSelectedItem()).getDivcode());
-                request.setLobbyCode(((Lobby) spn_lobbyCode.getSelectedItem()).getLobbycode());
-                request.setDesignation(((Designation) spn_desigCode.getSelectedItem()).getDesignationCode());
-                request.setMonth(((Month) spn_month.getSelectedItem()).getMonthCode());
-                request.setFYYear((String) spn_fYear.getSelectedItem());
+                request.setRailwayCode(((Railway) spn_ryCode.getSelectedItem()).getRlycode().trim());
+                request.setDivisionCode(((Division) spn_divCode.getSelectedItem()).getDivcode().trim());
+                request.setLobbyCode(((Lobby) spn_lobbyCode.getSelectedItem()).getLobbycode().trim());
+                request.setDesignation(((Designation) spn_desigCode.getSelectedItem()).getDesignationCode().trim());
+                request.setMonth("");
+                request.setFYYear("");
+                request.setProgDate(spn_date.getText().toString().trim());
+                request.setFlag("P");
                 DataHolder.getInstance().setGraphAPIRequest(request);
-                monthlyRequestPresenter.Request(request, "Getting Crew Utilization Report", Constants.CREW_UTILIZATION_FORTNIGHT);
+                monthlyRequestPresenter.Request(request, "Getting Crew Utilization Report", Constants.CREW_UTILIZATION);
 
             }
             else
@@ -438,8 +439,8 @@ public class CrewUtilizationController extends BaseActivity implements View.OnCl
                     monthOfYear = "" + (month + 1);
                 }
 
-                    spn_date.setText(dayOfMonth + "/" + monthOfYear + "/" + year);
-
+                    //spn_date.setText(dayOfMonth + "/" + monthOfYear + "/" + year);
+                      spn_date.setText(year + "-" + monthOfYear + "-" + dayOfMonth);
 
             }
         }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));

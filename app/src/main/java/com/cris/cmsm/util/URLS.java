@@ -11,7 +11,7 @@ public class URLS {
     //public static final String BASE_URL = "http://172.16.25.45:9080/CMSWEBSERVICE/";
     public static final String LOGIN = "master/validateuser";
     public static final String CREW_UTILIZATION = "master/getCrewUtilizationEDW";
-    public static final String CREW_UTILIZATION_FORTNIGHT = "master/getFortnightlyCrewUtilizationEDW";
+    //public static final String CREW_UTILIZATION_FORTNIGHT = "master/getFortnightlyCrewUtilizationEDW";
 
     public static final String ABNORMALITY_DETAILS="master/getAbnormalityDetails";
     public static final String Loginot="master/validateuserOther";

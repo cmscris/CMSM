@@ -74,7 +74,7 @@ public class MonthlyRequestPresenter implements RequestView {
                 });
                 break;
 
-
+/*
             case Constants.CREW_UTILIZATION_FORTNIGHT:
                 graphAPIRequest = (GraphAPIRequest) object;
                 showProgress(msg);
@@ -95,7 +95,7 @@ public class MonthlyRequestPresenter implements RequestView {
                 });
                 break;
 
-
+*/
 
             case Constants.ABNORMALITY:
                 graphAPIRequest = (GraphAPIRequest) object;

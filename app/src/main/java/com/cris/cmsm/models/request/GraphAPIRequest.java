@@ -19,6 +19,9 @@ public class GraphAPIRequest {
     @SerializedName("lobbyCode")
     @Expose
     private String lobbyCode;
+    @SerializedName("designation")
+    @Expose
+    private String designation;
     @SerializedName("serviceType")
     @Expose
     private String serviceType;
@@ -28,15 +31,15 @@ public class GraphAPIRequest {
     @SerializedName("month")
     @Expose
     private String month;
+    @SerializedName("progDate")
+    @Expose
+    private String progDate;        // USED FOR FORTNIGHT UTILIZATION
     @SerializedName("flag")
     @Expose
     private String flag;
-    @SerializedName("designation")
-    @Expose
-    private String designation;
 
 
-  @SerializedName("paramList")
+    @SerializedName("paramList")
     @Expose
     private List<String> paramList;
 
@@ -173,5 +176,27 @@ public class GraphAPIRequest {
         this.paramList = paramList;
     }
 
+    public String getfYYear() {
+        return fYYear;
+    }
 
+    public void setfYYear(String fYYear) {
+        this.fYYear = fYYear;
+    }
+
+    public String getProgDate() {
+        return progDate;
+    }
+
+    public void setProgDate(String progDate) {
+        this.progDate = progDate;
+    }
+
+    public List<String> getParamList() {
+        return paramList;
+    }
+
+    public void setParamList(List<String> paramList) {
+        this.paramList = paramList;
+    }
 }
