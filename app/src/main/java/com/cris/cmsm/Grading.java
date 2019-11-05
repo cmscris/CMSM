@@ -46,6 +46,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 import static com.cris.cmsm.util.Constants.CrewCounselling;
 
@@ -196,8 +197,8 @@ public class Grading extends AppCompatActivity implements TextWatcher, AdapterVi
                 int day = cldr.get(Calendar.DAY_OF_MONTH);
                 int month = cldr.get(Calendar.MONTH);
                 int years = cldr.get(Calendar.YEAR);
-                cldr.add(month, -30);
-                long minDate = cldr.getTime().getTime();
+                cldr.add(day, -7);
+                Date minDate = cldr.getTime();
 
                 // date picker dialog
                 picker = new DatePickerDialog(Grading.this,
@@ -218,9 +219,9 @@ public class Grading extends AppCompatActivity implements TextWatcher, AdapterVi
                                 }
                             }
                         }, years, month, day);
-                picker.getDatePicker().setMinDate(minDate);
+                picker.getDatePicker().setMinDate(minDate.getTime());
                 picker.getDatePicker().setMaxDate(System.currentTimeMillis());
-                picker.setCanceledOnTouchOutside(true);
+                //picker.setCanceledOnTouchOutside(true);
                 picker.show();
 
             }
