@@ -382,6 +382,26 @@ public class RequestPresenter implements RequestView {
 
                 });
                 break;
+            case Constants.LIMOVEMENT_DETAIL_MONTHLY:
+                showProgress(msg);
+                GraphAPIRequest reqlimonth = (GraphAPIRequest) object;
+                System.out.println("Request is >>" + new Gson().toJson(reqlimonth));
+                WebServices.getInstance().getService().getresp(reqlimonth).enqueue(new Callback<Limovementresponse>() {
+                    @Override
+                    public void onResponse(Call<Limovementresponse> call,Response<Limovementresponse> response) {
+                        dismissProgress();
+                        System.out.println("Response is " + new Gson().toJson(response));
+                        view.ResponseOk(response.body(), position);
+                    }
+
+                    @Override
+                    public void onFailure(Call <Limovementresponse> call, Throwable t) {
+                        System.out.println("Error in Response");
+                    }
+
+
+                });
+                break;
 
 
 

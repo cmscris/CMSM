@@ -68,7 +68,18 @@ public class DataHolder {
     public static String AbnrType="";
     public static ArrayList<String> limovlist;
     public static ArrayList<Limovdraftresponse> limovmainlist;
+
+    public static ArrayList <Limovdraftresponse> getLimovstatuslist() {
+        return limovstatuslist;
+    }
+
+    public static void setLimovstatuslist(ArrayList <Limovdraftresponse> limovstatuslist) {
+        DataHolder.limovstatuslist = limovstatuslist;
+    }
+
+    public static ArrayList<Limovdraftresponse> limovstatuslist;
     private KeyValue keyValue;
+
 
     private static DataHolder instance = null;
     private ConsumptionResponse railWayConsumption;

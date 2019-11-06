@@ -1,9 +1,11 @@
 package com.cris.cmsm;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -76,9 +78,6 @@ public class LI_activitydraftdetail extends AppCompatActivity implements OnItemC
         header_str += "\n LI Movement detail";
         reportHeaderView.setEnergyConsume(header_str);
 
-
-
-
         System.out.println(">>>>>>>>>>>>>>>>>>LIMOVLIST" + DataHolder.getLimovmainlist());
         innerList.clear();
         innerList = (ArrayList)DataHolder.getLimovmainlist();
@@ -98,38 +97,11 @@ public class LI_activitydraftdetail extends AppCompatActivity implements OnItemC
         bt_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                System.out.println("INNERLISTSIZE>>>>>>>>>>>"+innerList.size());
-                System.out.println("INNERLISTSIZE>>>>>>>>>>>"+innerList);
-                i=0;
-                ArrayList   item = new ArrayList();
-                item.clear();
-                item.add(loginInfoModel.getLoginid());
-                for(i=1;i<innerList.size();i++) {
-
-                    Limovdraftresponse li = (Limovdraftresponse) innerList.get(i);
-
-                    item.add(li.getFrmdttm());
-                    item.add(li.getTodttm());
-                    item.add(li.getDutytyp());
-                    item.add(li.getFrmsttn());
-                    item.add(li.getTosttn());
-                    item.add(li.getVia1());
-                    item.add(li.getVia2());
-                    item.add(li.getLoco());
-                    item.add(li.getTrain());
-                    item.add(li.getKm());
-                    item.add(li.getRmk());
-                    //listitem.add(item);
-                    }
-                System.out.println("Final List--->>>>>>>>"+item);
-                 System.out.println("Final List to submit--->>>>>>>>"+item.size());
-           request.setparamlist(item);
-           requestPresenter.Request(request,"Saving Data !!!!!!", Constants.SAVE_LI_MOVEMENT_DETAIL);
-
+                retryDialog(LI_activitydraftdetail.this, "You cannot edit data after Submit."+"\n"+" Press OK to submit Record");
 
             }
         });
+
 
            }
 
@@ -168,6 +140,51 @@ public class LI_activitydraftdetail extends AppCompatActivity implements OnItemC
 
 
         }
+    }
+    private void retryDialog(final Activity activity, String msg) {
+        new AlertDialog.Builder(activity)
+                .setTitle(getResources().getString(R.string.cms))
+                .setMessage(msg)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        System.out.println("INNERLISTSIZE>>>>>>>>>>>" + innerList.size());
+                        System.out.println("INNERLISTSIZE>>>>>>>>>>>" + innerList);
+                        i = 0;
+                        ArrayList item = new ArrayList();
+                        item.clear();
+                        item.add(loginInfoModel.getLoginid());
+                        for (i = 1; i < innerList.size(); i++) {
+
+                            Limovdraftresponse li = (Limovdraftresponse) innerList.get(i);
+
+                            item.add(li.getFrmdttm());
+                            item.add(li.getTodttm());
+                            item.add(li.getDutytyp());
+                            item.add(li.getFrmsttn());
+                            item.add(li.getTosttn());
+                            item.add(li.getVia1());
+                            item.add(li.getVia2());
+                            item.add(li.getLoco());
+                            item.add(li.getTrain());
+                            item.add(li.getKm());
+                            item.add(li.getRmk());
+                            //listitem.add(item);
+                        }
+                        System.out.println("Final List--->>>>>>>>" + item);
+                        System.out.println("Final List to submit--->>>>>>>>" + item.size());
+                        request.setparamlist(item);
+                        requestPresenter.Request(request, "Saving Data !!!!!!", Constants.SAVE_LI_MOVEMENT_DETAIL);
+
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
+                .setIcon(R.drawable.icon_logo)
+                .show();
     }
 
     @Override

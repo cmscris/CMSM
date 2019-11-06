@@ -40,6 +40,12 @@ public class LiMovementVOsResponse {
     @SerializedName("remrk")
     @Expose
     private String remrk;
+    @SerializedName("date")
+    @Expose
+    private String date;
+    @SerializedName("status")
+    @Expose
+    private String status;
 
     public String getSno() {
         return sno;
@@ -135,6 +141,21 @@ public class LiMovementVOsResponse {
 
     public void setRemrk(String remrk) {
         this.remrk = remrk;
+    }
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
 }

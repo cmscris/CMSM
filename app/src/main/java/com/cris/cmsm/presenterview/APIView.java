@@ -367,6 +367,8 @@ public interface APIView {
     @POST(URLS.SAVE_LI_MOVEMENT_DETAIL)
     Call<LimMovementSubmitResponse> getres(@Body GraphAPIRequest req);
 
+    @POST(URLS.LIMOVEMENT_DETAIL_MONTHLY)
+    Call<Limovementresponse> getresp(@Body GraphAPIRequest req);
 
 
 }

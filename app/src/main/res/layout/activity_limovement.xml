@@ -159,7 +159,16 @@
             android:text="Get Sumitted LI Movement"
             android:textColor="@color/colorWhite"
            />
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/note"
+            android:background="@color/colorBlueGrey"
+            android:textColor="@color/colorWhite"
+            android:textAlignment="center"
+            android:text="LI self responsible for filling Movement thorugh Chalak Dal app.">
+        </TextView>
     </LinearLayout>
+
     </android.support.v7.widget.CardView>
 </LinearLayout>

@@ -299,7 +299,7 @@ public class Abnormality_fill_activity extends AppCompatActivity implements Adap
 
         et_From_sttn.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
         //et_From_sttn.setFilters(new InputFilter[]{new InputFilter.LengthFilter(4)});
-        abnrfill.setFilters(new InputFilter[]{new InputFilter.LengthFilter(140)});
+        abnrfill.setFilters(new InputFilter[]{new InputFilter.LengthFilter(500)});
 
         // abnrfill.setImeOptions(EditorInfo.IME_FLAG_FORCE_ASCII);
         trainnum.setFilters(new InputFilter[]{new InputFilter.LengthFilter(10)});

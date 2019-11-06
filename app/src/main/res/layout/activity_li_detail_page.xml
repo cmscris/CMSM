@@ -321,6 +321,7 @@
                     android:layout_width="150dp"
                     android:layout_height="40dp"
                     android:layout_column="1"
+                    android:inputType="textCapWords"
                     android:background="@drawable/shape"
                     android:textColor="@color/colorBlack"
                     android:layout_marginLeft="25dp"
@@ -396,7 +397,7 @@
                     android:layout_marginLeft="25dp"
                     android:background="@drawable/shape"
                     android:gravity="left"
-                    android:singleLine="true"
+                    android:lines="3"
                     android:textColor="@color/colorBlack" />
             </TableRow>
         </TableLayout>
@@ -430,7 +431,7 @@
                     android:layout_marginLeft="10dp"
                     android:gravity="center_vertical"
                     android:background="@color/colorGrayBackground"
-                    android:text="SAVE"
+                    android:text="@string/save"
                     android:textAlignment="center"
                     android:textColor="@color/colorBlack"
                     android:textSize="12sp"
@@ -445,7 +446,7 @@
                     android:layout_marginLeft="10dp"
                     android:gravity="center_vertical"
                     android:background="@color/colorGrayBackground"
-                    android:text="CLEAR"
+                    android:text="@string/clear"
 
                     android:textAlignment="center"
                     android:textColor="@color/colorBlack"
@@ -461,7 +462,7 @@
                 android:layout_marginLeft="10dp"
                 android:gravity="center_vertical"
                 android:background="@color/colorGrayBackground"
-                android:text="Update"
+                android:text="@string/update"
                 android:textAlignment="center"
                 android:textColor="@color/colorBlack"
                 android:textSize="12sp"
@@ -476,16 +477,60 @@
                     android:layout_marginLeft="10dp"
                     android:gravity="center_vertical"
                     android:background="@color/colorGrayBackground"
-                    android:text="DELETE"
+                    android:text="@string/delete"
                     android:textAlignment="center"
                     android:textColor="@color/colorBlack"
                     android:textSize="12sp"
                     android:textStyle="bold" />
-
-
-
             </TableRow>
         </TableLayout>
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/colorBlueGrey"
+        app:cardElevation="10dp"
+        android:layout_gravity="center"
+        app:cardCornerRadius="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        >
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:collapseColumns="2">
+        <TableRow>
+            <Button
+                android:id="@+id/btn_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Base.TextAppearance.AppCompat.Widget.Button.Borderless.Colored"
+                android:layout_column="0"
+                android:drawableTop="@mipmap/ic_launcher_submitlist"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                android:text="@string/final_submit"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+            <Button
+                android:id="@+id/btn_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Base.TextAppearance.AppCompat.Widget.Button.Borderless.Colored"
+                android:layout_column="0"
+                android:drawableTop="@mipmap/ic_launcher_submitlist"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                android:text="View Report"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </TableRow>
+    </TableLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>
 </ScrollView>
