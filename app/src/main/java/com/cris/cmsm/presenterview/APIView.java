@@ -101,8 +101,8 @@ public interface APIView {
     @POST(URLS.CREW_UTILIZATION)
     Call<CrewUtilResponse> getCrewUtilization(@Body GraphAPIRequest request);
 
-    @POST(URLS.CREW_UTILIZATION_FORTNIGHT)
-    Call<CrewUtilResponse> getFortnightCrewUtilization(@Body GraphAPIRequest request);
+    //@POST(URLS.CREW_UTILIZATION_FORTNIGHT)
+    //Call<CrewUtilResponse> getFortnightCrewUtilization(@Body GraphAPIRequest request);
 
     @POST(URLS.ABNORMALITY)
     Call<AbnormalityResponse> getAbnormality(@Body GraphAPIRequest request);

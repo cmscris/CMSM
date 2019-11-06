@@ -9,15 +9,12 @@ import android.text.TextUtils;
 import com.cris.cmsm.DetailSSConsumption;
 import com.cris.cmsm.R;
 import com.cris.cmsm.adapter.CrewUtilizationAdapter;
-import com.cris.cmsm.adapter.SSConsumptionAdapter;
 import com.cris.cmsm.database.DataHolder;
 import com.cris.cmsm.interfaces.OnItemClickListener;
 import com.cris.cmsm.models.ReportHeaderView;
 import com.cris.cmsm.models.request.GraphAPIRequest;
-import com.cris.cmsm.models.request.SSConsumptionRequest;
 import com.cris.cmsm.models.response.CrewUtilResponse;
 import com.cris.cmsm.models.response.CrewUtilResponseVO;
-import com.cris.cmsm.models.response.ResSSConsumption;
 import com.cris.cmsm.models.response.SubStationRes;
 import com.cris.cmsm.models.response.SubstationResponseVO;
 import com.cris.cmsm.presenter.InsertRequestPresenter;
@@ -58,18 +55,18 @@ public class CrewUtilizationReportController extends AppCompatActivity implement
 
             if(!graphAPIRequest.getRailwayCode().isEmpty())
             {
-                header_str += "Railway: " +  graphAPIRequest.getRailwayCode();
+                header_str += graphAPIRequest.getRailwayCode() + " / ";
             }
 
 
             if(!graphAPIRequest.getDivisionCode().isEmpty())
             {
-                header_str += "Division: " +  graphAPIRequest.getDivisionCode();
+                header_str += graphAPIRequest.getDivisionCode() +  " / ";
             }
 
             if(!graphAPIRequest.getLobbyCode().isEmpty())
             {
-                header_str += "Lobby: " +  graphAPIRequest.getLobbyCode();
+                header_str +=  graphAPIRequest.getLobbyCode();
             }
 
 
@@ -77,18 +74,38 @@ public class CrewUtilizationReportController extends AppCompatActivity implement
 
 
 
-            reportHeaderView.setEnergyConsume(header_str );
+
+
+
 
             CrewUtilResponseVO cvo = new CrewUtilResponseVO();
             cvo.setLocation("HQ");
             cvo.setCrewcount("Count");
-            cvo.setGt240(">240");
-            cvo.setBt208_240("208-240");
-            cvo.setBt180_208("180-208");
-            cvo.setBt160_180("160-180");
-            cvo.setBt140_160("140-160");
-            cvo.setLt140("<140");
 
+            if(graphAPIRequest.getFlag().equalsIgnoreCase("M"))
+            {
+
+                header_str += " ( Monthly )";
+
+                cvo.setGt240(">240");
+                cvo.setBt208_240("208-240");
+                cvo.setBt180_208("180-208");
+                cvo.setBt160_180("160-180");
+                cvo.setBt140_160("140-160");
+                cvo.setLt140("<140");
+            }
+            else
+            {
+                header_str += " ( Fortnightly )";
+                cvo.setGt240(">120");
+                cvo.setBt208_240("104-120");
+                cvo.setBt180_208("90-104");
+                cvo.setBt160_180("80-90");
+                cvo.setBt140_160("120-80");
+                cvo.setLt140("<70");
+            }
+
+            reportHeaderView.setEnergyConsume(header_str );
             List<CrewUtilResponseVO> list = new ArrayList<>(crewUtilResponse.getCrewUtilResponseVO());
             list.add(0, cvo);
             recyclerView.setAdapter(new CrewUtilizationAdapter(CrewUtilizationReportController.this, reportHeaderView, CrewUtilizationReportController.this, list));
