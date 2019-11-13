@@ -349,6 +349,10 @@ public interface APIView {
     @POST(URLS.GET_CREWLIST)
     Call<Paramresponse> getcrewgrade(@Body GraphAPIRequest graphreq2);
 
+    @POST(URLS.GET_CREWLIST_GRADING)
+    Call<Paramresponse> getcrewgrades(@Body GraphAPIRequest graphreq2);
+    @POST(URLS.GET_CREWLIST_COUNSELLING)
+    Call<Paramresponse> getcrewconsel(@Body GraphAPIRequest graphreq2);
     @POST(URLS.SAVE_LI_GRADING)
     Call<Remarksresponse> getsavermk(@Body GraphAPIRequest saveli);
 
@@ -363,6 +367,9 @@ public interface APIView {
 
   @POST(URLS.LIMOVEMENTDETAILS)
     Call<Limovementresponse> getmssg(@Body GraphAPIRequest req);
+
+    @POST(URLS.LIMOVEMENT_DETAIL_DATEWISE)
+    Call<Limovementresponse> getLidetailDatewise(@Body GraphAPIRequest req);
 
     @POST(URLS.SAVE_LI_MOVEMENT_DETAIL)
     Call<LimMovementSubmitResponse> getres(@Body GraphAPIRequest req);

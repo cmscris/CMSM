@@ -60,7 +60,10 @@ public class Constants {
     public static final int LIMOVEMENTDETAILS =211;
     public static final int SAVE_LI_MOVEMENT_DETAIL=212;
     public static final int LIMOVEMENT_DETAIL_MONTHLY=213;
-    public static final int LIMOVEMENT_DATE_WISE=214;
+    public static final int LIMOVEMENT_DETAIL_DATEWISE=214;
+    public static final int GET_CREWLIST_LI_GRADING=215;
+    public static final int GET_CREWLIST_LI_COUNSELLING=216;
+
 
 
     public static final int SAVEABNORMALITY=52;

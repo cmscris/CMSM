@@ -64,13 +64,13 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 public class LI_activity_detail_page extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener, ResponseView {
-    private ArrayList permissionsToRequest;
+  /*  private ArrayList permissionsToRequest;
     private ArrayList permissionsRejected = new ArrayList();
     private ArrayList permissions = new ArrayList();
 
     private final static int ALL_PERMISSIONS_RESULT = 101;
     LocationTrack locationTrack;
-    double longitude,latitude;
+    double longitude,latitude;*/
    TextView  et_dt, et_todt;
     private TextView action_bar_title;
     EditText et_From_sttn, et_to_sttn, et_loco, et_train, et_remark,et_km,et_via1,et_via2;
@@ -116,7 +116,7 @@ public class LI_activity_detail_page extends AppCompatActivity implements
         save = (Button) findViewById(R.id.save);
         clear = (Button) findViewById(R.id.clear);
         update =(Button)findViewById(R.id.btn_updt);
-        btn_view=(Button) findViewById(R.id.btn_view);
+        //btn_view=(Button) findViewById(R.id.btn_view);
         btn_del=(Button)findViewById(R.id.btn_del);
         btn_list=(Button) findViewById(R.id.btn_list);
         iv_title_icon = findViewById(R.id.iv_title_icon);
@@ -124,6 +124,7 @@ public class LI_activity_detail_page extends AppCompatActivity implements
         iv_right.setImageResource(R.drawable.icon_logout);
         iv_right.setVisibility(View.VISIBLE);
         iv_title_icon.setImageResource(R.drawable.iv_back);
+        btn_del.setVisibility(View.GONE);
 
         update.setVisibility(View.GONE);
         save.setVisibility(View.VISIBLE);
@@ -132,7 +133,7 @@ public class LI_activity_detail_page extends AppCompatActivity implements
         loginInfoModel = userLoginPreferences.getLoginUser();
         commonClass=new CommonClass(LI_activity_detail_page.this);
         action_bar_title.setText("CMS- " + loginInfoModel.getFname());
-        permissions.add(ACCESS_FINE_LOCATION);
+       /* permissions.add(ACCESS_FINE_LOCATION);
         permissions.add(ACCESS_COARSE_LOCATION);
 
         permissionsToRequest = findUnAskedPermissions(permissions);
@@ -145,7 +146,7 @@ public class LI_activity_detail_page extends AppCompatActivity implements
 
             if (permissionsToRequest.size() > 0)
                 requestPermissions((String[]) permissionsToRequest.toArray(new String[permissionsToRequest.size()]), ALL_PERMISSIONS_RESULT);
-        }
+        }*/
 
 
 
@@ -160,24 +161,15 @@ public class LI_activity_detail_page extends AppCompatActivity implements
         et_via1.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
         et_via2.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
         et_loco.setFilters(new InputFilter[]{new InputFilter.LengthFilter(5)});
-        et_remark.setFilters(new InputFilter[]{new InputFilter.LengthFilter(50)});
+        et_remark.setFilters(new InputFilter[]{new InputFilter.LengthFilter(100)});
 
         et_train.setFilters(new InputFilter[]{new InputFilter.LengthFilter(10)});
         et_train.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
         Bundle extra = getIntent().getExtras();
         if (extra != null) {
             String temp = extra.getString("frmdate");
-            try {
-                date = formatter.parse(temp);
-                Log.e("formated date ", date + "");
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }   formateDate = new SimpleDateFormat("dd-MM-yyyy").format(date);
-            Log.v("output date ",formateDate);
-                System.out.println(temp);
-            System.out.println(formateDate);
-                // 2013-12-04
-            et_dt.setText(formateDate);
+            formateDate=temp;
+            et_dt.setText(temp);
 
         }
 
@@ -203,14 +195,14 @@ public class LI_activity_detail_page extends AppCompatActivity implements
             //Setting the ArrayAdapter data on the Spinner
         spn_dutytype.setAdapter(dept);
      spn_dutytype.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
-btn_view.setOnClickListener(new View.OnClickListener() {
+/*btn_view.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
         Intent i=new Intent(LI_activity_detail_page.this,LI_activitydraftdetail.class);
         i.putExtra("date",formateDate);
         startActivity(i);
     }
-});
+});*/
         btn_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -306,7 +298,7 @@ btn_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ArrayList validate=new ArrayList();
-                locationTrack = new LocationTrack(LI_activity_detail_page.this);
+               /* locationTrack = new LocationTrack(LI_activity_detail_page.this);
                 if(!locationTrack.checkGPS){
                     locationTrack.showSettingsAlert();
                 }
@@ -320,7 +312,7 @@ btn_view.setOnClickListener(new View.OnClickListener() {
 
                         locationTrack.showSettingsAlert();
                     }
-                }
+                }*/
 
                 if (et_dt.getText().toString().equals("") || et_todt.getText().toString().equals("") ) {
                     commonClass.showToast("Please enter From and To Date Time");
@@ -367,7 +359,7 @@ btn_view.setOnClickListener(new View.OnClickListener() {
 
 
     }
-    private ArrayList findUnAskedPermissions(ArrayList wanted) {
+   /* private ArrayList findUnAskedPermissions(ArrayList wanted) {
         ArrayList result = new ArrayList();
 
         for (Object perm : wanted) {
@@ -438,7 +430,7 @@ btn_view.setOnClickListener(new View.OnClickListener() {
                 .setNegativeButton("Cancel", null)
                 .create()
                 .show();
-    }
+    }*/
 
 
 
@@ -604,6 +596,7 @@ btn_view.setOnClickListener(new View.OnClickListener() {
                 ArrayList <String> datalist = data.getStringArrayListExtra("keyName");
                 System.out.println("Result final>>>>>>>>>>" + datalist);
                 save.setVisibility(View.GONE);
+                btn_del.setVisibility(View.VISIBLE);
                 update.setVisibility(View.VISIBLE);
                 sn=datalist.get(0);
                 int k= 1;
@@ -722,8 +715,8 @@ btn_view.setOnClickListener(new View.OnClickListener() {
                     limovdraftresponse.setKm(et_km.getText().toString());
                     limovdraftresponse.setRmk(et_remark.getText().toString());
                     limovdraftresponse.setEdit("EDIT");
-                    limovdraftresponse.setLongitude(Double.toString(longitude));
-                    limovdraftresponse.setLatitude(Double.toString(latitude));
+                    //limovdraftresponse.setLongitude(Double.toString(longitude));
+                   // limovdraftresponse.setLatitude(Double.toString(latitude));
 
                     liresponsePrev = (ArrayList) DataHolder.getLimovmainlist();
                     System.out.println("size of liresponse list before " + liresponse.size());
@@ -792,7 +785,7 @@ btn_view.setOnClickListener(new View.OnClickListener() {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        locationTrack.stopListener();
+        //locationTrack.stopListener();
     }
 
 }

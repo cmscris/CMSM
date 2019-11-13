@@ -178,14 +178,14 @@ public class Grading extends AppCompatActivity implements TextWatcher, AdapterVi
             //Setting the ArrayAdapter data on the Spinner
             spn_constype.setAdapter(cons_type);
             request.setparamlist(getCrewlistdata);
-            requestPresenter.Request(request,"Please wait",Constants.GET_CREWLIST);
+            requestPresenter.Request(request,"Please wait",Constants.GET_CREWLIST_LI_COUNSELLING);
 
         }
         else if(DataHolder.getType()==Constants.Grading){
             consformlayout.setVisibility(View.GONE);
             System.out.println(">>>>>>>>>>insideGradinglayout");
             request.setparamlist(getCrewlistdata);
-            requestPresenter.Request(request,"Please wait",Constants.GET_CREWLIST);
+            requestPresenter.Request(request,"Please wait",Constants.GET_CREWLIST_LI_GRADING);
         }
         if(!CommonClass.checkInternetConnection(Grading.this)) {
             commonClass.showToast("No internet available.");
@@ -197,8 +197,9 @@ public class Grading extends AppCompatActivity implements TextWatcher, AdapterVi
                 int day = cldr.get(Calendar.DAY_OF_MONTH);
                 int month = cldr.get(Calendar.MONTH);
                 int years = cldr.get(Calendar.YEAR);
-                cldr.add(day, -7);
-                Date minDate = cldr.getTime();
+                Calendar weekBackDate=Calendar.getInstance();
+                weekBackDate.add(Calendar.DAY_OF_MONTH,-7);
+                Date minDate = weekBackDate.getTime();
 
                 // date picker dialog
                 picker = new DatePickerDialog(Grading.this,

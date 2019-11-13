@@ -1,17 +1,24 @@
 package com.cris.cmsm;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.icu.text.UnicodeFilter;
+import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.os.SystemClock;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +29,7 @@ import android.text.InputType;
 import android.text.Spanned;
 import android.text.TextWatcher;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -51,17 +59,24 @@ import com.cris.cmsm.util.StringFormatter;
 import com.cris.cmsm.widget.TouchImageView;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URLEncoder;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class Abnormality_fill_activity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, ResponseView {
     TextView crewid1, designation, DOJ,crewiddata, designationdata,abnrdept,abnrsubhead,Loco,cameratv,Trainno,DOJ1,Timedata;
@@ -69,7 +84,6 @@ public class Abnormality_fill_activity extends AppCompatActivity implements Adap
     EditText et_From_sttn, et_to_sttn, et_to_km, et_From_km,Locodata,abnrfill,trainnum;
     Spinner spinner_section,subhead_spin,dept_spin;
     Button getsection_bttn, SaveNext,Reset2;
-    Bitmap photo;
     int currenthour;
     CommonClass commonClass;
     private TextView action_bar_title;
@@ -88,9 +102,14 @@ public class Abnormality_fill_activity extends AppCompatActivity implements Adap
     GraphAPIRequest request;
     NumberFormat format;
     String Hour,Minute,pickmonth,deptstring,subhead,time,date,etfrom,etto,section,image;
-    String bitmap="";
+    String photo="";
     ArrayList <String> filleddata,datafilllist;
     private static final int CAMERA_REQUEST = 1888;
+    private Bitmap bitmap;
+    private File destination = null;
+    private InputStream inputStreamImg;
+    private String imgPath = null;
+    private final int PICK_IMAGE_CAMERA = 1, PICK_IMAGE_GALLERY = 2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -178,9 +197,10 @@ public class Abnormality_fill_activity extends AppCompatActivity implements Adap
         touchimageview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                selectImage();
+                /*Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(cameraIntent, CAMERA_REQUEST);
-                touchimageview.resetZoom();
+                touchimageview.resetZoom();*/
             }
         });
 
@@ -369,8 +389,7 @@ public class Abnormality_fill_activity extends AppCompatActivity implements Adap
                 String decode=StringFormatter.convertUTF8ToString(utf);
                 System.out.println(">>>>>>>>>>>hindi string"+decode);
                 filleddata.add(utf);
-
-                filleddata.add(bitmap);
+                filleddata.add(photo);
 
                 System.out.println(" <>>>>>>inside onclick save" +(filleddata.size()));
                 System.out.println(" <>>>>>>inside onclick save" +(filleddata));
@@ -385,11 +404,6 @@ public class Abnormality_fill_activity extends AppCompatActivity implements Adap
 
                     request.setparamlist(filleddata);
                     requestPresenter.Request(request,"c",Constants.SAVEABNORMALITY);
-
-                    //callwebservice.
-                    /*Intent i = new Intent(Abnormality_fill_activity.this, Abnormality_department.class);
-                    i.putExtra("object", filleddata);
-                    startActivity(i);*/
 
                 }
             }
@@ -423,6 +437,107 @@ public class Abnormality_fill_activity extends AppCompatActivity implements Adap
                 }
             }
         });
+    }
+    private void selectImage() {
+        try {
+            PackageManager pm = getPackageManager();
+            int hasPerm = pm.checkPermission(Manifest.permission.CAMERA, getPackageName());
+            if(hasPerm!= PackageManager.PERMISSION_GRANTED) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    requestPermissions(new String[]{Manifest.permission.CAMERA}, CAMERA_REQUEST);
+                }
+            }
+            if (hasPerm == PackageManager.PERMISSION_GRANTED) {
+                final CharSequence[] options = {"Take Photo", "Choose From Gallery","Cancel"};
+                AlertDialog.Builder builder = new AlertDialog.Builder(Abnormality_fill_activity.this);
+                builder.setTitle("Select Option");
+                builder.setItems(options, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int item) {
+                        if (options[item].equals("Take Photo")) {
+                            dialog.dismiss();
+                            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                            startActivityForResult(intent, PICK_IMAGE_CAMERA);
+                        } else if (options[item].equals("Choose From Gallery")) {
+                            dialog.dismiss();
+                            Intent pickPhoto = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                            startActivityForResult(pickPhoto, PICK_IMAGE_GALLERY);
+                        } else if (options[item].equals("Cancel")) {
+                            dialog.dismiss();
+                        }
+                    }
+                });
+                builder.show();
+            } else
+                Toast.makeText(this, "Camera Permission error", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(this, "Camera Permission error", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        inputStreamImg = null;
+        if (requestCode == PICK_IMAGE_CAMERA) {
+            try {
+                Uri selectedImage = data.getData();
+                bitmap = (Bitmap) data.getExtras().get("data");
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bytes);
+
+                Log.e("Activity", "Pick from Camera::>>> ");
+
+                String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+                destination = new File(Environment.getExternalStorageDirectory() + "/" +
+                        getString(R.string.app_name), "IMG_" + timeStamp + ".jpg");
+                FileOutputStream fo;
+                try {
+                    destination.createNewFile();
+                    fo = new FileOutputStream(destination);
+                    fo.write(bytes.toByteArray());
+                    fo.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                imgPath = destination.getAbsolutePath();
+                touchimageview.setImageBitmap(bitmap);
+                byte[] imageByte=bytes.toByteArray();
+                photo= Base64.encodeToString(imageByte,Base64.DEFAULT);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (requestCode == PICK_IMAGE_GALLERY) {
+            Uri selectedImage = data.getData();
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bytes);
+                byte[] imageByte=bytes.toByteArray();
+                photo= Base64.encodeToString(imageByte,Base64.DEFAULT);
+                Log.e("Activity", "Pick from Gallery::>>> ");
+
+                imgPath = getRealPathFromURI(selectedImage);
+                destination = new File(imgPath.toString());
+                touchimageview.setImageBitmap(bitmap);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public String getRealPathFromURI(Uri contentUri) {
+        String[] proj = {MediaStore.Audio.Media.DATA};
+        Cursor cursor = managedQuery(contentUri, proj, null, null, null);
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
     }
 
 
@@ -625,7 +740,18 @@ public class Abnormality_fill_activity extends AppCompatActivity implements Adap
         overridePendingTransition(R.animator.slide_in_right, R.animator.slide_out_left);
         finish();
     }
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == CAMERA_REQUEST) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+   /* protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAMERA_REQUEST && resultCode==RESULT_OK && data!=null) {
 
             photo = (Bitmap) data.getExtras().get("data");
@@ -648,7 +774,7 @@ public class Abnormality_fill_activity extends AppCompatActivity implements Adap
 
         }
 
-    }
+    }*/
     private void retryDialog(final Activity activity, String msg) {
         new AlertDialog.Builder(activity)
                 .setTitle(getResources().getString(R.string.cms))

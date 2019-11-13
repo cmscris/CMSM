@@ -64,7 +64,6 @@ public class Dateadapter extends ArrayAdapter {
         int displayYear = dateCal.get(Calendar.YEAR);
         int currentMonth = currentDate.get(Calendar.MONTH) + 1;
         int currentYear = currentDate.get(Calendar.YEAR);
-        int currentdate=currentDate.get(Calendar.DAY_OF_MONTH);
         System.out.println("dayValue>>>>"+dayValue);
         View view = convertView;
         NumberFormat format=new DecimalFormat("00");
@@ -87,25 +86,15 @@ public class Dateadapter extends ArrayAdapter {
                 if (limovdraftresponsesarraylist.get(k).getDates().equals(day + "-" + displayMonth + "-" + displayYear)) {
                     System.out.println("dayValue>>>>2222222222" + dayValue);
                     if (limovdraftresponsesarraylist.get(k).getStatus().equals("Y")) {
-                        view.setBackgroundColor(Color.parseColor("#FF5722"));
+                        view.setBackgroundColor(Color.parseColor("#fc6924"));
                     }
 
                 }
                     k++;
                 }
-
-
             }
         }
 
-
-
-           /* if(i%2==0){
-                view.setBackgroundColor(Color.parseColor("#8BD8BD"));
-            }
-            else{
-                view.setBackgroundColor(Color.parseColor("#00B8D4"));
-            }*/
         else{
             view.setBackgroundColor(Color.parseColor("#E0E0E0"));
         }

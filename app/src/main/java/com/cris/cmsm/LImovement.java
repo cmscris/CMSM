@@ -52,7 +52,7 @@ public class LImovement extends AppCompatActivity implements ResponseView {
     TextView  display_current_date;
     private ArrayList<Limovdraftresponse> limovstatuslist;
     ImageView previous_month,next_month;
-    private ImageView iv_right;
+    private ImageView iv_right,iv_title_icon;
     Button btn_curr_mn_actvty;
     private SimpleDateFormat formatter = new SimpleDateFormat("MMMM yyyy", Locale.ENGLISH);
     private static final int MAX_CALENDAR_COLUMN = 42;
@@ -67,7 +67,7 @@ public class LImovement extends AppCompatActivity implements ResponseView {
     String flagdate,flagstatus;
     StringBuilder sb =new StringBuilder();
     private Calendar cal = Calendar.getInstance(Locale.ENGLISH);
-    ArrayList monthparam;
+    ArrayList monthparam,statusyeslist;
     String cur;
 
 
@@ -83,6 +83,8 @@ public class LImovement extends AppCompatActivity implements ResponseView {
         display_current_date=(TextView)findViewById(R.id.display_current_date);
         gridview = (GridView) findViewById(R.id.calendar_grid);
         userLoginPreferences = new UserLoginPreferences(LImovement.this);
+        iv_title_icon = findViewById(R.id.iv_title_icon);
+        iv_title_icon.setImageResource(R.drawable.iv_back);
         loginInfoModel = userLoginPreferences.getLoginUser();
         iv_right.setImageResource(R.drawable.icon_logout);
         iv_right.setVisibility(View.VISIBLE);
@@ -114,6 +116,13 @@ public class LImovement extends AppCompatActivity implements ResponseView {
                 }
             }
         });
+        iv_title_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+
+            }
+        });
         btn_curr_mn_actvty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -130,9 +139,28 @@ public class LImovement extends AppCompatActivity implements ResponseView {
            @Override
            public void onItemClick(AdapterView <?> parent, View view, int position, long id) {
                System.out.println("data at position>>>"+parent.getItemAtPosition(position));
-               Intent i=new Intent(LImovement.this,LI_activity_detail_page.class);
-               i.putExtra("frmdate",parent.getItemAtPosition(position).toString());
-               startActivity(i);
+               String formateDate = new SimpleDateFormat("dd-MM-yyyy").format(parent.getItemAtPosition(position));
+               System.out.println("formateDate>>>"+formateDate);
+
+               i=0;
+
+                   if (statusyeslist.contains(formateDate)) {
+                       System.out.println("Go To Submit ReportLi Movement>>>");
+                       calendarinput.clear();
+                       calendarinput.add(loginInfoModel.getLoginid());
+                       calendarinput.add(formateDate);
+                       Intent i = new Intent(LImovement.this, SubmitReportLiMovement.class);
+                       i.putExtra("date", calendarinput);
+                       startActivity(i);
+
+                   }
+
+               else {
+                       System.out.println("Go To LI_activity_detail_page>>>");
+                   Intent i = new Intent(LImovement.this, LI_activity_detail_page.class);
+                   i.putExtra("frmdate", formateDate);
+                   startActivity(i);
+               }
            }
        });
     }
@@ -239,12 +267,17 @@ public class LImovement extends AppCompatActivity implements ResponseView {
             System.out.println("<<<<<<<<<<<<<<<<<<<<<<<Key Sycess>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
             Limovementresponse limovementresponse=(Limovementresponse)object;
             limovstatuslist=new ArrayList <>();
+            statusyeslist=new ArrayList();
             i=0;
             while(i<limovementresponse.getLiMovementVOsResponse().size()) {
 
                 System.out.println("<<<<<<<<Date>>>>>>>" + limovementresponse.getLiMovementVOsResponse().get(i).getDate());
+
                 flagdate=limovementresponse.getLiMovementVOsResponse().get(i).getDate();
                 flagstatus=limovementresponse.getLiMovementVOsResponse().get(i).getStatus();
+                if(flagstatus.equals("Y")){
+                    statusyeslist.add(flagdate);
+            }
                 Limovdraftresponse limovdraftresponse=new Limovdraftresponse();
                 limovdraftresponse.setDates(limovementresponse.getLiMovementVOsResponse().get(i).getDate());
                 limovdraftresponse.setStatus(limovementresponse.getLiMovementVOsResponse().get(i).getStatus());

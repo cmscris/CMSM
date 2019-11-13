@@ -261,6 +261,48 @@ public class RequestPresenter implements RequestView {
 
                 });
                 break;
+            case Constants.GET_CREWLIST_LI_GRADING:
+                showProgress(msg);
+                GraphAPIRequest ligradingreq = (GraphAPIRequest) object;
+                System.out.println("Request is >>" + new Gson().toJson(ligradingreq));
+                WebServices.getInstance().getService().getcrewgrades(ligradingreq).enqueue(new Callback<Paramresponse>() {
+                    @Override
+                    public void onResponse(Call<Paramresponse> call,Response<Paramresponse> response) {
+                        dismissProgress();
+                        System.out.println("Response is " + new Gson().toJson(response));
+                        view.ResponseOk(response.body(), position);
+                    }
+
+                    @Override
+                    public void onFailure(Call <Paramresponse> call, Throwable t) {
+                        System.out.println("Error in Response");
+                    }
+
+
+                });
+                break;
+            case Constants.GET_CREWLIST_LI_COUNSELLING:
+                showProgress(msg);
+                GraphAPIRequest liconslingreq= (GraphAPIRequest) object;
+                System.out.println("Request is >>" + new Gson().toJson(liconslingreq));
+                WebServices.getInstance().getService().getcrewconsel(liconslingreq).enqueue(new Callback<Paramresponse>() {
+                    @Override
+                    public void onResponse(Call<Paramresponse> call,Response<Paramresponse> response) {
+                        dismissProgress();
+                        System.out.println("Response is " + new Gson().toJson(response));
+                        view.ResponseOk(response.body(), position);
+                    }
+
+                    @Override
+                    public void onFailure(Call <Paramresponse> call, Throwable t) {
+                        System.out.println("Error in Response");
+                    }
+
+
+                });
+                break;
+
+
             case Constants.SAVE_LI_GRADING:
                 showProgress(msg);
                 GraphAPIRequest saveli = (GraphAPIRequest) object;
@@ -362,6 +404,27 @@ public class RequestPresenter implements RequestView {
 
                 });
                 break;
+            case Constants.LIMOVEMENT_DETAIL_DATEWISE:
+                showProgress(msg);
+                GraphAPIRequest lireqdatewise = (GraphAPIRequest) object;
+                System.out.println("Request is >>" + new Gson().toJson(lireqdatewise));
+                WebServices.getInstance().getService().getLidetailDatewise(lireqdatewise).enqueue(new Callback<Limovementresponse>() {
+                    @Override
+                    public void onResponse(Call<Limovementresponse> call,Response<Limovementresponse> response) {
+                        dismissProgress();
+                        System.out.println("Response is " + new Gson().toJson(response));
+                        view.ResponseOk(response.body(), position);
+                    }
+
+                    @Override
+                    public void onFailure(Call <Limovementresponse> call, Throwable t) {
+                        System.out.println("Error in Response");
+                    }
+
+
+                });
+                break;
+
             case Constants.SAVE_LI_MOVEMENT_DETAIL:
                 showProgress(msg);
                 GraphAPIRequest reqlimov = (GraphAPIRequest) object;
