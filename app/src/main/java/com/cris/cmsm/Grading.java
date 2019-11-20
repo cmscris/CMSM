@@ -46,6 +46,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 import static com.cris.cmsm.util.Constants.CrewCounselling;
 
@@ -177,14 +178,14 @@ public class Grading extends AppCompatActivity implements TextWatcher, AdapterVi
             //Setting the ArrayAdapter data on the Spinner
             spn_constype.setAdapter(cons_type);
             request.setparamlist(getCrewlistdata);
-            requestPresenter.Request(request,"Please wait",Constants.GET_CREWLIST);
+            requestPresenter.Request(request,"Please wait",Constants.GET_CREWLIST_LI_COUNSELLING);
 
         }
         else if(DataHolder.getType()==Constants.Grading){
             consformlayout.setVisibility(View.GONE);
             System.out.println(">>>>>>>>>>insideGradinglayout");
             request.setparamlist(getCrewlistdata);
-            requestPresenter.Request(request,"Please wait",Constants.GET_CREWLIST);
+            requestPresenter.Request(request,"Please wait",Constants.GET_CREWLIST_LI_GRADING);
         }
         if(!CommonClass.checkInternetConnection(Grading.this)) {
             commonClass.showToast("No internet available.");
@@ -196,8 +197,9 @@ public class Grading extends AppCompatActivity implements TextWatcher, AdapterVi
                 int day = cldr.get(Calendar.DAY_OF_MONTH);
                 int month = cldr.get(Calendar.MONTH);
                 int years = cldr.get(Calendar.YEAR);
-                cldr.add(month, -30);
-                long minDate = cldr.getTime().getTime();
+                Calendar weekBackDate=Calendar.getInstance();
+                weekBackDate.add(Calendar.DAY_OF_MONTH,-7);
+                Date minDate = weekBackDate.getTime();
 
                 // date picker dialog
                 picker = new DatePickerDialog(Grading.this,
@@ -218,9 +220,9 @@ public class Grading extends AppCompatActivity implements TextWatcher, AdapterVi
                                 }
                             }
                         }, years, month, day);
-                picker.getDatePicker().setMinDate(minDate);
+                picker.getDatePicker().setMinDate(minDate.getTime());
                 picker.getDatePicker().setMaxDate(System.currentTimeMillis());
-                picker.setCanceledOnTouchOutside(true);
+                //picker.setCanceledOnTouchOutside(true);
                 picker.show();
 
             }

@@ -1,12 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_above="@id/tv_copyright"
+    android:fillViewport="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SubmitReportLiMovement">
+    tools:context=".SubmitReportLiMovement"
+    android:orientation="vertical">
+
 <com.cris.cmsm.widget.PinchRecyclerView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/pinchvw"/>
-</LinearLayout>
+    <Button
+        android:id="@+id/btn_add_row"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="right"
+        android:background="@color/colorBlueText"
+        android:drawableTop="@drawable/ic_action_add2"
+        android:text="Add Row"
+        android:textColor="@color/colorWhite"
+      />
+
+   </LinearLayout>
+</ScrollView>

@@ -16,8 +16,6 @@
     android:layout_marginRight="5dp"
     android:orientation="vertical">
 
-
-
     <com.cris.cmsm.widget.PinchRecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,6 +27,7 @@
         android:text="@string/Submit"
         android:layout_gravity="right"
         android:drawableTop="@mipmap/ic_launcher_submit">
+
 
     </Button>
 </LinearLayout>

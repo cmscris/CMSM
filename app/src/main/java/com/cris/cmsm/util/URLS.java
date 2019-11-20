@@ -99,4 +99,8 @@ public class URLS {
     public static final String LIMOVEMENTDETAILS="master/getLiMovementDetails";
     public static final String IRREGULAR_CREW = "master/getIrregularCrewSummaryForChalakDal";
     public static final String SAVE_LI_MOVEMENT_DETAIL = "master/saveLIMovementDetails";
+    public static final String LIMOVEMENT_DETAIL_MONTHLY = "master/getLiMovementDetailsMonthly";
+    public static final String GET_CREWLIST_GRADING="master/getCrewListLIGrading";
+    public static final String GET_CREWLIST_COUNSELLING="master/getCrewListLICounselling";
+    public static final String LIMOVEMENT_DETAIL_DATEWISE = "master/getLiMovementDetailsDatewise";
 }

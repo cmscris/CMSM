@@ -26,9 +26,14 @@ import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 import com.cris.cmsm.adapter.Dateadapter;
 import com.cris.cmsm.adapter.LImovementadapter;
 import com.cris.cmsm.database.DataHolder;
+import com.cris.cmsm.models.request.GraphAPIRequest;
+import com.cris.cmsm.models.response.Limovementresponse;
 import com.cris.cmsm.models.response.LoginIfoVO;
+import com.cris.cmsm.models.response.Paramresponse;
 import com.cris.cmsm.navcontrollers.DetailController;
 import com.cris.cmsm.prefrences.UserLoginPreferences;
+import com.cris.cmsm.presenter.RequestPresenter;
+import com.cris.cmsm.presenterview.ResponseView;
 import com.cris.cmsm.util.CommonClass;
 import com.cris.cmsm.util.Constants;
 
@@ -42,21 +47,28 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class LImovement extends AppCompatActivity {
+public class LImovement extends AppCompatActivity implements ResponseView {
     GridView gridview;
     TextView  display_current_date;
+    private ArrayList<Limovdraftresponse> limovstatuslist;
     ImageView previous_month,next_month;
-    private ImageView iv_right;
+    private ImageView iv_right,iv_title_icon;
     Button btn_curr_mn_actvty;
     private SimpleDateFormat formatter = new SimpleDateFormat("MMMM yyyy", Locale.ENGLISH);
     private static final int MAX_CALENDAR_COLUMN = 42;
+    int i=0;
+    private RequestPresenter requestPresenter;
+    GraphAPIRequest request;
     private Dateadapter mAdapter;
     ArrayList<String> calendarinput;
     private UserLoginPreferences userLoginPreferences;
     private LoginIfoVO loginInfoModel;
     CommonClass commonClass;
+    String flagdate,flagstatus;
     StringBuilder sb =new StringBuilder();
     private Calendar cal = Calendar.getInstance(Locale.ENGLISH);
+    ArrayList monthparam,statusyeslist;
+    String cur;
 
 
 
@@ -71,13 +83,29 @@ public class LImovement extends AppCompatActivity {
         display_current_date=(TextView)findViewById(R.id.display_current_date);
         gridview = (GridView) findViewById(R.id.calendar_grid);
         userLoginPreferences = new UserLoginPreferences(LImovement.this);
+        iv_title_icon = findViewById(R.id.iv_title_icon);
+        iv_title_icon.setImageResource(R.drawable.iv_back);
         loginInfoModel = userLoginPreferences.getLoginUser();
         iv_right.setImageResource(R.drawable.icon_logout);
         iv_right.setVisibility(View.VISIBLE);
+        commonClass=new CommonClass(LImovement.this);
         calendarinput=new ArrayList <>();
-        setUpCalendarAdapter();
+       Calendar cal= Calendar.getInstance();
+      int currentmonth= cal.get(Calendar.MONTH)+1 ;
+
+       System.out.println("Current Month"+ currentmonth);
+        System.out.println("Current Year"+ cal.get(Calendar.YEAR));
         setPreviousButtonClickEvent();
         setNextButtonClickEvent();
+        monthparam=new ArrayList();
+        requestPresenter=new RequestPresenter(LImovement.this);
+        request=new GraphAPIRequest();
+        monthparam.add(loginInfoModel.getLoginid());
+        monthparam.add(currentmonth);
+        monthparam.add(cal.get(Calendar.YEAR));
+        request.setparamlist(monthparam);
+        requestPresenter.Request(request,"Loading Data",Constants.LIMOVEMENT_DETAIL_MONTHLY);
+
         iv_right.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,6 +114,13 @@ public class LImovement extends AppCompatActivity {
                         showLogoutDialog(LImovement.this, "Do you want to logout?", true);
                         break;
                 }
+            }
+        });
+        iv_title_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+
             }
         });
         btn_curr_mn_actvty.setOnClickListener(new View.OnClickListener() {
@@ -104,9 +139,28 @@ public class LImovement extends AppCompatActivity {
            @Override
            public void onItemClick(AdapterView <?> parent, View view, int position, long id) {
                System.out.println("data at position>>>"+parent.getItemAtPosition(position));
-               Intent i=new Intent(LImovement.this,LI_activity_detail_page.class);
-               i.putExtra("frmdate",parent.getItemAtPosition(position).toString());
-               startActivity(i);
+               String formateDate = new SimpleDateFormat("dd-MM-yyyy").format(parent.getItemAtPosition(position));
+               System.out.println("formateDate>>>"+formateDate);
+
+               i=0;
+
+                   if (statusyeslist.contains(formateDate)) {
+                       System.out.println("Go To Submit ReportLi Movement>>>");
+                       calendarinput.clear();
+                       calendarinput.add(loginInfoModel.getLoginid());
+                       calendarinput.add(formateDate);
+                       Intent i = new Intent(LImovement.this, SubmitReportLiMovement.class);
+                       i.putExtra("date", calendarinput);
+                       startActivity(i);
+
+                   }
+
+               else {
+                       System.out.println("Go To LI_activity_detail_page>>>");
+                   Intent i = new Intent(LImovement.this, LI_activity_detail_page.class);
+                   i.putExtra("frmdate", formateDate);
+                   startActivity(i);
+               }
            }
        });
     }
@@ -116,7 +170,14 @@ public class LImovement extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d("Inside previous month","Month before");
                 cal.add(Calendar.MONTH, -1);
-                setUpCalendarAdapter();
+                int cuurent= cal.get(Calendar.MONTH)+1;
+                monthparam.clear();
+                monthparam.add(loginInfoModel.getLoginid());
+                monthparam.add( cuurent);
+                monthparam.add(cal.get(Calendar.YEAR));
+                request.setparamlist(monthparam);
+                requestPresenter.Request(request,"Loading Data",Constants.LIMOVEMENT_DETAIL_MONTHLY);
+
             }
         });
     }
@@ -126,12 +187,22 @@ public class LImovement extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d("Inside next_month","Month after");
                 cal.add(Calendar.MONTH, 1);
-                setUpCalendarAdapter();
+                int cuurent= cal.get(Calendar.MONTH)+1;
+
+                System.out.println("Next month>>>>>>>>"+cuurent);
+                monthparam.clear();
+
+                monthparam.add(loginInfoModel.getLoginid());
+                monthparam.add(cuurent);
+                request.setparamlist(monthparam);
+                monthparam.add(cal.get(Calendar.YEAR));
+                requestPresenter.Request(request,"Loading Data",Constants.LIMOVEMENT_DETAIL_MONTHLY);
             }
         });
     }
 
     private void setUpCalendarAdapter() {
+
         List <Date> dayValueInCells = new ArrayList<Date>();
 
         Calendar mCal = (Calendar)cal.clone();
@@ -144,7 +215,9 @@ public class LImovement extends AppCompatActivity {
         }
         Log.d("TAG", "Number of date " + dayValueInCells.size());
         String sDate = formatter.format(cal.getTime());
+        System.out.println("checkdate"+cal.getTime());
         display_current_date.setText(sDate);
+
         mAdapter = new Dateadapter(LImovement.this, dayValueInCells, cal);
         gridview.setAdapter(mAdapter);
     }
@@ -188,6 +261,52 @@ public class LImovement extends AppCompatActivity {
     }
 
 
+    @Override
+    public void ResponseOk(Object object, int position) {
+        if(object instanceof Limovementresponse){
+            System.out.println("<<<<<<<<<<<<<<<<<<<<<<<Key Sycess>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+            Limovementresponse limovementresponse=(Limovementresponse)object;
+            limovstatuslist=new ArrayList <>();
+            statusyeslist=new ArrayList();
+            i=0;
+            while(i<limovementresponse.getLiMovementVOsResponse().size()) {
+
+                System.out.println("<<<<<<<<Date>>>>>>>" + limovementresponse.getLiMovementVOsResponse().get(i).getDate());
+
+                flagdate=limovementresponse.getLiMovementVOsResponse().get(i).getDate();
+                flagstatus=limovementresponse.getLiMovementVOsResponse().get(i).getStatus();
+                if(flagstatus.equals("Y")){
+                    statusyeslist.add(flagdate);
+            }
+                Limovdraftresponse limovdraftresponse=new Limovdraftresponse();
+                limovdraftresponse.setDates(limovementresponse.getLiMovementVOsResponse().get(i).getDate());
+                limovdraftresponse.setStatus(limovementresponse.getLiMovementVOsResponse().get(i).getStatus());
+                System.out.println("<<<<<<<<Status>>>>>>>" + limovementresponse.getLiMovementVOsResponse().get(i).getStatus());
+                limovstatuslist.add(limovdraftresponse);
+                i++;
+            }
+            setUpCalendarAdapter();
+
+            DataHolder.setLimovstatuslist(limovstatuslist);
+        }
+    }
+
+    @Override
+    public void Error() {
+        commonClass.showToast("Error in Response");
+
+    }
+
+    @Override
+    public void dismissProgress() {
+       commonClass.dismissDialog();
+    }
+
+    @Override
+    public void showProgress(String msg) {
+  commonClass.showProgressBar(msg);
+
+    }
 }
 
 

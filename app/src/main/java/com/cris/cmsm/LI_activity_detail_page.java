@@ -1,10 +1,14 @@
 package com.cris.cmsm;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.LocationListener;
+import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +17,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.Spanned;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -26,6 +31,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.cris.cmsm.adapter.LImovementadapter;
 import com.cris.cmsm.database.DataHolder;
@@ -53,13 +59,22 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+
 public class LI_activity_detail_page extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener, ResponseView {
+  /*  private ArrayList permissionsToRequest;
+    private ArrayList permissionsRejected = new ArrayList();
+    private ArrayList permissions = new ArrayList();
 
+    private final static int ALL_PERMISSIONS_RESULT = 101;
+    LocationTrack locationTrack;
+    double longitude,latitude;*/
    TextView  et_dt, et_todt;
     private TextView action_bar_title;
     EditText et_From_sttn, et_to_sttn, et_loco, et_train, et_remark,et_km,et_via1,et_via2;
-    private ImageView iv_title_icon, iv_right, iv_middle;
+    private ImageView iv_title_icon, iv_right;
     ArrayList <ArrayList <String>> Mainlist;
     private LoginIfoVO loginInfoModel;
     String from_date_time, to_date_time;
@@ -73,9 +88,10 @@ public class LI_activity_detail_page extends AppCompatActivity implements
     private UserLoginPreferences userLoginPreferences;
     String Hour, Minute, id, fromdt, todt,frmmonth,tomonth,fromdttime,todttime;
     int pickfrmdt,picktodt,pickfrmyear,j,pickfrmmonth,picktomonth,picktoyear,pickfrmhour,picktohour,pickfrmmin,picktomin;
-    Button save, clear,update,btn_del;
-
-
+    Button save, clear,update,btn_del,btn_list,btn_view;
+    Date date=null;
+    SimpleDateFormat formatter = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzzz yyyy");
+    String formateDate;
     int i = 0;
     ArrayList <String> Savedatalist;
     CommonClass commonClass;
@@ -100,15 +116,16 @@ public class LI_activity_detail_page extends AppCompatActivity implements
         save = (Button) findViewById(R.id.save);
         clear = (Button) findViewById(R.id.clear);
         update =(Button)findViewById(R.id.btn_updt);
+        //btn_view=(Button) findViewById(R.id.btn_view);
         btn_del=(Button)findViewById(R.id.btn_del);
+        btn_list=(Button) findViewById(R.id.btn_list);
         iv_title_icon = findViewById(R.id.iv_title_icon);
         iv_right = findViewById(R.id.iv_right);
-        iv_middle = findViewById(R.id.iv_middle);
         iv_right.setImageResource(R.drawable.icon_logout);
         iv_right.setVisibility(View.VISIBLE);
         iv_title_icon.setImageResource(R.drawable.iv_back);
-        iv_middle.setImageResource(R.mipmap.ic_launcher_list);
-        iv_middle.setVisibility(View.VISIBLE);
+        btn_del.setVisibility(View.GONE);
+
         update.setVisibility(View.GONE);
         save.setVisibility(View.VISIBLE);
         action_bar_title = findViewById(R.id.action_bar_title);
@@ -116,6 +133,23 @@ public class LI_activity_detail_page extends AppCompatActivity implements
         loginInfoModel = userLoginPreferences.getLoginUser();
         commonClass=new CommonClass(LI_activity_detail_page.this);
         action_bar_title.setText("CMS- " + loginInfoModel.getFname());
+       /* permissions.add(ACCESS_FINE_LOCATION);
+        permissions.add(ACCESS_COARSE_LOCATION);
+
+        permissionsToRequest = findUnAskedPermissions(permissions);
+        //get the permissions we have asked for before but are not granted..
+        //we will store this in a global list to access later.
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+
+            if (permissionsToRequest.size() > 0)
+                requestPermissions((String[]) permissionsToRequest.toArray(new String[permissionsToRequest.size()]), ALL_PERMISSIONS_RESULT);
+        }*/
+
+
+
         titlelist=new ArrayList <>();
         Mainlist = new ArrayList <>();
         requestPresenter=new RequestPresenter(LI_activity_detail_page.this);
@@ -127,39 +161,60 @@ public class LI_activity_detail_page extends AppCompatActivity implements
         et_via1.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
         et_via2.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
         et_loco.setFilters(new InputFilter[]{new InputFilter.LengthFilter(5)});
-        et_remark.setFilters(new InputFilter[]{new InputFilter.LengthFilter(20)});
+        et_remark.setFilters(new InputFilter[]{new InputFilter.LengthFilter(100)});
 
         et_train.setFilters(new InputFilter[]{new InputFilter.LengthFilter(10)});
-        et_train.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS |InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+        et_train.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
         Bundle extra = getIntent().getExtras();
         if (extra != null) {
-            String dates = extra.getString("frmdate");
-                System.out.println(dates); // 2013-12-04
-            et_dt.setText(dates);
+            String temp = extra.getString("frmdate");
+            formateDate=temp;
+            et_dt.setText(temp);
 
         }
 
        Savedatalist=new ArrayList <>();
         Savedatalist.add("Select");
-        Savedatalist.add("NOMINATED LP ");
         Savedatalist.add("SAFETY DRIVE ");
         Savedatalist.add("AMBUSH CHECK ");
         Savedatalist.add("VIP MOVEMENT ");
-        Savedatalist.add("AS PER SR. DEETRO");
-        Savedatalist.add("LIRD CREW ");
+        Savedatalist.add("LRD CREW ");
         Savedatalist.add("CT CREW ");
         Savedatalist.add("HANDLING CREW ");
         Savedatalist.add("PRACTICAL TRG");
         Savedatalist.add("INSPECTION");
         Savedatalist.add("LOCO SCH. CHECK");
+        Savedatalist.add("SPCL DUTY");
+        Savedatalist.add("FOOTPLATE");
+        Savedatalist.add("COUNSELLING");
+        Savedatalist.add("STATIONARY DUTIES");
+        Savedatalist.add("PROTOCOL DUTY");
         ArrayAdapter dept = new ArrayAdapter(this, android.R.layout.simple_spinner_item, Savedatalist);
         dept.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
             //Setting the ArrayAdapter data on the Spinner
         spn_dutytype.setAdapter(dept);
      spn_dutytype.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
-
-
+/*btn_view.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        Intent i=new Intent(LI_activity_detail_page.this,LI_activitydraftdetail.class);
+        i.putExtra("date",formateDate);
+        startActivity(i);
+    }
+});*/
+        btn_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println(">>>>>>>>>>>>>>Inside Buttonlist" + DataHolder.getLimovmainlist());
+                if (DataHolder.getLimovmainlist() == null) {
+                    commonClass.showToast("Please fill LI Movement");
+                } else {
+                    Intent i = new Intent(LI_activity_detail_page.this, LI_activitydraftdetail.class);
+                    startActivityForResult(i, 1);
+                }
+            }
+        });
         btn_del.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -243,21 +298,47 @@ public class LI_activity_detail_page extends AppCompatActivity implements
             @Override
             public void onClick(View v) {
                 ArrayList validate=new ArrayList();
-                validate.add(et_From_sttn.getText().toString());
-                validate.add(et_to_sttn.getText().toString());
-                validate.add(et_loco.getText().toString());
-                if(et_dt.getText().toString().equals("")||et_todt.getText().toString().equals("")||et_From_sttn.getText().toString().equals("") || et_to_sttn.getText().toString().equals("")||et_loco.getText().toString().equals("")||
-                        et_train.getText().toString().equals("")||et_km.getText().toString().equals("")){
-                    commonClass.showToast("Please fill complete detail");
+               /* locationTrack = new LocationTrack(LI_activity_detail_page.this);
+                if(!locationTrack.checkGPS){
+                    locationTrack.showSettingsAlert();
+                }
+                else {
+                    if (locationTrack.canGetLocation()) {
 
+                        longitude = locationTrack.getLongitude();
+                        latitude = locationTrack.getLatitude();
+                        Toast.makeText(getApplicationContext(), "Longitude:" + Double.toString(longitude) + "\nLatitude:" + Double.toString(latitude), Toast.LENGTH_SHORT).show();
+                    } else {
+
+                        locationTrack.showSettingsAlert();
+                    }
+                }*/
+
+                if (et_dt.getText().toString().equals("") || et_todt.getText().toString().equals("") ) {
+                    commonClass.showToast("Please enter From and To Date Time");
+
+                }
+                else if(et_From_sttn.getText().toString().equals("")){
+                    commonClass.showToast("Please enter From Sttn");
+                }
+                else if(et_to_sttn.getText().toString().equals("")){
+                    commonClass.showToast("Please enter To Sttn");
+                }
+                else if(et_km.getText().toString().equals("")){
+                    commonClass.showToast("Please enter Km");
                 }
                 else if(et_remark.getText().toString().equals("")){
                     commonClass.showToast("Please enter Remarks");
                 }
-                else {
+
+                else{
+                    validate.add(et_From_sttn.getText().toString());
+                    validate.add(et_to_sttn.getText().toString());
+                    validate.add(et_loco.getText().toString());
                     request.setparamlist(validate);
                     requestPresenter.Request(request, "Validating!!!!!!!", Constants.VALIDATE_FROM_TO_STTN_LOCO);
                 }
+
 
 
             }
@@ -266,7 +347,7 @@ public class LI_activity_detail_page extends AppCompatActivity implements
         et_dt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                datePicker();
+                tiemPicker();
             }
         });
         et_todt.setOnClickListener(new View.OnClickListener() {
@@ -275,21 +356,83 @@ public class LI_activity_detail_page extends AppCompatActivity implements
                 datePicker2();
             }
         });
-        iv_middle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                System.out.println(">>>>>>>>>>>>>>LIMain" + DataHolder.getLimovmainlist());
-                if (DataHolder.getLimovmainlist() == null) {
-                    commonClass.showToast("Please fill LI Movement");
-                } else {
-                    Intent i = new Intent(LI_activity_detail_page.this, LI_activitydraftdetail.class);
-                    startActivityForResult(i, 1);
-                }
-            }
-        });
 
 
     }
+   /* private ArrayList findUnAskedPermissions(ArrayList wanted) {
+        ArrayList result = new ArrayList();
+
+        for (Object perm : wanted) {
+            if (!hasPermission((String)perm)) {
+                result.add(perm);
+            }
+        }
+
+        return result;
+    }
+
+    private boolean hasPermission(String permission) {
+        if (canMakeSmores()) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                return (checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED);
+            }
+        }
+        return true;
+    }
+
+    private boolean canMakeSmores() {
+        return (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1);
+    }
+
+
+    @TargetApi(Build.VERSION_CODES.M)
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+
+        switch (requestCode) {
+
+            case ALL_PERMISSIONS_RESULT:
+                for (Object perms : permissionsToRequest) {
+                    if (!hasPermission((String)perms)) {
+                        permissionsRejected.add(perms);
+                    }
+                }
+
+                if (permissionsRejected.size() > 0) {
+
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if (shouldShowRequestPermissionRationale((String) permissionsRejected.get(0))) {
+                            showMessageOKCancel("These permissions are mandatory for the application. Please allow access.",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                                requestPermissions((String[]) permissionsRejected.toArray(new String[permissionsRejected.size()]), ALL_PERMISSIONS_RESULT);
+                                            }
+                                        }
+                                    });
+                            return;
+                        }
+                    }
+
+                }
+
+                break;
+        }
+
+    }
+
+    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
+        new AlertDialog.Builder(LI_activity_detail_page.this)
+                .setMessage(message)
+                .setPositiveButton("OK", okListener)
+                .setNegativeButton("Cancel", null)
+                .create()
+                .show();
+    }*/
+
+
 
     private void showLogoutDialog(final Activity context, String msg,final boolean isLogout) {
         new AlertDialog.Builder(context).setCancelable(isLogout)
@@ -339,7 +482,8 @@ public class LI_activity_detail_page extends AppCompatActivity implements
         int mYear = c.get(Calendar.YEAR);
         int mMonth = c.get(Calendar.MONTH);
         int  mDay = c.get(Calendar.DAY_OF_MONTH);
-
+        c.add(mMonth, -1);
+        long minDate = c.getTime().getTime();
         DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                 new DatePickerDialog.OnDateSetListener() {
 
@@ -358,6 +502,7 @@ public class LI_activity_detail_page extends AppCompatActivity implements
                     }
                 }, mYear, mMonth, mDay);
         datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+        datePickerDialog.getDatePicker().setMinDate(minDate);
         datePickerDialog.show();
     }
     private void tiemPicker(){
@@ -378,7 +523,7 @@ public class LI_activity_detail_page extends AppCompatActivity implements
                         Minute=format.format(minute);
                         mHour = hourOfDay;
                         mMinute = minute;
-                        fromdttime=from_date_time+" "+Hour + ":" + Minute;
+                        fromdttime= formateDate +" "+Hour + ":" + Minute;
                         et_dt.setText(fromdttime);
 
                     }
@@ -404,22 +549,11 @@ public class LI_activity_detail_page extends AppCompatActivity implements
                         todt=format.format(dayOfMonth);
                         tomonth=format.format(monthOfYear + 1);
                         to_date_time = todt + "-" + (tomonth) + "-" + year;
-                        if(to_date_time.equals(from_date_time)){
                             tiemPicker2();
-                                }
-                        else if(pickfrmmonth<=picktomonth && pickfrmdt<=picktodt){
-                            tiemPicker2();
-
-                        }
-                        else if(pickfrmmonth<=picktomonth){
-                            tiemPicker2();
-                        }
-
-
 
                     }
                 }, mYear, mMonth, mDay);
-        datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+        datePickerDialog.getDatePicker();
         datePickerDialog.show();
     }
     private void tiemPicker2(){
@@ -439,29 +573,7 @@ public class LI_activity_detail_page extends AppCompatActivity implements
                         picktomin=minute;
                         Hour=format.format(hourOfDay);
                         Minute=format.format(minute);
-
-
-                        if(pickfrmdt>=picktodt && pickfrmyear>=picktoyear &&pickfrmmonth>=picktomonth){
-                            if(pickfrmhour>=picktohour&&pickfrmmin>=picktomin){
-                                et_todt.setText("Invalid Time");
-                            }
-                            else{
-                                System.out.println("Inside else");
-                                todttime=to_date_time+" "+Hour + ":" + Minute;
-                                et_todt.setText(to_date_time+" "+Hour + ":" + Minute);
-                            }
-
-                        }else if(picktodt>=pickfrmdt && picktoyear>=pickfrmyear && picktomonth>=pickfrmmonth){
-                            if(picktohour<=mHour && picktomin<=mMinute){
-                                todttime=to_date_time+" "+Hour + ":" + Minute;
-                                System.out.println("totime"+todttime+"currenthr"+mHour);
-                                et_todt.setText(to_date_time+" "+Hour + ":" + Minute);
-                            }
-                            else{
-                                et_todt.setText("Invalid Time");
-                            }
-                        }
-
+                        et_todt.setText(to_date_time+" "+Hour + ":" + Minute);
                     }
                 }, mHour, mMinute, false);
         timePickerDialog.show();
@@ -484,6 +596,7 @@ public class LI_activity_detail_page extends AppCompatActivity implements
                 ArrayList <String> datalist = data.getStringArrayListExtra("keyName");
                 System.out.println("Result final>>>>>>>>>>" + datalist);
                 save.setVisibility(View.GONE);
+                btn_del.setVisibility(View.VISIBLE);
                 update.setVisibility(View.VISIBLE);
                 sn=datalist.get(0);
                 int k= 1;
@@ -585,6 +698,8 @@ public class LI_activity_detail_page extends AppCompatActivity implements
 
                 j = i + 1;
                 id=""+j;
+
+
                     liresponse = new ArrayList <>();
                     Limovdraftresponse limovdraftresponse = new Limovdraftresponse();
                     limovdraftresponse.setId(id);
@@ -600,6 +715,9 @@ public class LI_activity_detail_page extends AppCompatActivity implements
                     limovdraftresponse.setKm(et_km.getText().toString());
                     limovdraftresponse.setRmk(et_remark.getText().toString());
                     limovdraftresponse.setEdit("EDIT");
+                    //limovdraftresponse.setLongitude(Double.toString(longitude));
+                   // limovdraftresponse.setLatitude(Double.toString(latitude));
+
                     liresponsePrev = (ArrayList) DataHolder.getLimovmainlist();
                     System.out.println("size of liresponse list before " + liresponse.size());
                     if (liresponsePrev == null || liresponsePrev.size()==0) {
@@ -616,7 +734,7 @@ public class LI_activity_detail_page extends AppCompatActivity implements
                         System.out.println("size of liresponse list after" + liresponsePrev.size());
                         System.out.println("size of liresponse list " + DataHolder.getLimovmainlist());
                     }
-                    et_dt.setText("");
+                    et_dt.setText(formateDate);
                     et_todt.setText("");
                     et_From_sttn.setText("");
                     et_to_sttn.setText("");
@@ -627,6 +745,7 @@ public class LI_activity_detail_page extends AppCompatActivity implements
                     et_remark.setText("");
                     et_km.setText("");
                     commonClass.showToast("Data Saved as a Draft");
+
                     i++;
 
             }
@@ -663,4 +782,10 @@ public class LI_activity_detail_page extends AppCompatActivity implements
         commonClass.showProgressBar(msg);
 
     }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //locationTrack.stopListener();
+    }
+
 }

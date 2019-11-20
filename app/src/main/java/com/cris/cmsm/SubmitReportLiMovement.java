@@ -1,8 +1,11 @@
 package com.cris.cmsm;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
+import android.widget.Button;
 
 import com.cris.cmsm.adapter.LiMovementDetailAdapter;
 import com.cris.cmsm.database.DataHolder;
@@ -24,32 +27,62 @@ import java.util.List;
 
 public class SubmitReportLiMovement extends AppCompatActivity implements OnItemClickListener,ResponseView {
     PinchRecyclerView pinchvw;
+    Button btn_add_row;
     private RequestPresenter requestPresenter;
     GraphAPIRequest request;
     CommonClass commonClass;
     private LoginIfoVO loginInfoModel;
     private UserLoginPreferences userLoginPreferences;
+    ArrayList date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submit_report_li_movement);
         pinchvw=(PinchRecyclerView)findViewById(R.id.pinchvw);
+        btn_add_row=(Button)findViewById(R.id.btn_add_row);
         pinchvw.setLayoutManager(new LinearLayoutManager(this));
         requestPresenter=new RequestPresenter(SubmitReportLiMovement.this);
         commonClass=new CommonClass(SubmitReportLiMovement.this);
         request=new GraphAPIRequest();
         userLoginPreferences=new UserLoginPreferences(this);
         loginInfoModel = userLoginPreferences.getLoginUser();
+        btn_add_row.setVisibility(View.GONE);
         Bundle extra = getIntent().getExtras();
         if (extra != null) {
-            ArrayList date = extra.getStringArrayList("date");
+            date = extra.getStringArrayList("date");
+            DataHolder.setFlag("");
+            if(date.get(1).toString().startsWith("Jan")||date.get(1).toString().startsWith("Feb")||date.get(1).toString().startsWith("Mar")||date.get(1).toString().startsWith("Apr")||date.get(1).toString().startsWith("May")
+            ||date.get(1).toString().startsWith("June")||date.get(1).toString().startsWith("Jul")||date.get(1).toString().startsWith("Aug")||date.get(1).toString().startsWith("Sept")||date.get(1).toString().startsWith("Oct")
+            ||date.get(1).toString().startsWith("Nov")||date.get(1).toString().startsWith("Dec")){
+                System.out.println("request----for month"+date);
+                request.setparamlist(date);
+                requestPresenter.Request(request,"Please wait", Constants.LIMOVEMENTDETAILS);
+            }
+            else{
+                DataHolder.setFlag("Y");
+                System.out.println("request----for picked date"+date);
+                request.setparamlist(date);
+                requestPresenter.Request(request,"Please wait", Constants.LIMOVEMENT_DETAIL_DATEWISE);
+            }
 
-            System.out.println("request----"+date);
-            request.setparamlist(date);
-            requestPresenter.Request(request,"Please wait", Constants.LIMOVEMENTDETAILS);
 
         }
+        if(DataHolder.getFlag().equals("Y")){
+            btn_add_row.setVisibility(View.VISIBLE);
+        }
+        else{
+            btn_add_row.setVisibility(View.GONE);
+        }
+        btn_add_row.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(SubmitReportLiMovement.this,LI_activity_detail_page.class);
+                i.putExtra("frmdate",date.get(1).toString());
+                startActivity(i);
+
+            }
+        });
     }
 
     @Override
