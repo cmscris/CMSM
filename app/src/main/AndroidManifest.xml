@@ -260,6 +260,15 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen"
             android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".navcontrollers.LiInspectionController"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeFullScreen"
+            android:windowSoftInputMode="stateHidden" />
+
+
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />

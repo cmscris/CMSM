@@ -171,4 +171,13 @@
     <string name="final_submit">Final Submit</string>
 
 
+
+    <!-- CREW LI MODULE VALUES-->
+
+    <string name="inspection_record_title"> LI Inspection Record</string>
+    <string name="inspection_record">Inspection\nRecord</string>
+    <string name="lp_id">LP ID </string>
+    <string name="alp_id">CP-LP/ALP ID </string>
+
+
 </resources>

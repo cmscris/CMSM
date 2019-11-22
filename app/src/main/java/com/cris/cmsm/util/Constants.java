@@ -63,6 +63,7 @@ public class Constants {
     public static final int LIMOVEMENT_DETAIL_DATEWISE=214;
     public static final int GET_CREWLIST_LI_GRADING=215;
     public static final int GET_CREWLIST_LI_COUNSELLING=216;
+    public static final int INSPECTION_RECORD=217;
 
 
 

@@ -531,5 +531,21 @@ public class CommonClass {
     }
 
 
+    public static List<String> getDemoValues(String firstValue) {
+
+        List<String> demoList = new ArrayList<>();
+        demoList.add(firstValue);
+        demoList.add("Option1");
+        demoList.add("Option2");
+        demoList.add("Option3");
+        demoList.add("Option4");
+        demoList.add("Option5");
+
+
+
+        return demoList;
+    }
+
+
 
 }

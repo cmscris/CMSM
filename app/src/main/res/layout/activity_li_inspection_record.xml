@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@color/colorGrayBackground"
+android:orientation="vertical">
+
+<include layout="@layout/actionbar_layout" />
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="left"
+    android:layout_margin="@dimen/margin_10"
+    android:background="@drawable/drop_shadow"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_10">
+
+
+
+    <TextView
+        android:id="@+id/tv_filters"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/text_16"
+        android:text="Inspection Basic Record"
+        android:textColor="@color/colorBlueText" />
+
+
+
+    <!-- REFERENCE NUMBER -->
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/spn_ref_no"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_10"
+        android:background="@drawable/shape" />
+
+
+
+    <!-- CMS LOCO PILOT ID -->
+    <EditText
+        android:id="@+id/et_lp_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/lp_id"
+        android:inputType="text"
+        android:padding="@dimen/padding_10"
+        android:textSize="@dimen/text_14"
+        android:layout_marginTop="@dimen/margin_10"
+        android:background="@drawable/shape" />
+
+
+    <!-- CMS CO-LP/ALP ID -->
+    <EditText
+        android:id="@+id/et_alp_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/lp_id"
+        android:inputType="text"
+        android:padding="@dimen/padding_10"
+        android:textSize="@dimen/text_14"
+        android:layout_marginTop="@dimen/margin_10"
+        android:background="@drawable/shape" />
+
+
+    <!-- LEAD LOCO NO - WILL BE EXTRACTED FROM ARRIVAL INFO -->
+    <TextView
+        android:id="@+id/tv_lead_loco_no"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/text_16"
+        android:text=""
+        android:textColor="@color/colorBlueText" />
+
+
+
+    <!-- WOEKING CAB / CONTROL STAND  -->
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/spn_cab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_10"
+        android:background="@drawable/shape" />
+
+
+    <!-- TRAIN NO - WILL BE EXTRACTED FROM ARRIVAL INFO -->
+    <TextView
+        android:id="@+id/tv_train_no"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/text_16"
+        android:text=""
+        android:textColor="@color/colorBlueText" />
+
+
+    <!-- TRAIN TYPE  -->
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/spn_train_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_10"
+        android:background="@drawable/shape" />
+
+
+
+    <Button
+        android:id="@+id/btn_filter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_15"
+        android:background="@color/colorButton"
+        android:text="@string/filter"
+        android:textColor="@color/colorWhite" />
+</LinearLayout>
+
+</LinearLayout>

@@ -35,6 +35,7 @@ import com.cris.cmsm.navcontrollers.CrewPositionController;
 import com.cris.cmsm.navcontrollers.DetailController;
 import com.cris.cmsm.navcontrollers.IrregularCrewController;
 import com.cris.cmsm.navcontrollers.LICrewMonitoredReportController;
+import com.cris.cmsm.navcontrollers.LiInspectionController;
 import com.cris.cmsm.navcontrollers.MonthGraphController;
 import com.cris.cmsm.navcontrollers.SubStationConsController;
 import com.cris.cmsm.navcontrollers.VcdStatusController;
@@ -154,6 +155,7 @@ public class HomeActivity extends AppCompatActivity implements ResponseView, Rec
                 list.add(new MenuModel(R.color.colorCardOrange,R.drawable.crew_position,res.getString(R.string.crew_counselling)));
                 list.add(new MenuModel(R.color.colorCardFive,R.drawable.crew_position,"Crew Current Status"));
                 list.add(new MenuModel(R.color.colorCardFive, R.drawable.consumption_analytics,"LI Movement"));
+                list.add(new MenuModel(R.color.colorCardOrange, R.drawable.availability, res.getString(R.string.inspection_record)));
                 //list.add(new MenuModel(R.color.colorTeal, R.drawable.feedback, res.getString(R.string.feedback)));
             }
             else
@@ -188,6 +190,8 @@ public class HomeActivity extends AppCompatActivity implements ResponseView, Rec
 
     @Override
     public void onItemClickListener(MenuModel model) {
+
+        System.out.println(">>>>>>>>>>>>>> Menu Title >>>>>>>>>>>>>>>>>>>>>>> " + model.getMenuTitle());
         if (model.getMenuTitle().equals(res.getString(R.string.crew_strength))) {
             CommonClass.goToNextScreen(HomeActivity.this, BoardController.class, true, false);
         } else if (model.getMenuTitle().equals(res.getString(R.string.crew_utilization))) {
@@ -261,6 +265,15 @@ public class HomeActivity extends AppCompatActivity implements ResponseView, Rec
             //CommonClass.goToNextScreen(HomeActivity.this,CalendarCustomView.class, true, false);
             // CommonClass.goToNextScreen(HomeActivity.this, LICrewsttstable.class, true, false);
         }
+        else if(model.getMenuTitle().equals(res.getString(R.string.inspection_record))){
+            DataHolder.setType(Constants.INSPECTION_RECORD);
+            System.out.println(">>>>>>>>>>>>>> Inspection Record for LI >>>>>>>>>>>>>>>>>>>>>>> ");
+            Intent i=new Intent(HomeActivity.this, LiInspectionController.class);
+            startActivity(i);
+            //CommonClass.goToNextScreen(HomeActivity.this,CalendarCustomView.class, true, false);
+            // CommonClass.goToNextScreen(HomeActivity.this, LICrewsttstable.class, true, false);
+        }
+
         else if (model.getMenuTitle().equals(res.getString(R.string.sfoorti))) {
 
             if(loginInfoModel.getAuthlevel().equals("IR"))
