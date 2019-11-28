@@ -157,9 +157,12 @@ public class LImovement extends AppCompatActivity implements ResponseView {
 
                else {
                        System.out.println("Go To LI_activity_detail_page>>>");
-                   Intent i = new Intent(LImovement.this, LI_activity_detail_page.class);
+                   /*Intent i = new Intent(LImovement.this, LI_activity_detail_page.class);
                    i.putExtra("frmdate", formateDate);
-                   startActivity(i);
+                   startActivity(i);*/
+                       Intent i = new Intent(LImovement.this, LiRecordMovement.class);
+                       i.putExtra("frmdate", formateDate);
+                       startActivity(i);
                }
            }
        });

@@ -1,3 +1,4 @@
+
 package com.cris.cmsm;
 
 import android.annotation.TargetApi;
@@ -7,8 +8,11 @@ import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.LocationListener;
 import android.os.Build;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -47,6 +51,7 @@ import com.cris.cmsm.util.CommonClass;
 import com.cris.cmsm.util.Constants;
 import com.cris.cmsm.widget.PinchRecyclerView;
 
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -57,6 +62,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
@@ -64,14 +70,14 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 public class LI_activity_detail_page extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener, ResponseView {
-  /*  private ArrayList permissionsToRequest;
-    private ArrayList permissionsRejected = new ArrayList();
-    private ArrayList permissions = new ArrayList();
+    /*private ArrayList permissionsToRequest;
+      private ArrayList permissionsRejected = new ArrayList();
+      private ArrayList permissions = new ArrayList();
 
-    private final static int ALL_PERMISSIONS_RESULT = 101;
+      private final static int ALL_PERMISSIONS_RESULT = 101;*/
     LocationTrack locationTrack;
-    double longitude,latitude;*/
-   TextView  et_dt, et_todt;
+    double longitude,latitude;
+    TextView  et_dt, et_todt;
     private TextView action_bar_title;
     EditText et_From_sttn, et_to_sttn, et_loco, et_train, et_remark,et_km,et_via1,et_via2;
     private ImageView iv_title_icon, iv_right;
@@ -85,12 +91,14 @@ public class LI_activity_detail_page extends AppCompatActivity implements
     Spinner spn_dutytype;
     NumberFormat format;
     String slectspn,slectspn2;
+    String Hour="" ;
+    String Minute="";
     private UserLoginPreferences userLoginPreferences;
-    String Hour, Minute, id, fromdt, todt,frmmonth,tomonth,fromdttime,todttime;
+    String  id, fromdt, todt,frmmonth,tomonth,fromdttime,todttime;
     int pickfrmdt,picktodt,pickfrmyear,j,pickfrmmonth,picktomonth,picktoyear,pickfrmhour,picktohour,pickfrmmin,picktomin;
     Button save, clear,update,btn_del,btn_list,btn_view;
     Date date=null;
-    SimpleDateFormat formatter = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzzz yyyy");
+    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
     String formateDate;
     int i = 0;
     ArrayList <String> Savedatalist;
@@ -133,7 +141,8 @@ public class LI_activity_detail_page extends AppCompatActivity implements
         loginInfoModel = userLoginPreferences.getLoginUser();
         commonClass=new CommonClass(LI_activity_detail_page.this);
         action_bar_title.setText("CMS- " + loginInfoModel.getFname());
-       /* permissions.add(ACCESS_FINE_LOCATION);
+        //tiemPicker();
+    /*permissions.add(ACCESS_FINE_LOCATION);
         permissions.add(ACCESS_COARSE_LOCATION);
 
         permissionsToRequest = findUnAskedPermissions(permissions);
@@ -169,11 +178,12 @@ public class LI_activity_detail_page extends AppCompatActivity implements
         if (extra != null) {
             String temp = extra.getString("frmdate");
             formateDate=temp;
-            et_dt.setText(temp);
+            String currenttime= sdf.format(Calendar.getInstance().getTime());
+            et_dt.setText(temp+""+currenttime);
 
         }
 
-       Savedatalist=new ArrayList <>();
+        Savedatalist=new ArrayList <>();
         Savedatalist.add("Select");
         Savedatalist.add("SAFETY DRIVE ");
         Savedatalist.add("AMBUSH CHECK ");
@@ -192,9 +202,9 @@ public class LI_activity_detail_page extends AppCompatActivity implements
         ArrayAdapter dept = new ArrayAdapter(this, android.R.layout.simple_spinner_item, Savedatalist);
         dept.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-            //Setting the ArrayAdapter data on the Spinner
+        //Setting the ArrayAdapter data on the Spinner
         spn_dutytype.setAdapter(dept);
-     spn_dutytype.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
+        spn_dutytype.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
 /*btn_view.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
@@ -240,7 +250,8 @@ public class LI_activity_detail_page extends AppCompatActivity implements
         iv_title_icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    finish();
+                Intent i  = new Intent(LI_activity_detail_page.this, LImovement.class);
+                startActivity(i);
 
             }
         });
@@ -265,7 +276,7 @@ public class LI_activity_detail_page extends AppCompatActivity implements
             @Override
             public void onClick(View v) {
                 int j=Integer.parseInt(sn);
-               DataHolder.getLimovmainlist().get(j).setFrmdttm(et_dt.getText().toString());
+                DataHolder.getLimovmainlist().get(j).setFrmdttm(et_dt.getText().toString());
                 DataHolder.getLimovmainlist().get(j).setTodttm(et_todt.getText().toString());
                 DataHolder.getLimovmainlist().get(j).setFrmsttn(et_From_sttn.getText().toString());
                 DataHolder.getLimovmainlist().get(j).setTosttn(et_to_sttn.getText().toString());
@@ -278,41 +289,27 @@ public class LI_activity_detail_page extends AppCompatActivity implements
                 DataHolder.getLimovmainlist().get(j).setRmk(et_remark.getText().toString());
 
 
-             commonClass.showToast("Data Updated");
-             et_dt.setText("");
-             et_todt.setText("");
-             et_From_sttn.setText("");
-             et_to_sttn.setText("");
-             et_via1.setText("");
-             et_via2.setText("");
-             et_train.setText("");
-             et_loco.setText("");
-             et_remark.setText("");
-             et_km.setText("");
+                commonClass.showToast("Data Updated");
+                et_dt.setText("");
+                et_todt.setText("");
+                et_From_sttn.setText("");
+                et_to_sttn.setText("");
+                et_via1.setText("");
+                et_via2.setText("");
+                et_train.setText("");
+                et_loco.setText("");
+                et_remark.setText("");
+                et_km.setText("");
                 save.setVisibility(View.VISIBLE);
                 update.setVisibility(View.GONE);
 
-        }
+            }
         });
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ArrayList validate=new ArrayList();
-               /* locationTrack = new LocationTrack(LI_activity_detail_page.this);
-                if(!locationTrack.checkGPS){
-                    locationTrack.showSettingsAlert();
-                }
-                else {
-                    if (locationTrack.canGetLocation()) {
-
-                        longitude = locationTrack.getLongitude();
-                        latitude = locationTrack.getLatitude();
-                        Toast.makeText(getApplicationContext(), "Longitude:" + Double.toString(longitude) + "\nLatitude:" + Double.toString(latitude), Toast.LENGTH_SHORT).show();
-                    } else {
-
-                        locationTrack.showSettingsAlert();
-                    }
-                }*/
+                //locationTrack = new LocationTrack(LI_activity_detail_page.this);
 
                 if (et_dt.getText().toString().equals("") || et_todt.getText().toString().equals("") ) {
                     commonClass.showToast("Please enter From and To Date Time");
@@ -330,19 +327,50 @@ public class LI_activity_detail_page extends AppCompatActivity implements
                 else if(et_remark.getText().toString().equals("")){
                     commonClass.showToast("Please enter Remarks");
                 }
-
                 else{
+                    /*if(!locationTrack.checkGPS){
+                        locationTrack.showSettingsAlert();
+                    }
+                    else {*/
+                       /* if (locationTrack.canGetLocation()) {
+                            longitude = locationTrack.getLongitude();
+                            latitude = locationTrack.getLatitude();
+                            String cityName = null;
+                            Geocoder gcd = new Geocoder(getBaseContext(), Locale.getDefault());
+                            List <Address> addresses;
+                            try {
+                                addresses = gcd.getFromLocation(latitude,
+                                        longitude, 1);
+                                if (addresses.size() > 0) {
+                                    System.out.println(addresses.get(0).getPremises());
+                                    cityName = addresses.get(0).getPremises();
+                                }
+                            }
+                            catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            String s = longitude + "\n" + latitude + "\n\nMy Current City is: "
+                                    + cityName;*/
                     validate.add(et_From_sttn.getText().toString());
                     validate.add(et_to_sttn.getText().toString());
                     validate.add(et_loco.getText().toString());
+                    // Toast.makeText(getApplicationContext(),"City Name:"+s +"\nLongitude:" + Double.toString(longitude) + "\nLatitude:" + Double.toString(latitude), Toast.LENGTH_SHORT).show();
                     request.setparamlist(validate);
                     requestPresenter.Request(request, "Validating!!!!!!!", Constants.VALIDATE_FROM_TO_STTN_LOCO);
-                }
+                }/*else {
 
-
+                            locationTrack.showSettingsAlert();
+                        }
+                    }*/
 
             }
+
+
+
+            //}/
         });
+
+
 
         et_dt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -359,7 +387,7 @@ public class LI_activity_detail_page extends AppCompatActivity implements
 
 
     }
-   /* private ArrayList findUnAskedPermissions(ArrayList wanted) {
+  /* private ArrayList findUnAskedPermissions(ArrayList wanted) {
         ArrayList result = new ArrayList();
 
         for (Object perm : wanted) {
@@ -385,9 +413,9 @@ public class LI_activity_detail_page extends AppCompatActivity implements
     }
 
 
-    @TargetApi(Build.VERSION_CODES.M)
+   /*  @TargetApi(Build.VERSION_CODES.M)
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+   public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
 
         switch (requestCode) {
 

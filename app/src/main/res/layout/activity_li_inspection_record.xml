@@ -1,24 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:background="@color/colorGrayBackground"
-android:orientation="vertical">
-
-<include layout="@layout/actionbar_layout" />
-
-
-<LinearLayout
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="left"
-    android:layout_margin="@dimen/margin_10"
-    android:background="@drawable/drop_shadow"
-    android:orientation="vertical"
-    android:padding="@dimen/padding_10">
+    android:layout_height="match_parent"
+    android:layout_above="@id/tv_copyright"
+    android:fillViewport="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorGrayBackground"
+        android:orientation="vertical">
 
 
-
+    <include layout="@layout/actionbar_layout" />
     <TextView
         android:id="@+id/tv_filters"
         android:layout_width="match_parent"
@@ -58,7 +54,7 @@ android:orientation="vertical">
         android:id="@+id/et_alp_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/lp_id"
+        android:hint="@string/alp_id"
         android:inputType="text"
         android:padding="@dimen/padding_10"
         android:textSize="@dimen/text_14"
@@ -67,14 +63,18 @@ android:orientation="vertical">
 
 
     <!-- LEAD LOCO NO - WILL BE EXTRACTED FROM ARRIVAL INFO -->
-    <TextView
-        android:id="@+id/tv_lead_loco_no"
+
+    <EditText
+        android:id="@+id/et_lead_loco_no"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="@dimen/text_16"
-        android:text=""
-        android:textColor="@color/colorBlueText" />
+        android:hint="@string/lead_loco_no"
+        android:inputType="text"
+        android:padding="@dimen/padding_10"
+        android:textSize="@dimen/text_14"
+        android:layout_marginTop="@dimen/margin_10"
+        android:background="@drawable/shape" />
+
 
 
 
@@ -88,14 +88,18 @@ android:orientation="vertical">
 
 
     <!-- TRAIN NO - WILL BE EXTRACTED FROM ARRIVAL INFO -->
-    <TextView
-        android:id="@+id/tv_train_no"
+
+    <EditText
+        android:id="@+id/et_train_no"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="@dimen/text_16"
-        android:text=""
-        android:textColor="@color/colorBlueText" />
+        android:hint="@string/train_no"
+        android:inputType="text"
+        android:padding="@dimen/padding_10"
+        android:textSize="@dimen/text_14"
+        android:layout_marginTop="@dimen/margin_10"
+        android:background="@drawable/shape" />
+
 
 
     <!-- TRAIN TYPE  -->
@@ -106,9 +110,308 @@ android:orientation="vertical">
         android:layout_marginTop="@dimen/margin_10"
         android:background="@drawable/shape" />
 
+    <!-- BPC NO -->
+
+    <EditText
+        android:id="@+id/et_bpc_no"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="BPC NO"
+        android:inputType="text"
+        android:padding="@dimen/padding_10"
+        android:textSize="@dimen/text_14"
+        android:layout_marginTop="@dimen/margin_10"
+        android:background="@drawable/shape" />
 
 
-    <Button
+    <!-- BPC PERSENTAGE -->
+
+    <EditText
+        android:id="@+id/et_bpc_percentage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="BPC %"
+        android:inputType="text"
+        android:padding="@dimen/padding_10"
+        android:textSize="@dimen/text_14"
+        android:layout_marginTop="@dimen/margin_10"
+        android:background="@drawable/shape" />
+
+
+    <!-- BPC ISSUE STATION -->
+
+    <EditText
+        android:id="@+id/et_bpc_issue_station"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="BPC ISSUE STATION"
+        android:inputType="text"
+        android:padding="@dimen/padding_10"
+        android:textSize="@dimen/text_14"
+        android:layout_marginTop="@dimen/margin_10"
+        android:background="@drawable/shape" />
+
+
+
+    <!-- BPC VALID / INVALID  -->
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/spn_bpc_valid_invalid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_10"
+        android:background="@drawable/shape" />
+
+
+
+    <!-- LOAD -->
+
+    <EditText
+        android:id="@+id/et_load"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="LOAD"
+        android:inputType="text"
+        android:padding="@dimen/padding_10"
+        android:textSize="@dimen/text_14"
+        android:layout_marginTop="@dimen/margin_10"
+        android:background="@drawable/shape" />
+
+    <!-- NO OF COACHED / WAGONS -->
+
+    <EditText
+        android:id="@+id/et_no_of_coaches"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="NO OF COACHES"
+        android:inputType="text"
+        android:padding="@dimen/padding_10"
+        android:textSize="@dimen/text_14"
+        android:layout_marginTop="@dimen/margin_10"
+        android:background="@drawable/shape" />
+
+
+    <!-- TYPE OF COACHES / WAGONS  -->
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/spn_type_of_coches"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_10"
+        android:background="@drawable/shape" />
+
+
+
+    <!-- COMMODITY -->
+
+    <EditText
+        android:id="@+id/et_comoddity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="COMODDITY"
+        android:inputType="text"
+        android:padding="@dimen/padding_10"
+        android:textSize="@dimen/text_14"
+        android:layout_marginTop="@dimen/margin_10"
+        android:background="@drawable/shape" />
+
+    <!-- GUARD ID -->
+
+    <EditText
+        android:id="@+id/et_guard_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="GUARD ID"
+        android:inputType="text"
+        android:padding="@dimen/padding_10"
+        android:textSize="@dimen/text_14"
+        android:layout_marginTop="@dimen/margin_10"
+        android:background="@drawable/shape" />
+
+
+    <!-- ENEREGY METER START -->
+
+    <EditText
+        android:id="@+id/et_energy_meter_start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="ENERGY METER START"
+        android:inputType="text"
+        android:padding="@dimen/padding_10"
+        android:textSize="@dimen/text_14"
+        android:layout_marginTop="@dimen/margin_10"
+        android:background="@drawable/shape" />
+
+    <!-- ENEREGY METER END -->
+
+    <EditText
+        android:id="@+id/et_energy_meter_end"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="ENEREGY METER END"
+        android:inputType="text"
+        android:padding="@dimen/padding_10"
+        android:textSize="@dimen/text_14"
+        android:layout_marginTop="@dimen/margin_10"
+        android:background="@drawable/shape" />
+
+    <!-- REGENE START -->
+    <EditText
+        android:id="@+id/et_regen_start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="REGEN START"
+        android:inputType="text"
+        android:padding="@dimen/padding_10"
+        android:textSize="@dimen/text_14"
+        android:layout_marginTop="@dimen/margin_10"
+        android:background="@drawable/shape" />
+
+
+    <!-- REGENE END -->
+    <EditText
+        android:id="@+id/et_regen_end"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="REGEN END"
+        android:inputType="text"
+        android:padding="@dimen/padding_10"
+        android:textSize="@dimen/text_14"
+        android:layout_marginTop="@dimen/margin_10"
+        android:background="@drawable/shape" />
+
+
+
+    <!-- SPEEDO METER WORKING / NOT WORKING  -->
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/spn_speedometer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_10"
+        android:background="@drawable/shape" />
+
+    <!-- VCD WORKING / WORKING -->
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/spn_vcd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_10"
+        android:background="@drawable/shape" />
+
+    <!-- HORNS WORKING / WORKING -->
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/spn_horns"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_10"
+        android:background="@drawable/shape" />
+
+    <!-- SANDER WORKING / WORKING -->
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/spn_sander"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_10"
+        android:background="@drawable/shape" />
+
+
+    <!-- TRAIL LOCO NO -->
+    <EditText
+        android:id="@+id/et_trail_loco_no"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="TRAIL LOCO NO"
+        android:inputType="text"
+        android:padding="@dimen/padding_10"
+        android:textSize="@dimen/text_14"
+        android:layout_marginTop="@dimen/margin_10"
+        android:background="@drawable/shape" />
+
+
+
+    <EditText
+        android:id="@+id/et_weak_area_lp"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:hint="LP WEAK AREA REMARKS"
+        android:inputType="text|textMultiLine"
+        android:padding="@dimen/padding_10"
+        android:textSize="@dimen/text_14"
+        android:layout_marginTop="@dimen/margin_10"
+        android:background="@drawable/shape" />
+
+            <EditText
+                android:id="@+id/et_weak_area_alp"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:hint="ALP WEAK AREA REMARKS"
+                android:inputType="text|textMultiLine"
+                android:padding="@dimen/padding_10"
+                android:textSize="@dimen/text_14"
+                android:layout_marginTop="@dimen/margin_10"
+                android:background="@drawable/shape" />
+
+        <TextView
+            android:id="@+id/tv_ambush"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:padding="@dimen/text_16"
+            android:text="If performed any ambush check"
+            android:textColor="@color/colorBlueText" />
+
+        <CheckBox android:id="@+id/ch_gate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gate"/>
+        <CheckBox android:id="@+id/ch_ba"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Breath Analyzer"/>
+
+        <CheckBox android:id="@+id/ch_runningroom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Running Room"/>
+        <CheckBox android:id="@+id/ch_auto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Automatic"/>
+
+        <CheckBox android:id="@+id/ch_cug"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CUG"/>
+        <CheckBox android:id="@+id/ch_speedgun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Speed Gun"/>
+        <CheckBox android:id="@+id/ch_bookinglooby"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Booking Lobby"/>
+        <CheckBox android:id="@+id/ch_nrt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NRT/Stable Load"/>
+        <CheckBox android:id="@+id/ch_yard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="yard"/>
+        <CheckBox android:id="@+id/ch_shunting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Shunting"/>
+        <CheckBox android:id="@+id/ch_cont"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Continuity"/>
+
+
+
+
+
+
+
+        <Button
         android:id="@+id/btn_filter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -116,6 +419,11 @@ android:orientation="vertical">
         android:background="@color/colorButton"
         android:text="@string/filter"
         android:textColor="@color/colorWhite" />
-</LinearLayout>
+
 
 </LinearLayout>
+
+</ScrollView>
+
+
+

@@ -267,6 +267,7 @@
             android:theme="@style/AppThemeFullScreen"
             android:windowSoftInputMode="stateHidden" />
 
+        <activity android:name=".LiRecordMovement" />
 
 
         <meta-data

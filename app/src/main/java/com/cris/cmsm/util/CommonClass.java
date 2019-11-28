@@ -547,5 +547,28 @@ public class CommonClass {
     }
 
 
+    public static List<String> getDemoValid(String firstValue) {
+
+        List<String> demoList = new ArrayList<>();
+        demoList.add(firstValue);
+        demoList.add("Valid");
+        demoList.add("InValid");
+
+
+
+        return demoList;
+    }
+
+    public static List<String> getDemoWorking(String firstValue) {
+
+        List<String> demoList = new ArrayList<>();
+        demoList.add(firstValue);
+        demoList.add("Working");
+        demoList.add("Not Working");
+
+
+
+        return demoList;
+    }
 
 }

@@ -178,6 +178,7 @@
     <string name="inspection_record">Inspection\nRecord</string>
     <string name="lp_id">LP ID </string>
     <string name="alp_id">CP-LP/ALP ID </string>
-
+    <string name="lead_loco_no">LEAD LOCO NO</string>
+    <string name="bpc_no">BPC NO</string>
 
 </resources>
