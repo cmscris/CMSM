@@ -41,8 +41,15 @@ public class Constants {
     public static final int CREW_AVAILABILITY_DETAIL= 203;
     public static final int Report_Abnormality= 204;
     public static final int IRREGULAR_CREW= 205;
+    public static final int Grading=206;
 
-    public static final int Grading=205;
+
+
+
+
+
+
+
     public static final int Loginot=44;
     public static final int ABNORMALITYLIST=41;
     public static final int ABNORMALITY_DETAILS=45;
@@ -65,7 +72,8 @@ public class Constants {
     public static final int GET_CREWLIST_LI_COUNSELLING=216;
     public static final int INSPECTION_RECORD=217;
 
-
+    public static final int GET_NEAREST_STATION_GPS=218;
+    public static final int LI_DEPARTURE_DATA=219;
 
     public static final int SAVEABNORMALITY=52;
     public static final int ABNORMALITYANALYSISCOUNT=53;
@@ -111,6 +119,7 @@ public class Constants {
 
 
     public static final String KEY = "Consumption_entry";
+    public static final String STR_PARAM = "str_param";
     public static final String PAGE_URL = "PAGE_URL";
     public static final String PAGE_TITLE = "PAGE_TITLE";
     public static final String IRGREENRI = "https://cms.indianrail.gov.in/indexAndroid.html";

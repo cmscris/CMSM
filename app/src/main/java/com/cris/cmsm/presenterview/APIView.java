@@ -7,9 +7,11 @@ import com.cris.cmsm.models.request.ConSummaryRequest;
 import com.cris.cmsm.models.request.CrewAvailabilityDetailRequest;
 import com.cris.cmsm.models.request.EnergyConsumptionRequest;
 import com.cris.cmsm.models.request.FeedbackRequest;
+import com.cris.cmsm.models.request.GPSRequest;
 import com.cris.cmsm.models.request.GraphAPIRequest;
 import com.cris.cmsm.models.request.KeyValueRequest;
 import com.cris.cmsm.models.request.LTConnectionRequest;
+import com.cris.cmsm.models.request.LiMovementRequest;
 import com.cris.cmsm.models.request.LoginRequest;
 import com.cris.cmsm.models.request.MISReportRequest;
 import com.cris.cmsm.models.request.MonthlyConsModel;
@@ -24,8 +26,10 @@ import com.cris.cmsm.models.request.SubmitLTConnection;
 import com.cris.cmsm.models.response.AbnormalityResponse;
 import com.cris.cmsm.models.response.CrewAvailabilityDetailResponse;
 import com.cris.cmsm.models.response.KeyValueResponse;
+import com.cris.cmsm.models.response.LiMovementVOsResponseNew;
 import com.cris.cmsm.models.response.LimMovementSubmitResponse;
 import com.cris.cmsm.models.response.Limovementresponse;
+import com.cris.cmsm.models.response.NearestStationResponse;
 import com.cris.cmsm.models.response.Paramresponse;
 import com.cris.cmsm.models.response.Passwordresponse;
 import com.cris.cmsm.models.response.Remarksresponse;
@@ -376,6 +380,14 @@ public interface APIView {
 
     @POST(URLS.LIMOVEMENT_DETAIL_MONTHLY)
     Call<Limovementresponse> getresp(@Body GraphAPIRequest req);
+
+
+    @POST(URLS.NEAREST_STATION_GPS)
+    Call<List<NearestStationResponse>> getNearestStationGPS(@Body GPSRequest gpsRequest);
+
+
+    @POST(URLS.SAVE_LI_DEPARTURE)
+    Call<LiMovementVOsResponseNew> saveLiDeparture(@Body LiMovementRequest liMovementRequest);
 
 
 }

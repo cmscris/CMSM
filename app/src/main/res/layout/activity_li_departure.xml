@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_above="@id/tv_copyright"
+    android:fillViewport="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorCyan"
+        android:orientation="vertical">
+
+
+        <include layout="@layout/actionbar_layout" />
+
+        <TextView
+            android:id="@+id/tv_filters"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/text_16"
+            android:text="LI Departure"
+            android:textSize="20dp"
+            android:textColor="@color/colorBlueText" />
+
+
+        <!-- USER COORDINATES -->
+        <TextView
+            android:id="@+id/tv_cord"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nearest Station"
+            android:inputType="text"
+            android:padding="@dimen/padding_10"
+            android:textSize="@dimen/text_16"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/margin_10"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/roundshapeorange"
+            android:layout_column="2"/>
+
+
+
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:stretchColumns="1"
+            >
+
+
+            <TableRow
+                android:layout_width="match_parent">
+
+                <TextView
+                    android:text="Nearest Station"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="@dimen/text_14"
+                    android:textStyle="bold"
+                    android:layout_column="1" />
+
+
+
+            </TableRow>
+
+
+        </TableLayout>
+
+
+        <!-- NEAREST STATION -->
+        <TextView
+            android:id="@+id/tv_nearest_station"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nearest Station"
+            android:inputType="text"
+            android:padding="@dimen/padding_10"
+            android:textSize="@dimen/text_14"
+            android:layout_marginTop="@dimen/margin_10"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/roundshape"
+            android:layout_column="2"/>
+
+
+
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:stretchColumns="2"
+            >
+
+
+        <TableRow
+            android:layout_width="match_parent">
+
+            <TextView
+                android:text="Date/Time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textSize="@dimen/text_14"
+                android:textStyle="bold"
+                android:layout_column="1" />
+
+
+        </TableRow>
+
+
+        </TableLayout>
+
+
+
+
+        <!-- FROM DATE TIME -->
+        <TextView
+            android:id="@+id/tv_frm_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:padding="@dimen/padding_10"
+            android:textSize="@dimen/text_16"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/margin_10"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/roundshape"
+            android:layout_column="2"/>
+
+
+        <!-- FROM STATION -->
+        <EditText
+            android:id="@+id/et_frm_sttn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="From Station"
+            android:inputType="text"
+            android:padding="@dimen/padding_10"
+            android:textSize="@dimen/text_14"
+            android:layout_marginTop="@dimen/margin_10"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/roundshape"
+            />
+
+
+        <!-- TO STATION -->
+        <EditText
+            android:id="@+id/et_to_sttn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="To Station"
+            android:inputType="text"
+            android:padding="@dimen/padding_10"
+            android:textSize="@dimen/text_14"
+            android:layout_marginTop="@dimen/margin_10"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/roundshape" />
+
+        <!-- VIA 1 -->
+        <EditText
+            android:id="@+id/et_via1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Via 1"
+            android:inputType="text"
+            android:padding="@dimen/padding_10"
+            android:textSize="@dimen/text_14"
+            android:layout_marginTop="@dimen/margin_10"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/roundshape" />
+
+        <!-- VIA 2 -->
+        <EditText
+            android:id="@+id/et_via2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Via 2"
+            android:inputType="text"
+            android:padding="@dimen/padding_10"
+            android:textSize="@dimen/text_14"
+            android:layout_marginTop="@dimen/margin_10"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/roundshape" />
+
+
+        <!-- MOVEMENT AUTHORITY -->
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/spn_movt_auth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/roundshape" />
+
+
+        <!-- DUTY TYPE -->
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/spn_dutytype"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/roundshape" />
+
+
+        <!-- LOCO NO -->
+
+        <EditText
+            android:id="@+id/et_loco_no"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Loco No"
+            android:inputType="text"
+            android:padding="@dimen/padding_10"
+            android:textSize="@dimen/text_14"
+            android:layout_marginTop="@dimen/margin_10"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/roundshape" />
+
+
+        <!-- TRAIN NO -->
+
+        <EditText
+            android:id="@+id/et_train_no"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/train_no"
+            android:inputType="text"
+            android:padding="@dimen/padding_10"
+            android:textSize="@dimen/text_14"
+            android:layout_marginTop="@dimen/margin_10"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/roundshape" />
+
+
+
+        <!-- PURPOSE  -->
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/spn_purpose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/roundshape" />
+
+
+
+        <!-- REMARKS -->
+        <EditText
+            android:id="@+id/et_remarks"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:hint="REMARKS"
+            android:inputType="text|textMultiLine"
+            android:padding="@dimen/padding_10"
+            android:textSize="@dimen/text_14"
+            android:layout_marginTop="@dimen/margin_10"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/roundshape" />
+
+
+
+
+        <!-- SERVICE TYPE  -->
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/spn_serviceTyp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/roundshape" />
+
+
+
+
+        <Button
+            android:id="@+id/btn_filter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_15"
+            android:background="@color/colorButton"
+            android:text="@string/filter"
+            android:textColor="@color/colorWhite" />
+
+
+    </LinearLayout>
+
+</ScrollView>

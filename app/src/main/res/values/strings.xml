@@ -175,10 +175,20 @@
     <!-- CREW LI MODULE VALUES-->
 
     <string name="inspection_record_title"> LI Inspection Record</string>
+    <string name="li_departure_title"> LI Departure</string>
     <string name="inspection_record">Inspection\nRecord</string>
     <string name="lp_id">LP ID </string>
     <string name="alp_id">CP-LP/ALP ID </string>
     <string name="lead_loco_no">LEAD LOCO NO</string>
     <string name="bpc_no">BPC NO</string>
+
+
+
+
+    <string name="GPSAlertDialogTitle">GPS is setting</string>
+    <string name="GPSAlertDialogMessage">GPS is not enabled. Do you want to go to setting menu</string>
+    <string name="action_settings">Settings</string>
+    <string name="cancel">Cancel</string>
+
 
 </resources>

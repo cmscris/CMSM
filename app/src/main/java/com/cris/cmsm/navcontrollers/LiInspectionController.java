@@ -123,15 +123,33 @@ public class LiInspectionController extends BaseActivity implements View.OnClick
         et_weak_area_lp= findViewById(R.id.et_weak_area_lp);
         btn_filter = findViewById(R.id.btn_filter);
 
-        tv_filters = findViewById(R.id.tv_filters);
+
         tv_ambush = findViewById(R.id.tv_ambush);
-        action_bar_title = findViewById(R.id.action_bar_title);
+
         iv_title_icon = findViewById(R.id.iv_title_icon);
         iv_title_icon.setImageResource(R.drawable.iv_back);
-        action_bar_title.setText(getResources().getString(R.string.inspection_record_title));
-        tv_filters.setTypeface(font);
+        iv_title_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+
+            }
+        });
+
+
+        // TITLE BAR
+        action_bar_title = findViewById(R.id.action_bar_title);
         action_bar_title.setTypeface(font);
+        action_bar_title.setText("CMS- " + loginInfoModel.getFname());
+
+
+        // PAGE TITLE
+        tv_filters = findViewById(R.id.tv_filters);
+        tv_filters.setTypeface(font);
         tv_filters.setText(getResources().getString(R.string.inspection_record_title));
+
+
+
 
         iv_title_icon.setOnClickListener(this);
         btn_filter.setOnClickListener(this);

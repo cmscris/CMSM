@@ -142,6 +142,11 @@ public class LiRecordMovement extends AppCompatActivity implements AdapterView.O
                 datePicker();
             }
         });
+
+
+
+
+
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {

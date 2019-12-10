@@ -91,6 +91,15 @@ public class CommonClass {
 
     }
 
+    public static void goToNextScreen(Activity activity, Class<?> destination, boolean isAnim, String value) {
+        Intent i = new Intent(activity, destination);
+        i.putExtra(Constants.STR_PARAM, value);
+        activity.startActivity(i);
+        if (isAnim)
+            activity.overridePendingTransition(R.animator.slide_in_left, R.animator.slide_out_right);
+
+    }
+
     public static void goToNextScreen(Activity activity, Class<?> destination, boolean isAnim, String pageTitle, String value) {
         Intent i = new Intent(activity, destination);
         i.putExtra(Constants.PAGE_TITLE, pageTitle);
@@ -499,8 +508,8 @@ public class CommonClass {
         keyValueList.add(new KeyValue("HQ Crew FIFO", "CrewAvailableFIFO"));
         keyValueList.add(new KeyValue("HQ Crew FAFO", "CrewAvailableFAFO"));
         keyValueList.add(new KeyValue("HQ Crew Prgs Hrs", "CrewAvailablePrg"));
-        keyValueList.add(new KeyValue("HQ Crew at OS", "HQCREWATOS"));
-        keyValueList.add(new KeyValue("OS Crew at HQ", "OSCREWATHQ"));
+        //keyValueList.add(new KeyValue("HQ Crew at OS", "HQCREWATOS"));
+        //keyValueList.add(new KeyValue("OS Crew at HQ", "OSCREWATHQ"));
         keyValueList.add(new KeyValue("All Crew at HQ", "AllCrewatHQ"));
 
 
@@ -566,9 +575,41 @@ public class CommonClass {
         demoList.add("Working");
         demoList.add("Not Working");
 
+        return demoList;
+    }
+
+    public static List<String> getMovementAuthprity(String firstValue) {
+
+        List<String> demoList = new ArrayList<>();
+        demoList.add(firstValue);
+        demoList.add("SELF");
+        demoList.add("DIV CONTROL");
+
+        return demoList;
+    }
+
+    public static List<String> getLiDeparturePurpose(String firstValue) {
+
+        List<String> demoList = new ArrayList<>();
+        demoList.add(firstValue);
+        demoList.add("Footplate with alloted");
+        demoList.add("Not alloted staff");
+        demoList.add("Accompany with officers");
+        demoList.add("Ambush check");
+        demoList.add("Inspection");
 
 
         return demoList;
     }
+
+    public static List<String> getServiceType(String firstValue) {
+
+        List<String> demoList = new ArrayList<>();
+        demoList.add(firstValue);
+        demoList.add("Coach");
+        demoList.add("Goods");
+        return demoList;
+    }
+
 
 }

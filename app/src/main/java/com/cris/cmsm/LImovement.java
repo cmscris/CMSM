@@ -30,7 +30,9 @@ import com.cris.cmsm.models.request.GraphAPIRequest;
 import com.cris.cmsm.models.response.Limovementresponse;
 import com.cris.cmsm.models.response.LoginIfoVO;
 import com.cris.cmsm.models.response.Paramresponse;
+import com.cris.cmsm.navcontrollers.BoardController;
 import com.cris.cmsm.navcontrollers.DetailController;
+import com.cris.cmsm.navcontrollers.LiDepartureController;
 import com.cris.cmsm.prefrences.UserLoginPreferences;
 import com.cris.cmsm.presenter.RequestPresenter;
 import com.cris.cmsm.presenterview.ResponseView;
@@ -90,10 +92,10 @@ public class LImovement extends AppCompatActivity implements ResponseView {
         iv_right.setVisibility(View.VISIBLE);
         commonClass=new CommonClass(LImovement.this);
         calendarinput=new ArrayList <>();
-       Calendar cal= Calendar.getInstance();
-      int currentmonth= cal.get(Calendar.MONTH)+1 ;
+        Calendar cal= Calendar.getInstance();
+        int currentmonth= cal.get(Calendar.MONTH)+1 ;
 
-       System.out.println("Current Month"+ currentmonth);
+        System.out.println("Current Month"+ currentmonth);
         System.out.println("Current Year"+ cal.get(Calendar.YEAR));
         setPreviousButtonClickEvent();
         setNextButtonClickEvent();
@@ -104,6 +106,19 @@ public class LImovement extends AppCompatActivity implements ResponseView {
         monthparam.add(currentmonth);
         monthparam.add(cal.get(Calendar.YEAR));
         request.setparamlist(monthparam);
+
+
+        /* GETS THE DATES ALONG WITH THE STATUS OF DATA FILLED ON THAT OR NOT
+        *
+        * e.g.
+        *
+        * {"body":{"liMovementVOsResponse":[
+          {"date":"01-12-2019","status":"N"},
+          {"date":"02-12-2019","status":"N"},
+          {"date":"03-12-2019","status":"N"},
+        *
+        *
+        * */
         requestPresenter.Request(request,"Loading Data",Constants.LIMOVEMENT_DETAIL_MONTHLY);
 
         iv_right.setOnClickListener(new View.OnClickListener() {
@@ -144,6 +159,8 @@ public class LImovement extends AppCompatActivity implements ResponseView {
 
                i=0;
 
+
+               // IF statusyeslist CONTAINS THE DATE CLICKED THAT MEANS IT IS ALREADY FILLED
                    if (statusyeslist.contains(formateDate)) {
                        System.out.println("Go To Submit ReportLi Movement>>>");
                        calendarinput.clear();
@@ -154,19 +171,97 @@ public class LImovement extends AppCompatActivity implements ResponseView {
                        startActivity(i);
 
                    }
-
-               else {
+                    else {   // THE DATA HAS NOT BE FILEED - TAKE THE USER TO THE DEPARTURE FILL FORM
                        System.out.println("Go To LI_activity_detail_page>>>");
-                   /*Intent i = new Intent(LImovement.this, LI_activity_detail_page.class);
-                   i.putExtra("frmdate", formateDate);
-                   startActivity(i);*/
+                       /*Intent i = new Intent(LImovement.this, LI_activity_detail_page.class);
+                       i.putExtra("frmdate", formateDate);
+                       startActivity(i);*/
+
+
+                       /* COMMENTED BY SANJAY RANGA ON 03/12/2019
+                       *  DIRECTING TO DEPARTURE FORM NOW AS PER THE NEW REQUIREMENTS
+                       *
+                       *
                        Intent i = new Intent(LImovement.this, LiRecordMovement.class);
                        i.putExtra("frmdate", formateDate);
                        startActivity(i);
+                       */
+
+                       // GO TO LiDepartureController - PASS FROM DATE AS PARAMETER
+                       CommonClass.goToNextScreen(LImovement.this, LiDepartureController.class, true, formateDate);
+
                }
            }
        });
     }
+
+
+
+
+
+
+
+
+    @Override
+    public void ResponseOk(Object object, int position) {
+        if(object instanceof Limovementresponse){
+
+
+            System.out.println(">>>>>>>>>>>>>>>>>>>> ResponseOk");
+            Limovementresponse limovementresponse=(Limovementresponse)object;
+            limovstatuslist=new ArrayList <>();
+            statusyeslist=new ArrayList();
+            i=0;
+            while(i<limovementresponse.getLiMovementVOsResponse().size()) {
+
+                System.out.println(">>>> Date" + limovementresponse.getLiMovementVOsResponse().get(i).getDate());
+
+                flagdate=limovementresponse.getLiMovementVOsResponse().get(i).getDate();
+                flagstatus=limovementresponse.getLiMovementVOsResponse().get(i).getStatus();
+
+                // INSERT DATE INTO statusyeslist WHERE FILLED FLAG == Y
+                if(flagstatus.equals("Y")){
+                    statusyeslist.add(flagdate);
+                }
+                Limovdraftresponse limovdraftresponse=new Limovdraftresponse();
+                limovdraftresponse.setDates(limovementresponse.getLiMovementVOsResponse().get(i).getDate());
+                limovdraftresponse.setStatus(limovementresponse.getLiMovementVOsResponse().get(i).getStatus());
+                System.out.println(">>>> Status" + limovementresponse.getLiMovementVOsResponse().get(i).getStatus());
+                limovstatuslist.add(limovdraftresponse);
+                i++;
+            }
+            setUpCalendarAdapter();
+
+            DataHolder.setLimovstatuslist(limovstatuslist);
+        }
+    }
+
+
+    // POPULATE THE CALENDAR COMPONENT
+    private void setUpCalendarAdapter() {
+
+        List <Date> dayValueInCells = new ArrayList<Date>();
+
+        Calendar mCal = (Calendar)cal.clone();
+        mCal.set(Calendar.DAY_OF_MONTH, 1);
+        int firstDayOfTheMonth = mCal.get(Calendar.DAY_OF_WEEK) - 1;
+        mCal.add(Calendar.DAY_OF_MONTH, -firstDayOfTheMonth);
+        while(dayValueInCells.size() < MAX_CALENDAR_COLUMN){
+            dayValueInCells.add(mCal.getTime());
+            mCal.add(Calendar.DAY_OF_MONTH, 1);
+        }
+        Log.d("TAG", "Number of date " + dayValueInCells.size());
+        String sDate = formatter.format(cal.getTime());
+        System.out.println("checkdate"+cal.getTime());
+        display_current_date.setText(sDate);
+
+        mAdapter = new Dateadapter(LImovement.this, dayValueInCells, cal);
+        gridview.setAdapter(mAdapter);
+    }
+
+
+
+
     private void setPreviousButtonClickEvent(){
         previous_month.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -204,26 +299,10 @@ public class LImovement extends AppCompatActivity implements ResponseView {
         });
     }
 
-    private void setUpCalendarAdapter() {
 
-        List <Date> dayValueInCells = new ArrayList<Date>();
 
-        Calendar mCal = (Calendar)cal.clone();
-        mCal.set(Calendar.DAY_OF_MONTH, 1);
-        int firstDayOfTheMonth = mCal.get(Calendar.DAY_OF_WEEK) - 1;
-        mCal.add(Calendar.DAY_OF_MONTH, -firstDayOfTheMonth);
-        while(dayValueInCells.size() < MAX_CALENDAR_COLUMN){
-            dayValueInCells.add(mCal.getTime());
-            mCal.add(Calendar.DAY_OF_MONTH, 1);
-        }
-        Log.d("TAG", "Number of date " + dayValueInCells.size());
-        String sDate = formatter.format(cal.getTime());
-        System.out.println("checkdate"+cal.getTime());
-        display_current_date.setText(sDate);
 
-        mAdapter = new Dateadapter(LImovement.this, dayValueInCells, cal);
-        gridview.setAdapter(mAdapter);
-    }
+
     private void showLogoutDialog (final Activity context, String msg, final boolean isLogout){
         new AlertDialog.Builder(context).setCancelable(isLogout)
                 .setTitle(getResources().getString(R.string.cms))
@@ -264,35 +343,6 @@ public class LImovement extends AppCompatActivity implements ResponseView {
     }
 
 
-    @Override
-    public void ResponseOk(Object object, int position) {
-        if(object instanceof Limovementresponse){
-            System.out.println("<<<<<<<<<<<<<<<<<<<<<<<Key Sycess>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-            Limovementresponse limovementresponse=(Limovementresponse)object;
-            limovstatuslist=new ArrayList <>();
-            statusyeslist=new ArrayList();
-            i=0;
-            while(i<limovementresponse.getLiMovementVOsResponse().size()) {
-
-                System.out.println("<<<<<<<<Date>>>>>>>" + limovementresponse.getLiMovementVOsResponse().get(i).getDate());
-
-                flagdate=limovementresponse.getLiMovementVOsResponse().get(i).getDate();
-                flagstatus=limovementresponse.getLiMovementVOsResponse().get(i).getStatus();
-                if(flagstatus.equals("Y")){
-                    statusyeslist.add(flagdate);
-            }
-                Limovdraftresponse limovdraftresponse=new Limovdraftresponse();
-                limovdraftresponse.setDates(limovementresponse.getLiMovementVOsResponse().get(i).getDate());
-                limovdraftresponse.setStatus(limovementresponse.getLiMovementVOsResponse().get(i).getStatus());
-                System.out.println("<<<<<<<<Status>>>>>>>" + limovementresponse.getLiMovementVOsResponse().get(i).getStatus());
-                limovstatuslist.add(limovdraftresponse);
-                i++;
-            }
-            setUpCalendarAdapter();
-
-            DataHolder.setLimovstatuslist(limovstatuslist);
-        }
-    }
 
     @Override
     public void Error() {

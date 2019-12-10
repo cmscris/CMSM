@@ -103,4 +103,8 @@ public class URLS {
     public static final String GET_CREWLIST_GRADING="master/getCrewListLIGrading";
     public static final String GET_CREWLIST_COUNSELLING="master/getCrewListLICounselling";
     public static final String LIMOVEMENT_DETAIL_DATEWISE = "master/getLiMovementDetailsDatewise";
+
+    //GET NEAREST STATION DATA FROM GPS
+    public static final String NEAREST_STATION_GPS = "master/getClosestStation";
+    public static final String SAVE_LI_DEPARTURE = "master/saveLIMovementDeparture";
 }

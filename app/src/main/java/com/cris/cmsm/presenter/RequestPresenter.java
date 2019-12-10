@@ -8,8 +8,10 @@ import com.cris.cmsm.models.request.ConSummaryRequest;
 import com.cris.cmsm.models.request.CrewAvailabilityDetailRequest;
 import com.cris.cmsm.models.request.EnergyConsumptionRequest;
 import com.cris.cmsm.models.request.FeedbackRequest;
+import com.cris.cmsm.models.request.GPSRequest;
 import com.cris.cmsm.models.request.GraphAPIRequest;
 import com.cris.cmsm.models.request.KeyValueRequest;
+import com.cris.cmsm.models.request.LiMovementRequest;
 import com.cris.cmsm.models.request.LoginRequest;
 import com.cris.cmsm.models.request.MISReportRequest;
 import com.cris.cmsm.models.response.Annexure14CRes;
@@ -22,11 +24,13 @@ import com.cris.cmsm.models.response.CrewPositionSummaryResponse;
 import com.cris.cmsm.models.response.FeedbackResponse;
 import com.cris.cmsm.models.response.KeyValueResponse;
 import com.cris.cmsm.models.response.LICrewMonitoredResponse;
+import com.cris.cmsm.models.response.LiMovementVOsResponseNew;
 import com.cris.cmsm.models.response.LimMovementSubmitResponse;
 import com.cris.cmsm.models.response.Limovementresponse;
 import com.cris.cmsm.models.response.LoginResponse;
 import com.cris.cmsm.models.response.MISReportResponse;
 import com.cris.cmsm.models.response.MasterData;
+import com.cris.cmsm.models.response.NearestStationResponse;
 import com.cris.cmsm.models.response.Paramresponse;
 import com.cris.cmsm.models.response.Passwordresponse;
 import com.cris.cmsm.models.response.RB1Response;
@@ -453,7 +457,7 @@ public class RequestPresenter implements RequestView {
                     @Override
                     public void onResponse(Call<Limovementresponse> call,Response<Limovementresponse> response) {
                         dismissProgress();
-                        System.out.println("Response is " + new Gson().toJson(response));
+                        System.out.println("LIMOVEMENT_DETAIL_MONTHLY Response is " + new Gson().toJson(response));
                         view.ResponseOk(response.body(), position);
                     }
 
@@ -1582,6 +1586,51 @@ public class RequestPresenter implements RequestView {
                     @Override
                     public void onFailure(Call<ThreeYearData> call, Throwable t) {
                         dismissProgress();
+                        view.Error();
+                    }
+                });
+                break;
+
+
+            case Constants.GET_NEAREST_STATION_GPS:
+                showProgress(msg);
+                GPSRequest gpsRequest = (GPSRequest) object;
+
+                System.out.println("Request is " + new Gson().toJson(gpsRequest));
+                WebServices.getInstance().getService().getNearestStationGPS(gpsRequest).enqueue(new Callback<List<NearestStationResponse>>() {
+                    @Override
+                    public void onResponse(Call<List<NearestStationResponse>> call, Response<List<NearestStationResponse>> response) {
+                        dismissProgress();
+                        //   System.out.println("Response is " + new Gson().toJson(response.body()));
+                        view.ResponseOk(response.body(), position);
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<NearestStationResponse>> call, Throwable t) {
+                        dismissProgress();
+                        view.Error();
+                    }
+                });
+                break;
+
+            case Constants.LI_DEPARTURE_DATA:
+                showProgress(msg);
+                LiMovementRequest liMovementRequest = (LiMovementRequest) object;
+
+                System.out.println("Request is " + new Gson().toJson(liMovementRequest));
+                WebServices.getInstance().getService().saveLiDeparture(liMovementRequest).enqueue(new Callback<LiMovementVOsResponseNew>() {
+                    @Override
+                    public void onResponse(Call<LiMovementVOsResponseNew> call, Response<LiMovementVOsResponseNew> response) {
+                        dismissProgress();
+                        System.out.println("Response is " + new Gson().toJson(response.body()));
+                        view.ResponseOk(response.body(), position);
+                    }
+
+                    @Override
+                    public void onFailure(Call<LiMovementVOsResponseNew> call, Throwable t) {
+                        dismissProgress();
+
+                        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ERROR");
                         view.Error();
                     }
                 });

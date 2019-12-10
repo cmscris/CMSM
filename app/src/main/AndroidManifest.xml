@@ -267,6 +267,13 @@
             android:theme="@style/AppThemeFullScreen"
             android:windowSoftInputMode="stateHidden" />
 
+        <activity
+            android:name=".navcontrollers.LiDepartureController"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeFullScreen"
+            android:windowSoftInputMode="stateHidden" />
+
+
         <activity android:name=".LiRecordMovement" />
 
 
