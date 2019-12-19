@@ -49,4 +49,12 @@ public class SpinnerAdapter extends BaseAdapter {
         tv_titles.setTypeface(font);
         return convertView;
     }
+
+
+    public int getPosition(String value)
+    {
+        return list.indexOf(value);
+    }
+
+
 }

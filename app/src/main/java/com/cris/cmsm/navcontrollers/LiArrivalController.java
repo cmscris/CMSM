@@ -2,7 +2,6 @@ package com.cris.cmsm.navcontrollers;
 
 import android.Manifest;
 import android.app.TimePickerDialog;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.location.Location;
@@ -11,11 +10,13 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatSpinner;
 import android.text.InputFilter;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -24,9 +25,6 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.cris.cmsm.BaseActivity;
-import com.cris.cmsm.HomeActivity;
-import com.cris.cmsm.LImovement;
-import com.cris.cmsm.LoginActivity;
 import com.cris.cmsm.R;
 import com.cris.cmsm.adapter.SpinnerAdapter;
 import com.cris.cmsm.database.DataBaseManager;
@@ -62,19 +60,19 @@ import static com.cris.cmsm.util.GPSTracker.MY_PERMISSIONS_REQUEST_LOCATION;
  *
  */
 
-public class LiDepartureController extends BaseActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener, ResponseView, LocationListener {
+public class LiArrivalController extends BaseActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener, ResponseView, LocationListener {
 
 
     // Get Class Name
     private static String TAG = GPSTracker.class.getName();
 
 
-    private AppCompatSpinner spn_movt_auth,spn_dutytype,spn_purpose,spn_serviceTyp,spn_nearest_station;
-    private EditText et_frm_sttn,et_to_sttn,et_via1, et_via2, et_loco_no,et_train_no,et_remarks;
+    private AppCompatSpinner spn_dutytype,spn_nearest_station, spn_other_dutytype,spn_serviceTyp;
+    private EditText et_to_sttn,et_via1, et_via2, et_loco_no,et_train_no,et_remarks, et_kms;
 
 
     private ImageView iv_title_icon;
-    private TextView action_bar_title, tv_filters , tv_frm_date, tv_cord;
+    private TextView action_bar_title, tv_filters , tv_frm_date, tv_to_date, tv_cord, tv_ref_no, tv_frm_sttn;
     private Typeface font;
     private Button btn_filter;
     private CommonClass commonClass;
@@ -85,59 +83,62 @@ public class LiDepartureController extends BaseActivity implements View.OnClickL
     private LoginIfoVO loginInfoModel;
     private UserLoginPreferences userLoginPreferences;
 
-
+    private LiMovementRequest liMovementRequest;
     // FROM DATE RELATED
-    String fromDate;
+    String toDate;
     NumberFormat format;
     // GLOBAL VARIABLES FOR TIME PICKER
     int mHour, mMinute;
     int pickfrmhour,pickfrmmin;
-    String Hour, Minute, fromDateTime;
+    String Hour, Minute, toDateTime;
 
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_li_departure);
+        setContentView(R.layout.activity_li_arrival);
 
 
         format = new DecimalFormat("00");
 
 
-        monthlyRequestPresenter = new MonthlyRequestPresenter(LiDepartureController.this);
-        requestPresenter = new RequestPresenter(LiDepartureController.this);
-        userLoginPreferences = new UserLoginPreferences(LiDepartureController.this);
+        monthlyRequestPresenter = new MonthlyRequestPresenter(LiArrivalController.this);
+        requestPresenter = new RequestPresenter(LiArrivalController.this);
+        userLoginPreferences = new UserLoginPreferences(LiArrivalController.this);
         loginInfoModel = userLoginPreferences.getLoginUser();
-        loginUser = new UserLoginPreferences(LiDepartureController.this).getLoginUser();
-        commonClass = new CommonClass(LiDepartureController.this);
-        dataBaseManager = new DataBaseManager(LiDepartureController.this);
+        loginUser = new UserLoginPreferences(LiArrivalController.this).getLoginUser();
+        commonClass = new CommonClass(LiArrivalController.this);
+        dataBaseManager = new DataBaseManager(LiArrivalController.this);
         dataBaseManager.createDatabase();
 
-        font = new FontFamily(LiDepartureController.this).getBold();
+        font = new FontFamily(LiArrivalController.this).getBold();
 
 
 
-        spn_movt_auth = findViewById(R.id.spn_movt_auth);
+
         spn_dutytype = findViewById(R.id.spn_dutytype);
-        spn_purpose = findViewById(R.id.spn_purpose);
+        //spn_other_dutytype = findViewById(R.id.spn_other_dutytype);
         spn_serviceTyp= findViewById(R.id.spn_serviceTyp);
         spn_nearest_station = findViewById(R.id.spn_nearest_station);
 
-        tv_frm_date= findViewById(R.id.tv_frm_date);
+
+        tv_frm_date = findViewById(R.id.tv_frm_date);
+        tv_to_date = findViewById(R.id.tv_to_date);
         tv_cord = findViewById(R.id.tv_cord);
         tv_cord.setCompoundDrawablesWithIntrinsicBounds(R.drawable.coordinates, 0, 0, 0);
+        tv_ref_no  = findViewById(R.id.tv_ref_no);
+        tv_frm_sttn = findViewById(R.id.tv_frm_sttn);
 
 
-        et_frm_sttn= findViewById(R.id.et_frm_sttn);
         et_to_sttn= findViewById(R.id.et_to_sttn);
         et_via1= findViewById(R.id.et_via1);
         et_via2= findViewById(R.id.et_via2);
         et_loco_no= findViewById(R.id.et_loco_no);
         et_train_no= findViewById(R.id.et_train_no);
         et_remarks= findViewById(R.id.et_remarks);
+        et_kms = findViewById(R.id.et_kms);
 
-        et_frm_sttn.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
         et_to_sttn.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
         et_via1.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
         et_via2.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
@@ -168,7 +169,7 @@ public class LiDepartureController extends BaseActivity implements View.OnClickL
         // PAGE TITLE
         tv_filters = findViewById(R.id.tv_filters);
         tv_filters.setTypeface(font);
-        tv_filters.setText(getResources().getString(R.string.li_departure_title));
+        tv_filters.setText(getResources().getString(R.string.li_arrival_title));
 
 
 
@@ -180,11 +181,9 @@ public class LiDepartureController extends BaseActivity implements View.OnClickL
 
 
         List<Railway> railwayList = dataBaseManager.getRailwayList(true);
-        spn_movt_auth.setAdapter(new SpinnerAdapter(LiDepartureController.this, CommonClass.getMovementAuthprity("Select Authority")));
-        spn_dutytype.setAdapter(new SpinnerAdapter(LiDepartureController.this, CommonClass.getDutyType("Select Duty Type")));
-        spn_purpose.setAdapter(new SpinnerAdapter(LiDepartureController.this, CommonClass.getLiDeparturePurpose("Select Purpose")));
-        spn_serviceTyp.setAdapter(new SpinnerAdapter(LiDepartureController.this, CommonClass.getServiceType("Select Service Type")));
-
+        spn_dutytype.setAdapter(new SpinnerAdapter(LiArrivalController.this, CommonClass.getDutyType("Select Duty Type")));
+        //spn_other_dutytype.setAdapter(new SpinnerAdapter(LiArrivalController.this, CommonClass.getDemoValues("Select Duty Type")));
+        spn_serviceTyp.setAdapter(new SpinnerAdapter(LiArrivalController.this, CommonClass.getServiceType("Select Service Type")));
 
 
 
@@ -192,28 +191,19 @@ public class LiDepartureController extends BaseActivity implements View.OnClickL
         if (extra != null) {
 
             SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-            fromDate=extra.getString(Constants.STR_PARAM);
+
+            toDate=extra.getString(Constants.STR_PARAM);
             String currenttime= sdf.format(Calendar.getInstance().getTime());
-            tv_frm_date.setText(fromDate + " " + currenttime);
+            tv_to_date.setText(toDate + " " + currenttime);
 
         }
 
-/*
-        tv_nearest_station.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // GET THE LATTITUDE & LONGITUDE
-                getLocation();
 
-                // CALL WEBSERVICE TO GET THE NEAREST STATION
-                callWebService(Constants.GET_NEAREST_STATION_GPS);
-            }
-        });
-*/
-        tv_frm_date.setOnClickListener(new View.OnClickListener() {
+
+        tv_to_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tiemPicker(fromDate);
+                tiemPicker(toDate);
             }
         });
 
@@ -234,6 +224,9 @@ public class LiDepartureController extends BaseActivity implements View.OnClickL
         callWebService(Constants.GET_NEAREST_STATION_GPS);
 
 
+        // CALL WEBSERVICE TO GET DEPARTURE DATA
+        callWebService(Constants.GET_LI_MOVEMENT_DEPARTURE_DATA);
+
 
 
     }
@@ -241,15 +234,17 @@ public class LiDepartureController extends BaseActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
 
-
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>   Clicked");
         switch (v.getId()) {
 
             case R.id.btn_filter:
 
                 // CALL WEBSERVICE TO SAVE DEPARTURE DATA
 
+                System.out.println(">>>>>>>>>>>>>>>>>>>>>>   Here");
                 if (isValid()) {
-                    callWebService(Constants.LI_DEPARTURE_DATA);
+                    System.out.println(">>>>>>>>>>>>>>>>>>>>>>   Calling");
+                    callWebService(Constants.LI_ARRIVAL_DATA);
                 }
 
                 break;
@@ -295,37 +290,59 @@ public class LiDepartureController extends BaseActivity implements View.OnClickL
 
                     //tv_cord.setText(" " + latitude.substring(0,6) + "  :  " + longitude .substring(0,6));
                     tv_cord.setText(" " + latitude + "  :  " + longitude);
-
                     //CALL THE WEB SERVICE
                     requestPresenter.Request(request, "Fetching nearest stations", Constants.GET_NEAREST_STATION_GPS);
                     break;
 
+                case Constants.GET_LI_MOVEMENT_DEPARTURE_DATA :
 
-                case Constants.LI_DEPARTURE_DATA :
                     // PREPARE THE REQUEST OBJECT
-                    System.out.println(">>>>>>>>>>>>>>>>>>>> Inside LI_DEPARTURE_DATA" + loginInfoModel.getLoginid() );
+                    liMovementRequest = new LiMovementRequest();
+                    liMovementRequest.setLi_id(loginInfoModel.getLoginid());
+
+                    // HOW TO PROGRAMATICALLY CHANGE THE SHAPE OF INPUT ELEMENT
+                    //et_loco_no.setBackgroundDrawable(ContextCompat.getDrawable(LiArrivalController.this, R.drawable.roundshapeorange));
+
+
+
+                    //CALL THE WEB SERVICE
+                    requestPresenter.Request(liMovementRequest, "Getting Data", Constants.GET_LI_MOVEMENT_DEPARTURE_DATA);
+                    break;
+
+
+
+                case Constants.LI_ARRIVAL_DATA :
+                    // PREPARE THE REQUEST OBJECT
+                    System.out.println(">>>>>>>>>>>>>>>>>>>>>>   Called");
                     LiMovementRequest liMovementRequest = new LiMovementRequest();
 
+
+                    liMovementRequest.setRefNo(tv_ref_no.getText().toString());
                     liMovementRequest.setLi_id(loginInfoModel.getLoginid());
-                    liMovementRequest.setFromLongitude(longitude);
-                    liMovementRequest.setFromLatitude(latitude);
-                    liMovementRequest.setFromDateTime(tv_frm_date.getText().toString());
-                    //liMovementRequest.setNeartestStation(tv_nearest_station.getText().toString());
-                    liMovementRequest.setFromStation(et_frm_sttn.getText().toString());
+                    liMovementRequest.setToLongitude(longitude);
+                    liMovementRequest.setToLatitude(latitude);
+                    liMovementRequest.setTodateTime(tv_to_date.getText().toString());
                     liMovementRequest.setToStation(et_to_sttn.getText().toString());
                     liMovementRequest.setVia1((et_via1.getText()== null)?"":et_via1.getText().toString());
                     liMovementRequest.setVia2((et_via2.getText()== null)?"":et_via2.getText().toString());
-                    liMovementRequest.setAuthority(spn_movt_auth.getSelectedItem().toString());
                     liMovementRequest.setDutyType(spn_dutytype.getSelectedItem().toString());
+                    liMovementRequest.setOtherDyty(spn_other_dutytype.getSelectedItem().toString());
                     liMovementRequest.setLocoNo(et_loco_no.getText().toString());
                     liMovementRequest.setTrainNo(et_train_no.getText().toString());
-                    liMovementRequest.setPurpose(spn_purpose.getSelectedItem().toString());
-                    liMovementRequest.setRemarks(et_remarks.getText().toString());
+                    liMovementRequest.setRemarks((et_remarks.getText()== null)?"":et_remarks.getText().toString());
                     liMovementRequest.setServiceType(spn_serviceTyp.getSelectedItem().toString());
+                    liMovementRequest.setDutyKms((et_kms.getText()== null)?"":et_kms.getText().toString());
 
-                    System.out.println("Request is " + new Gson().toJson(liMovementRequest));
+                    liMovementRequest.setOtherDyty("Other Duty");
+
+
+                    System.out.println("My Request is " + new Gson().toJson(liMovementRequest));
+
+
+
+
                     //CALL THE WEB SERVICE
-                    requestPresenter.Request(liMovementRequest, "Getting Data", Constants.LI_DEPARTURE_DATA);
+                    requestPresenter.Request(liMovementRequest, "Getting Data", Constants.LI_ARRIVAL_DATA);
                     break;
             }
 
@@ -343,8 +360,6 @@ public class LiDepartureController extends BaseActivity implements View.OnClickL
                 List<NearestStationResponse> nearestStationResponseList = (List<NearestStationResponse>) object;
                 List<String> nearestStations = new ArrayList();
 
-
-
                 System.out.println("Response is " + new Gson().toJson(nearestStationResponseList));
 
 
@@ -360,40 +375,52 @@ public class LiDepartureController extends BaseActivity implements View.OnClickL
                         nearestStationResponse = itr.next();
                         nearestStations.add(nearestStationResponse.getStationCode() + " / (" + nearestStationResponse.getDistance() + " KM )");
                     }
-
                     // SET ADAPTER
-                    spn_nearest_station.setAdapter(new SpinnerAdapter(LiDepartureController.this, nearestStations));
-
+                    spn_nearest_station.setAdapter(new SpinnerAdapter(LiArrivalController.this, nearestStations));
 
                 } else
                     commonClass.showToast("No data available.");
                 break;
 
-            case Constants.LI_DEPARTURE_DATA:
+            case Constants.LI_ARRIVAL_DATA:
                 LiMovementVOsResponseNew liMovementVOsResponseNew = (LiMovementVOsResponseNew) object;
 
                 System.out.println("Response is " + new Gson().toJson(liMovementVOsResponseNew));
 
 
-                if (liMovementVOsResponseNew != null) {     // IF DEPARTURE DATA SAVED SUCCESSFULLY
+                if (liMovementVOsResponseNew != null) {
 
-                    // SHOW A TOAST
                     commonClass.showToast(liMovementVOsResponseNew.getMessage());
-
-                    // GO TO LI MOVEMENT MONTHLY DISPLAY
-                    DataHolder.setType(Constants.LI_MOVEMENT);
-                    CommonClass.goToNextScreen(LiDepartureController.this,LImovement.class,true , false);
 
 
                 } else
-                {
-                    // SHOW FAIL MESSAGE
                     commonClass.showToast("Failed to save");
-                }
-
                 break;
 
+            case Constants.GET_LI_MOVEMENT_DEPARTURE_DATA:
+                liMovementVOsResponseNew = (LiMovementVOsResponseNew) object;
 
+
+                if (liMovementVOsResponseNew != null) {
+                    liMovementRequest = liMovementVOsResponseNew.getLiMovementDetailsResponse().get(0);
+                    System.out.println("Response is " + new Gson().toJson(liMovementVOsResponseNew));
+
+                    tv_ref_no.setText(liMovementRequest.getRefNo());
+                    tv_frm_date.setText(liMovementRequest.getFromDateTime());
+                    tv_frm_sttn.setText(liMovementRequest.getFromStation());
+                    et_to_sttn.setText(liMovementRequest.getToStation());
+                    et_via1.setText(liMovementRequest.getVia1());
+                    et_via2.setText(liMovementRequest.getVia2());
+                    spn_dutytype.setSelection(((SpinnerAdapter)spn_dutytype.getAdapter()).getPosition(liMovementRequest.getDutyType()));
+                    //spn_other_dutytype.setSelection(((SpinnerAdapter)spn_other_dutytype.getAdapter()).getPosition(liMovementRequest.getOtherDyty()));
+                    et_loco_no.setText(liMovementRequest.getLocoNo());
+                    et_train_no.setText(liMovementRequest.getTrainNo());
+                    spn_serviceTyp.setSelection(((SpinnerAdapter)spn_serviceTyp.getAdapter()).getPosition(liMovementRequest.getServiceType()));
+
+
+                } else
+                    commonClass.showToast("Failed to get the departure data");
+                break;
 
 
         }
@@ -402,7 +429,7 @@ public class LiDepartureController extends BaseActivity implements View.OnClickL
 
 
     private boolean isValid() {
-        if (et_frm_sttn.getText().toString().trim().isEmpty()) {
+        if (et_to_sttn.getText().toString().trim().isEmpty()) {
             commonClass.showToast("Please enter From Station.");
             return false;
         } else if (et_to_sttn.getText().toString().trim().isEmpty()) {
@@ -438,7 +465,7 @@ public class LiDepartureController extends BaseActivity implements View.OnClickL
 
 
 
-    private void tiemPicker( String fromDate){
+    private void tiemPicker( String toDate){
         // Get Current Time
         final Calendar c = Calendar.getInstance();
         mHour = c.get(Calendar.HOUR_OF_DAY);
@@ -456,8 +483,8 @@ public class LiDepartureController extends BaseActivity implements View.OnClickL
                         Minute=format.format(minute);
                         mHour = hourOfDay;
                         mMinute = minute;
-                        fromDateTime= fromDate +" "+Hour + ":" + Minute;
-                        tv_frm_date.setText(fromDateTime);
+                        toDateTime= toDate +" "+Hour + ":" + Minute;
+                        tv_to_date.setText(toDateTime);
 
                     }
                 }, mHour, mMinute, false);

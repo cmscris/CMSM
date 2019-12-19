@@ -74,6 +74,8 @@ public class Constants {
 
     public static final int GET_NEAREST_STATION_GPS=218;
     public static final int LI_DEPARTURE_DATA=219;
+    public static final int LI_ARRIVAL_DATA=220;
+    public static final int GET_LI_MOVEMENT_DEPARTURE_DATA=221;
 
     public static final int SAVEABNORMALITY=52;
     public static final int ABNORMALITYANALYSISCOUNT=53;

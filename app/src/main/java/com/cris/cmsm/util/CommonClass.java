@@ -612,4 +612,30 @@ public class CommonClass {
     }
 
 
+
+    public static List<String> getDutyType(String firstValue) {
+
+        List<String> demoList = new ArrayList<>();
+        demoList.add(firstValue);
+        demoList.add("Foot Plate");
+        demoList.add("Lobby Duty");
+        demoList.add("Ambush Check");
+        demoList.add("Class");
+        demoList.add("Counselling");
+        demoList.add("Yard Duty");
+        demoList.add("Joint Duty");
+        demoList.add("Enquiry");
+        demoList.add("Safety Seminar");
+        demoList.add("Inspection");
+        demoList.add("Interview With Officer");
+
+
+
+
+
+        return demoList;
+    }
+
+
+
 }

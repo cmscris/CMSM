@@ -1635,6 +1635,52 @@ public class RequestPresenter implements RequestView {
                     }
                 });
                 break;
+
+            case Constants.LI_ARRIVAL_DATA:
+                showProgress(msg);
+                liMovementRequest = (LiMovementRequest) object;
+
+                System.out.println("Request is " + new Gson().toJson(liMovementRequest));
+                WebServices.getInstance().getService().saveLiArrival(liMovementRequest).enqueue(new Callback<LiMovementVOsResponseNew>() {
+                    @Override
+                    public void onResponse(Call<LiMovementVOsResponseNew> call, Response<LiMovementVOsResponseNew> response) {
+                        dismissProgress();
+                        System.out.println("Response is " + new Gson().toJson(response.body()));
+                        view.ResponseOk(response.body(), position);
+                    }
+
+                    @Override
+                    public void onFailure(Call<LiMovementVOsResponseNew> call, Throwable t) {
+                        dismissProgress();
+
+                        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ERROR");
+                        view.Error();
+                    }
+                });
+                break;
+
+            case Constants.GET_LI_MOVEMENT_DEPARTURE_DATA:
+                showProgress(msg);
+                liMovementRequest = (LiMovementRequest) object;
+
+                System.out.println("Request is " + new Gson().toJson(liMovementRequest));
+                WebServices.getInstance().getService().getLiMovementDepartureData(liMovementRequest).enqueue(new Callback<LiMovementVOsResponseNew>() {
+                    @Override
+                    public void onResponse(Call<LiMovementVOsResponseNew> call, Response<LiMovementVOsResponseNew> response) {
+                        dismissProgress();
+                        System.out.println("Response is " + new Gson().toJson(response.body()));
+                        view.ResponseOk(response.body(), position);
+                    }
+
+                    @Override
+                    public void onFailure(Call<LiMovementVOsResponseNew> call, Throwable t) {
+                        dismissProgress();
+
+                        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ERROR");
+                        view.Error();
+                    }
+                });
+                break;
         }
     }
 

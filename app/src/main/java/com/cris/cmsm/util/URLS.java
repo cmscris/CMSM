@@ -107,4 +107,6 @@ public class URLS {
     //GET NEAREST STATION DATA FROM GPS
     public static final String NEAREST_STATION_GPS = "master/getClosestStation";
     public static final String SAVE_LI_DEPARTURE = "master/saveLIMovementDeparture";
+    public static final String SAVE_LI_ARRIVAL = "master/saveLIMovementArrival";
+    public static final String GET_LI_MOVEMENT_DEPARTURE_DATA = "master/getRefNoForArrival";
 }

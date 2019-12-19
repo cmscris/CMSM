@@ -390,4 +390,12 @@ public interface APIView {
     Call<LiMovementVOsResponseNew> saveLiDeparture(@Body LiMovementRequest liMovementRequest);
 
 
+    @POST(URLS.SAVE_LI_ARRIVAL)
+    Call<LiMovementVOsResponseNew> saveLiArrival(@Body LiMovementRequest liMovementRequest);
+
+
+    @POST(URLS.GET_LI_MOVEMENT_DEPARTURE_DATA)
+    Call<LiMovementVOsResponseNew> getLiMovementDepartureData(@Body LiMovementRequest liMovementRequest);
+
+
 }

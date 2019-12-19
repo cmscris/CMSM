@@ -86,6 +86,9 @@ public class Dateadapter extends ArrayAdapter {
                 if (limovdraftresponsesarraylist.get(k).getDates().equals(day + "-" + displayMonth + "-" + displayYear)) {
                     System.out.println("dayValue>>>>2222222222" + dayValue);
                     if (limovdraftresponsesarraylist.get(k).getStatus().equals("Y")) {
+                        view.setBackgroundColor(Color.parseColor("#228B22"));
+                    }
+                    else  if (limovdraftresponsesarraylist.get(k).getStatus().equals("P")) {
                         view.setBackgroundColor(Color.parseColor("#fc6924"));
                     }
 

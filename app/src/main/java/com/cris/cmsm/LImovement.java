@@ -32,6 +32,7 @@ import com.cris.cmsm.models.response.LoginIfoVO;
 import com.cris.cmsm.models.response.Paramresponse;
 import com.cris.cmsm.navcontrollers.BoardController;
 import com.cris.cmsm.navcontrollers.DetailController;
+import com.cris.cmsm.navcontrollers.LiArrivalController;
 import com.cris.cmsm.navcontrollers.LiDepartureController;
 import com.cris.cmsm.prefrences.UserLoginPreferences;
 import com.cris.cmsm.presenter.RequestPresenter;
@@ -46,8 +47,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class LImovement extends AppCompatActivity implements ResponseView {
     GridView gridview;
@@ -69,7 +72,8 @@ public class LImovement extends AppCompatActivity implements ResponseView {
     String flagdate,flagstatus;
     StringBuilder sb =new StringBuilder();
     private Calendar cal = Calendar.getInstance(Locale.ENGLISH);
-    ArrayList monthparam,statusyeslist;
+    ArrayList monthparam;
+    Map<String, String> dataFilledStatus;
     String cur;
 
 
@@ -154,27 +158,42 @@ public class LImovement extends AppCompatActivity implements ResponseView {
            @Override
            public void onItemClick(AdapterView <?> parent, View view, int position, long id) {
                System.out.println("data at position>>>"+parent.getItemAtPosition(position));
-               String formateDate = new SimpleDateFormat("dd-MM-yyyy").format(parent.getItemAtPosition(position));
-               System.out.println("formateDate>>>"+formateDate);
+               String selectedDate = new SimpleDateFormat("dd-MM-yyyy").format(parent.getItemAtPosition(position));
+               System.out.println("selectedDate>>>"+selectedDate);
 
                i=0;
 
+               /*
+               * MODIFIED BY SANJAY RANGA ON 10/12/2019
+               *
+               * CHANGED dataFilledStatus FROM ARRYLIST TO MAP TO INCLUDE THE STATUS
+               * */
+               // IF dataFilledStatus CONTAINS THE DATE CLICKED THAT MEANS IT IS ALREADY FILLED
+                   if (dataFilledStatus.containsKey(selectedDate)) {
 
-               // IF statusyeslist CONTAINS THE DATE CLICKED THAT MEANS IT IS ALREADY FILLED
-                   if (statusyeslist.contains(formateDate)) {
-                       System.out.println("Go To Submit ReportLi Movement>>>");
-                       calendarinput.clear();
-                       calendarinput.add(loginInfoModel.getLoginid());
-                       calendarinput.add(formateDate);
-                       Intent i = new Intent(LImovement.this, SubmitReportLiMovement.class);
-                       i.putExtra("date", calendarinput);
-                       startActivity(i);
+                       
+                       // IF LI MOVEMENT IS COMPLETELY FILLED (DEPARTURE + ARRIVAL )
+                       if(dataFilledStatus.get(selectedDate).equals("Y"))
+                       {
+                           System.out.println("Go To Submit ReportLi Movement>>>");
+                           calendarinput.clear();
+                           calendarinput.add(loginInfoModel.getLoginid());
+                           calendarinput.add(selectedDate);
+                           Intent i = new Intent(LImovement.this, SubmitReportLiMovement.class);
+                           i.putExtra("date", calendarinput);
+                           startActivity(i);
+                       }// IF ONLY DEPARTURE IS FILLED THEN FORWARD TO FILL ARRIVAL
+                       else
+                       {
+                           CommonClass.goToNextScreen(LImovement.this, LiArrivalController.class, true, selectedDate);
+                       }
 
-                   }
+
+                   }// IF NO DATA IS FILLED
                     else {   // THE DATA HAS NOT BE FILEED - TAKE THE USER TO THE DEPARTURE FILL FORM
                        System.out.println("Go To LI_activity_detail_page>>>");
                        /*Intent i = new Intent(LImovement.this, LI_activity_detail_page.class);
-                       i.putExtra("frmdate", formateDate);
+                       i.putExtra("frmdate", selectedDate);
                        startActivity(i);*/
 
 
@@ -183,13 +202,23 @@ public class LImovement extends AppCompatActivity implements ResponseView {
                        *
                        *
                        Intent i = new Intent(LImovement.this, LiRecordMovement.class);
-                       i.putExtra("frmdate", formateDate);
+                       i.putExtra("frmdate", selectedDate);
                        startActivity(i);
                        */
 
-                       // GO TO LiDepartureController - PASS FROM DATE AS PARAMETER
-                       CommonClass.goToNextScreen(LImovement.this, LiDepartureController.class, true, formateDate);
+/*
+                       // IF ANY PREVIOUS ARRIVAL IS PENDING THAN USER CANNOT FILL A DEPARTURE
+                       if (dataFilledStatus.containsValue("P")) {
+                           commonClass.showToast("One arrival is pending");
 
+                       }
+                       else   // ELSE GO TO LiDepartureController - PASS FROM DATE AS PARAMETER
+                       {
+                           CommonClass.goToNextScreen(LImovement.this, LiDepartureController.class, true, selectedDate);
+                       }
+*/
+
+                       CommonClass.goToNextScreen(LImovement.this, LiDepartureController.class, true, selectedDate);
                }
            }
        });
@@ -210,7 +239,7 @@ public class LImovement extends AppCompatActivity implements ResponseView {
             System.out.println(">>>>>>>>>>>>>>>>>>>> ResponseOk");
             Limovementresponse limovementresponse=(Limovementresponse)object;
             limovstatuslist=new ArrayList <>();
-            statusyeslist=new ArrayList();
+            dataFilledStatus=new HashMap<String,String>();
             i=0;
             while(i<limovementresponse.getLiMovementVOsResponse().size()) {
 
@@ -219,9 +248,9 @@ public class LImovement extends AppCompatActivity implements ResponseView {
                 flagdate=limovementresponse.getLiMovementVOsResponse().get(i).getDate();
                 flagstatus=limovementresponse.getLiMovementVOsResponse().get(i).getStatus();
 
-                // INSERT DATE INTO statusyeslist WHERE FILLED FLAG == Y
-                if(flagstatus.equals("Y")){
-                    statusyeslist.add(flagdate);
+                // INSERT DATE INTO dataFilledStatus WHERE FILLED FLAG == Y || FLAG == P
+                if(!flagstatus.equals("N")){
+                    dataFilledStatus.put(flagdate,flagstatus);
                 }
                 Limovdraftresponse limovdraftresponse=new Limovdraftresponse();
                 limovdraftresponse.setDates(limovementresponse.getLiMovementVOsResponse().get(i).getDate());
