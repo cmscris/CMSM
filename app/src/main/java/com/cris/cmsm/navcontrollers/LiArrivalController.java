@@ -25,6 +25,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.cris.cmsm.BaseActivity;
+import com.cris.cmsm.LImovement;
 import com.cris.cmsm.R;
 import com.cris.cmsm.adapter.SpinnerAdapter;
 import com.cris.cmsm.database.DataBaseManager;
@@ -326,7 +327,7 @@ public class LiArrivalController extends BaseActivity implements View.OnClickLis
                     liMovementRequest.setVia1((et_via1.getText()== null)?"":et_via1.getText().toString());
                     liMovementRequest.setVia2((et_via2.getText()== null)?"":et_via2.getText().toString());
                     liMovementRequest.setDutyType(spn_dutytype.getSelectedItem().toString());
-                    liMovementRequest.setOtherDyty(spn_other_dutytype.getSelectedItem().toString());
+                    //liMovementRequest.setOtherDyty(spn_other_dutytype.getSelectedItem().toString());
                     liMovementRequest.setLocoNo(et_loco_no.getText().toString());
                     liMovementRequest.setTrainNo(et_train_no.getText().toString());
                     liMovementRequest.setRemarks((et_remarks.getText()== null)?"":et_remarks.getText().toString());
@@ -391,7 +392,9 @@ public class LiArrivalController extends BaseActivity implements View.OnClickLis
                 if (liMovementVOsResponseNew != null) {
 
                     commonClass.showToast(liMovementVOsResponseNew.getMessage());
-
+                    // GO TO LI MOVEMENT MONTHLY DISPLAY
+                    DataHolder.setType(Constants.LI_MOVEMENT);
+                    CommonClass.goToNextScreen(LiArrivalController.this, LImovement.class,true , false);
 
                 } else
                     commonClass.showToast("Failed to save");
