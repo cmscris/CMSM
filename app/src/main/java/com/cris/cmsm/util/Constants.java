@@ -42,24 +42,6 @@ public class Constants {
     public static final int Report_Abnormality= 204;
     public static final int IRREGULAR_CREW= 205;
     public static final int Grading=206;
-
-
-
-
-
-
-
-
-    public static final int Loginot=44;
-    public static final int ABNORMALITYLIST=41;
-    public static final int ABNORMALITY_DETAILS=45;
-    public static final int SECTION=50;
-    public static final int GETREMARKS=46;
-    public static final int GETABNORMALITYCOUNT=47;
-    public static final int GETABNORMALITYLISTSUBMITTED=48;
-    public static final int CHANGEPASSWORD=49;
-    public static final int SUBHEADLIST=51;
-    public static final int CrewCounselling=206;
     public static final int CREWCURRENTSTATUS=207;
     public static final int LICREWSTATUS=208;
     public static final int LI_MOVEMENT=209;
@@ -76,6 +58,24 @@ public class Constants {
     public static final int LI_DEPARTURE_DATA=219;
     public static final int LI_ARRIVAL_DATA=220;
     public static final int GET_LI_MOVEMENT_DEPARTURE_DATA=221;
+
+    public static final int CrewCounselling=222;
+
+
+
+
+
+    public static final int Loginot=44;
+    public static final int ABNORMALITYLIST=41;
+    public static final int ABNORMALITY_DETAILS=45;
+    public static final int SECTION=50;
+    public static final int GETREMARKS=46;
+    public static final int GETABNORMALITYCOUNT=47;
+    public static final int GETABNORMALITYLISTSUBMITTED=48;
+    public static final int CHANGEPASSWORD=49;
+    public static final int SUBHEADLIST=51;
+
+
 
     public static final int SAVEABNORMALITY=52;
     public static final int ABNORMALITYANALYSISCOUNT=53;
