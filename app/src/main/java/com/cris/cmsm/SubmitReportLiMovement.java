@@ -15,6 +15,7 @@ import com.cris.cmsm.models.request.GraphAPIRequest;
 import com.cris.cmsm.models.response.LiMovementVOsResponse;
 import com.cris.cmsm.models.response.Limovementresponse;
 import com.cris.cmsm.models.response.LoginIfoVO;
+import com.cris.cmsm.navcontrollers.LiDepartureController;
 import com.cris.cmsm.prefrences.UserLoginPreferences;
 import com.cris.cmsm.presenter.RequestPresenter;
 import com.cris.cmsm.presenterview.ResponseView;
@@ -77,10 +78,21 @@ public class SubmitReportLiMovement extends AppCompatActivity implements OnItemC
         btn_add_row.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                /*
+                * CHANGED BY SANJAY RANGA
+                * FORWARDING TO LI DEPARTURE SCREEN
+                *
+                *
+                *
+                * OLD CODE BY PRIYA
                 Intent i=new Intent(SubmitReportLiMovement.this,LI_activity_detail_page.class);
                 i.putExtra("frmdate",date.get(1).toString());
                 startActivity(i);
 
+                *
+                */
+                CommonClass.goToNextScreen(SubmitReportLiMovement.this, LiDepartureController.class, true, date.get(1).toString());
             }
         });
     }
