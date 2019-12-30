@@ -206,7 +206,7 @@ public class LImovement extends AppCompatActivity implements ResponseView {
                        startActivity(i);
                        */
 
-/*
+
                        // IF ANY PREVIOUS ARRIVAL IS PENDING THAN USER CANNOT FILL A DEPARTURE
                        if (dataFilledStatus.containsValue("P")) {
                            commonClass.showToast("One arrival is pending");
@@ -216,9 +216,9 @@ public class LImovement extends AppCompatActivity implements ResponseView {
                        {
                            CommonClass.goToNextScreen(LImovement.this, LiDepartureController.class, true, selectedDate);
                        }
-*/
 
-                       CommonClass.goToNextScreen(LImovement.this, LiDepartureController.class, true, selectedDate);
+
+
                }
            }
        });
