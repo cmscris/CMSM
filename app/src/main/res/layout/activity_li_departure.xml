@@ -135,28 +135,6 @@
 
 
 
-
-
-
-        <!-- Break-->
-        <TextView
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint=""
-            android:inputType="text"
-            android:padding="@dimen/padding_10"
-            android:textSize="@dimen/text_14"
-            android:layout_marginTop="@dimen/margin_10"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@color/colorCyan" />
-
-
-
-
-
-
         <!-- FROM STATION -->
         <EditText
             android:id="@+id/et_frm_sttn"
@@ -220,23 +198,6 @@
 
 
 
-        <!-- Break-->
-        <TextView
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint=""
-            android:inputType="text"
-            android:padding="@dimen/padding_10"
-            android:textSize="@dimen/text_14"
-            android:layout_marginTop="@dimen/margin_10"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@color/colorCyan" />
-
-
-
-
 
 
         <!-- MOVEMENT AUTHORITY -->
@@ -292,7 +253,7 @@
 
 
 
-        <!-- Break-->
+        <!-- Break
         <TextView
 
             android:layout_width="match_parent"
@@ -306,7 +267,7 @@
             android:layout_marginRight="10dp"
             android:background="@color/colorCyan" />
 
-
+           -->
 
 
 
@@ -349,29 +310,12 @@
 
 
 
-        <!-- Break-->
-        <TextView
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint=""
-            android:inputType="text"
-            android:padding="@dimen/padding_10"
-            android:textSize="@dimen/text_14"
-            android:layout_marginTop="@dimen/margin_10"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@color/colorCyan" />
-
-
-
-
 
         <!-- REMARKS -->
         <EditText
             android:id="@+id/et_remarks"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="70dp"
             android:hint="REMARKS"
             android:inputType="text|textMultiLine"
             android:padding="@dimen/padding_10"

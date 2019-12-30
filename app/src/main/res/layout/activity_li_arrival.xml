@@ -124,28 +124,6 @@
 
 
 
-
-
-
-            <!-- Break-->
-            <TextView
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint=""
-                android:inputType="text"
-                android:padding="@dimen/padding_10"
-                android:textSize="@dimen/text_14"
-                android:layout_marginTop="@dimen/margin_10"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@color/colorCyan" />
-
-
-
-
-
-
             <!-- FROM DATE / TIME -->
             <TableRow android:layout_width="match_parent">
                 <TextView
@@ -207,24 +185,6 @@
 
 
 
-
-
-
-
-
-            <!-- Break-->
-            <TextView
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint=""
-                android:inputType="text"
-                android:padding="@dimen/padding_10"
-                android:textSize="@dimen/text_14"
-                android:layout_marginTop="@dimen/margin_10"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@color/colorCyan" />
 
 
 
@@ -357,25 +317,6 @@
 
 
 
-            <!-- Break-->
-            <TextView
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint=""
-                android:inputType="text"
-                android:padding="@dimen/padding_10"
-                android:textSize="@dimen/text_14"
-                android:layout_marginTop="@dimen/margin_10"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@color/colorCyan" />
-
-
-
-
-
-
             <!-- DUTY TYPE -->
             <TableRow android:layout_width="match_parent">
                 <TextView
@@ -454,24 +395,6 @@
 
 
 
-
-
-
-
-
-            <!-- Break-->
-            <TextView
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint=""
-                android:inputType="text"
-                android:padding="@dimen/padding_10"
-                android:textSize="@dimen/text_14"
-                android:layout_marginTop="@dimen/margin_10"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@color/colorCyan" />
 
 
 
@@ -588,7 +511,7 @@
                 <EditText
                     android:id="@+id/et_remarks"
                     android:layout_width="0dip"
-                    android:layout_height="150dp"
+                    android:layout_height="70dp"
                     android:hint="REMARKS"
                     android:inputType="text|textMultiLine"
                     android:padding="@dimen/padding_10"
