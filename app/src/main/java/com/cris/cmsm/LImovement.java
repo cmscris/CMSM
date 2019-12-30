@@ -169,19 +169,28 @@ public class LImovement extends AppCompatActivity implements ResponseView {
                * CHANGED dataFilledStatus FROM ARRYLIST TO MAP TO INCLUDE THE STATUS
                * */
                // IF dataFilledStatus CONTAINS THE DATE CLICKED THAT MEANS IT IS ALREADY FILLED
+
+
+
+
+
                    if (dataFilledStatus.containsKey(selectedDate)) {
 
-                       
+
                        // IF LI MOVEMENT IS COMPLETELY FILLED (DEPARTURE + ARRIVAL )
                        if(dataFilledStatus.get(selectedDate).equals("Y"))
                        {
-                           System.out.println("Go To Submit ReportLi Movement>>>");
-                           calendarinput.clear();
-                           calendarinput.add(loginInfoModel.getLoginid());
-                           calendarinput.add(selectedDate);
-                           Intent i = new Intent(LImovement.this, SubmitReportLiMovement.class);
-                           i.putExtra("date", calendarinput);
-                           startActivity(i);
+
+
+                               System.out.println("Go To Submit ReportLi Movement>>>");
+                               calendarinput.clear();
+                               calendarinput.add(loginInfoModel.getLoginid());
+                               calendarinput.add(selectedDate);
+                               Intent i = new Intent(LImovement.this, SubmitReportLiMovement.class);
+                               i.putExtra("date", calendarinput);
+                               startActivity(i);
+
+
                        }// IF ONLY DEPARTURE IS FILLED THEN FORWARD TO FILL ARRIVAL
                        else
                        {
@@ -250,14 +259,30 @@ public class LImovement extends AppCompatActivity implements ResponseView {
 
                 // INSERT DATE INTO dataFilledStatus WHERE FILLED FLAG == Y || FLAG == P
                 if(!flagstatus.equals("N")){
-                    dataFilledStatus.put(flagdate,flagstatus);
+                    if(dataFilledStatus.containsKey(flagdate))
+                    {
+                        flagstatus= "M";
+                        System.out.println(">>>> sETTING" + flagstatus);
+                        if(dataFilledStatus.get(flagdate).equals('Y'))
+                        {
+                            dataFilledStatus.remove(flagdate);
+                        }
+                    }
+                    else
+                    {
+                        dataFilledStatus.put(flagdate,flagstatus);
+                    }
                 }
                 Limovdraftresponse limovdraftresponse=new Limovdraftresponse();
-                limovdraftresponse.setDates(limovementresponse.getLiMovementVOsResponse().get(i).getDate());
-                limovdraftresponse.setStatus(limovementresponse.getLiMovementVOsResponse().get(i).getStatus());
-                System.out.println(">>>> Status" + limovementresponse.getLiMovementVOsResponse().get(i).getStatus());
+                limovdraftresponse.setDates(flagdate);
+                limovdraftresponse.setStatus(flagstatus);
+                System.out.println(">>>> Status" + flagstatus);
                 limovstatuslist.add(limovdraftresponse);
                 i++;
+            }
+
+            for (Map.Entry<String, String> entry : dataFilledStatus.entrySet()) {
+                System.out.println("Key : " + entry.getKey() + " ---- Value : " + entry.getValue().toString());
             }
             setUpCalendarAdapter();
 
@@ -284,6 +309,8 @@ public class LImovement extends AppCompatActivity implements ResponseView {
         System.out.println("checkdate"+cal.getTime());
         display_current_date.setText(sDate);
 
+
+        // SET THE COLORS IN CALANDER
         mAdapter = new Dateadapter(LImovement.this, dayValueInCells, cal);
         gridview.setAdapter(mAdapter);
     }

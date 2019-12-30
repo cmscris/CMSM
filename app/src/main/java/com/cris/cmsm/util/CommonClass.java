@@ -597,6 +597,7 @@ public class CommonClass {
         demoList.add("Accompany with officers");
         demoList.add("Ambush check");
         demoList.add("Inspection");
+        demoList.add("Attend Loco");
 
 
         return demoList;
@@ -628,6 +629,7 @@ public class CommonClass {
         demoList.add("Safety Seminar");
         demoList.add("Inspection");
         demoList.add("Interview With Officer");
+        demoList.add("Spare");
 
 
 

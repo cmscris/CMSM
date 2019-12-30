@@ -88,7 +88,7 @@ public class Dateadapter extends ArrayAdapter {
                     if (limovdraftresponsesarraylist.get(k).getStatus().equals("Y")) {
                         view.setBackgroundColor(Color.parseColor("#228B22"));
                     }
-                    else  if (limovdraftresponsesarraylist.get(k).getStatus().equals("P")) {
+                    else  if (limovdraftresponsesarraylist.get(k).getStatus().equals("P") || limovdraftresponsesarraylist.get(k).getStatus().equals("M")) {
                         view.setBackgroundColor(Color.parseColor("#fc6924"));
                     }
 
