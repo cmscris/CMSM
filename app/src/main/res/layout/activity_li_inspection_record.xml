@@ -186,20 +186,7 @@
 
 
 
-        <!-- LOAD -->
 
-        <EditText
-            android:id="@+id/et_load"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="LOAD"
-            android:inputType="text"
-            android:padding="@dimen/padding_10"
-            android:textSize="@dimen/text_14"
-            android:layout_marginTop="@dimen/margin_10"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/roundshape" />
 
         <!-- NO OF COACHED / WAGONS -->
 
@@ -251,6 +238,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="GUARD ID"
+            android:inputType="text"
+            android:padding="@dimen/padding_10"
+            android:textSize="@dimen/text_14"
+            android:layout_marginTop="@dimen/margin_10"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/roundshape" />
+
+
+
+        <!-- LOAD -->
+
+        <EditText
+            android:id="@+id/et_load"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="LOAD"
             android:inputType="text"
             android:padding="@dimen/padding_10"
             android:textSize="@dimen/text_14"
@@ -377,6 +381,7 @@
             android:background="@drawable/roundshape" />
 
 
+        <!-- LP WEAK AREA -->
 
         <EditText
             android:id="@+id/et_weak_area_lp"
@@ -390,6 +395,8 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:background="@drawable/roundshape" />
+
+        <!-- ALP WEAK AREA -->
 
         <EditText
             android:id="@+id/et_weak_area_alp"

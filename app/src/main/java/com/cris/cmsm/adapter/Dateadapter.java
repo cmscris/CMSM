@@ -83,8 +83,12 @@ public class Dateadapter extends ArrayAdapter {
                 while(k<limovdraftresponsesarraylist.size()){
                 System.out.println("Date from limovdraftresponse.........>>>>> " + limovdraftresponsesarraylist.get(k).getDates());
                 System.out.println("Date from limovdraftresponse.........>>>>> " + limovdraftresponsesarraylist.get(k).getStatus());
-                if (limovdraftresponsesarraylist.get(k).getDates().equals(day + "-" + displayMonth + "-" + displayYear)) {
-                    System.out.println("dayValue>>>>2222222222" + dayValue);
+                System.out.println("limovdraftresponsesarraylist.get(k).getDates() = " + limovdraftresponsesarraylist.get(k).getDates());
+                System.out.println("Day Value = " + day + "-" + format.format(displayMonth) + "-" + displayYear);
+
+                // IF THE DATE IS PRESENT IN THE DATA
+                if (limovdraftresponsesarraylist.get(k).getDates().equals(day + "-" + format.format(displayMonth) + "-" + displayYear)) {
+
                     if (limovdraftresponsesarraylist.get(k).getStatus().equals("Y")) {
                         view.setBackgroundColor(Color.parseColor("#228B22"));
                     }

@@ -109,4 +109,6 @@ public class URLS {
     public static final String SAVE_LI_DEPARTURE = "master/saveLIMovementDeparture";
     public static final String SAVE_LI_ARRIVAL = "master/saveLIMovementArrival";
     public static final String GET_LI_MOVEMENT_DEPARTURE_DATA = "master/getRefNoForArrival";
+
+    public static final String SAVE_LI_INSPECTION = "master/saveLiInspection";
 }

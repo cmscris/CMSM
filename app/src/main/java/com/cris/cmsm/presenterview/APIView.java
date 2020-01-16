@@ -1,6 +1,7 @@
 package com.cris.cmsm.presenterview;
 
 import com.cris.cmsm.models.KeyValue;
+import com.cris.cmsm.models.LiInspectionRecord;
 import com.cris.cmsm.models.Lobby;
 import com.cris.cmsm.models.request.AssetManagementModel;
 import com.cris.cmsm.models.request.ConSummaryRequest;
@@ -26,6 +27,7 @@ import com.cris.cmsm.models.request.SubmitLTConnection;
 import com.cris.cmsm.models.response.AbnormalityResponse;
 import com.cris.cmsm.models.response.CrewAvailabilityDetailResponse;
 import com.cris.cmsm.models.response.KeyValueResponse;
+import com.cris.cmsm.models.response.LiInspectionResponse;
 import com.cris.cmsm.models.response.LiMovementVOsResponseNew;
 import com.cris.cmsm.models.response.LimMovementSubmitResponse;
 import com.cris.cmsm.models.response.Limovementresponse;
@@ -396,6 +398,10 @@ public interface APIView {
 
     @POST(URLS.GET_LI_MOVEMENT_DEPARTURE_DATA)
     Call<LiMovementVOsResponseNew> getLiMovementDepartureData(@Body LiMovementRequest liMovementRequest);
+
+
+    @POST(URLS.SAVE_LI_INSPECTION)
+    Call<LiInspectionResponse> saveLiInspection(@Body LiInspectionRecord liInspectionRecord);
 
 
 }

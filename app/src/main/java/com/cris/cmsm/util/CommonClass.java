@@ -631,13 +631,21 @@ public class CommonClass {
         demoList.add("Interview With Officer");
         demoList.add("Spare");
 
-
-
-
-
         return demoList;
     }
 
+
+
+    public static List<String> getCoachType(String firstValue) {
+
+        List<String> demoList = new ArrayList<>();
+        demoList.add(firstValue);
+        demoList.add("CONCOR");
+        demoList.add("BOXN");
+        demoList.add("EMPTYBCN");
+        demoList.add("CONTAINER");
+        return demoList;
+    }
 
 
 }

@@ -15,7 +15,7 @@ public class LiInspectionRecord {
     private String noOfCoachWagon;
     private String coachWagonType;
     private String commodity;
-    private String guardName;
+    private String guardId;
     private String grossTon;
     private String emrStart;
     private String emrEnd;
@@ -30,6 +30,14 @@ public class LiInspectionRecord {
     private String otherDuty;
     private String dateTime;
 
+
+    public String getGuardId() {
+        return guardId;
+    }
+
+    public void setGuardId(String guardId) {
+        this.guardId = guardId;
+    }
 
     public String getRefNo() {
         return refNo;
@@ -135,13 +143,6 @@ public class LiInspectionRecord {
         this.commodity = commodity;
     }
 
-    public String getGuardName() {
-        return guardName;
-    }
-
-    public void setGuardName(String guardName) {
-        this.guardName = guardName;
-    }
 
     public String getGrossTon() {
         return grossTon;

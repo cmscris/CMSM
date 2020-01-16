@@ -27,6 +27,7 @@ import com.cris.cmsm.database.DataBaseManager;
 import com.cris.cmsm.database.DataHolder;
 import com.cris.cmsm.models.Designation;
 import com.cris.cmsm.models.Division;
+import com.cris.cmsm.models.LiInspectionRecord;
 import com.cris.cmsm.models.Lobby;
 import com.cris.cmsm.models.Month;
 import com.cris.cmsm.models.Railway;
@@ -41,6 +42,7 @@ import com.cris.cmsm.presenterview.ResponseView;
 import com.cris.cmsm.util.CommonClass;
 import com.cris.cmsm.util.Constants;
 import com.cris.cmsm.util.FontFamily;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -159,7 +161,7 @@ public class LiInspectionController extends BaseActivity implements View.OnClick
         spn_cab.setAdapter(new SpinnerAdapter(LiInspectionController.this, CommonClass.getDemoValues("Select Cab")));
         spn_train_type.setAdapter(new SpinnerAdapter(LiInspectionController.this, CommonClass.getDemoValues("Select Train Type")));
         spn_bpc_valid_invalid.setAdapter(new SpinnerAdapter(LiInspectionController.this, CommonClass.getDemoValid("Select BPC")));
-        spn_type_of_coches.setAdapter(new SpinnerAdapter(LiInspectionController.this, CommonClass.getDemoValues("Select Coach Type")));
+        spn_type_of_coches.setAdapter(new SpinnerAdapter(LiInspectionController.this, CommonClass.getCoachType("Select Coach Type")));
         spn_speedometer.setAdapter(new SpinnerAdapter(LiInspectionController.this, CommonClass.getDemoWorking("Select Speedometer Status")));
         spn_vcd.setAdapter(new SpinnerAdapter(LiInspectionController.this, CommonClass.getDemoWorking("Select VCD Status")));
         spn_horns.setAdapter(new SpinnerAdapter(LiInspectionController.this, CommonClass.getDemoWorking("Select Horns Status")));
@@ -188,6 +190,44 @@ public class LiInspectionController extends BaseActivity implements View.OnClick
 
 
     private void callWebService(int cat) {
+
+
+        // POPULATE THE INSPECTION RECORD
+        LiInspectionRecord liInspectionRecord = new LiInspectionRecord();
+
+        liInspectionRecord.setRefNo(spn_ref_no.getSelectedItem().toString());
+        liInspectionRecord.setLpId(et_lp_id.getText().toString());
+        liInspectionRecord.setCoLpId(et_alp_id.getText().toString());
+        liInspectionRecord.setTrailLocoNo(et_trail_loco_no.getText().toString());
+        liInspectionRecord.setTrainType(spn_train_type.getSelectedItem().toString());
+        liInspectionRecord.setCab(spn_cab.getSelectedItem().toString());
+        liInspectionRecord.setBpcNo(et_bpc_no.getText().toString());
+        liInspectionRecord.setBpcPercent(et_bpc_percentage.getText().toString());
+        liInspectionRecord.setBpcIssueStation(et_bpc_issue_station.getText().toString());
+        liInspectionRecord.setBpcValid(spn_bpc_valid_invalid.getSelectedItem().toString());
+        liInspectionRecord.setNoOfCoachWagon(et_no_of_coaches.getText().toString());
+        liInspectionRecord.setCoachWagonType(spn_type_of_coches.getSelectedItem().toString());
+        liInspectionRecord.setCommodity(et_comoddity.getText().toString());
+        liInspectionRecord.setGuardId(et_guard_id.getText().toString());
+        liInspectionRecord.setGrossTon(et_load.getText().toString());
+        liInspectionRecord.setEmrStart(et_energy_meter_start.getText().toString());
+        liInspectionRecord.setEmrEnd(et_energy_meter_end.getText().toString());
+        liInspectionRecord.setRegenStart(et_regen_start.getText().toString());
+        liInspectionRecord.setRegenEnd(et_regen_end.getText().toString());
+        liInspectionRecord.setSpeedMeter(spn_speedometer.getSelectedItem().toString());
+        liInspectionRecord.setVcd(spn_vcd.getSelectedItem().toString());
+        liInspectionRecord.setHorns(spn_horns.getSelectedItem().toString());
+        liInspectionRecord.setSander(spn_sander.getSelectedItem().toString());
+        liInspectionRecord.setLpWeakRemark(et_weak_area_lp.getText().toString());
+        liInspectionRecord.setCoLpWeakRemark(et_weak_area_alp.getText().toString());
+
+
+
+        //CALL THE WEB SERVICE
+        requestPresenter.Request(liInspectionRecord, "Getting Data", Constants.SAVE_INSPECTION_RECORD);
+
+
+
 
     }
 

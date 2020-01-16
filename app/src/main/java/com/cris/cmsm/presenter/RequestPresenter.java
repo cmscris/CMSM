@@ -3,6 +3,7 @@ package com.cris.cmsm.presenter;
 import com.cris.cmsm.database.DataHolder;
 import com.cris.cmsm.interactor.WebServices;
 import com.cris.cmsm.models.KeyValue;
+import com.cris.cmsm.models.LiInspectionRecord;
 import com.cris.cmsm.models.Lobby;
 import com.cris.cmsm.models.request.ConSummaryRequest;
 import com.cris.cmsm.models.request.CrewAvailabilityDetailRequest;
@@ -24,6 +25,7 @@ import com.cris.cmsm.models.response.CrewPositionSummaryResponse;
 import com.cris.cmsm.models.response.FeedbackResponse;
 import com.cris.cmsm.models.response.KeyValueResponse;
 import com.cris.cmsm.models.response.LICrewMonitoredResponse;
+import com.cris.cmsm.models.response.LiInspectionResponse;
 import com.cris.cmsm.models.response.LiMovementVOsResponseNew;
 import com.cris.cmsm.models.response.LimMovementSubmitResponse;
 import com.cris.cmsm.models.response.Limovementresponse;
@@ -1674,6 +1676,30 @@ public class RequestPresenter implements RequestView {
 
                     @Override
                     public void onFailure(Call<LiMovementVOsResponseNew> call, Throwable t) {
+                        dismissProgress();
+
+                        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ERROR");
+                        view.Error();
+                    }
+                });
+                break;
+
+
+            case Constants.SAVE_INSPECTION_RECORD:
+                showProgress(msg);
+                LiInspectionRecord liInspectionRecord = (LiInspectionRecord) object;
+
+                System.out.println("Request is " + new Gson().toJson(liInspectionRecord));
+                WebServices.getInstance().getService().saveLiInspection(liInspectionRecord).enqueue(new Callback<LiInspectionResponse>() {
+                    @Override
+                    public void onResponse(Call<LiInspectionResponse> call, Response<LiInspectionResponse> response) {
+                        dismissProgress();
+                        System.out.println("Response is " + new Gson().toJson(response.body()));
+                        view.ResponseOk(response.body(), position);
+                    }
+
+                    @Override
+                    public void onFailure(Call<LiInspectionResponse> call, Throwable t) {
                         dismissProgress();
 
                         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ERROR");

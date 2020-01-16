@@ -60,7 +60,7 @@ public class Constants {
     public static final int GET_LI_MOVEMENT_DEPARTURE_DATA=221;
 
     public static final int CrewCounselling=222;
-
+    public static final int SAVE_INSPECTION_RECORD=223;
 
 
 
