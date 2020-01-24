@@ -1,6 +1,7 @@
 package com.cris.cmsm.navcontrollers;
 
 import android.Manifest;
+import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -17,6 +18,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -53,6 +55,7 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -90,7 +93,7 @@ public class LiDepartureController extends BaseActivity implements View.OnClickL
     String fromDate;
     NumberFormat format;
     // GLOBAL VARIABLES FOR TIME PICKER
-    int mHour, mMinute;
+    int mHour, mMinute, mDay, mMonth, mYear;
     int pickfrmhour,pickfrmmin;
     String Hour, Minute, fromDateTime;
 
@@ -213,7 +216,9 @@ public class LiDepartureController extends BaseActivity implements View.OnClickL
         tv_frm_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tiemPicker(fromDate);
+
+                datePicker();
+                //tiemPicker(fromDate);
             }
         });
 
@@ -402,6 +407,13 @@ public class LiDepartureController extends BaseActivity implements View.OnClickL
 
 
     private boolean isValid() {
+
+
+
+
+        // GET FROM DATE TIME
+        String from_date = tv_frm_date.getText().toString();
+
         if (et_frm_sttn.getText().toString().trim().isEmpty()) {
             commonClass.showToast("Please enter From Station.");
             return false;
@@ -413,6 +425,9 @@ public class LiDepartureController extends BaseActivity implements View.OnClickL
             return false;
         }else if (et_train_no.getText().toString().trim().isEmpty()) {
             commonClass.showToast("Please enter train No.");
+            return false;
+        }else if (!CommonClass.isBeforeCurrent(from_date)) {
+            commonClass.showToast("From Date/Time cannot be greater than Current Date/Time  ");
             return false;
         }else
             return true;
@@ -463,6 +478,36 @@ public class LiDepartureController extends BaseActivity implements View.OnClickL
                 }, mHour, mMinute, false);
         timePickerDialog.show();
     }
+
+
+
+    private void datePicker(){
+
+        // Get Current Date
+        final Calendar c = Calendar.getInstance();
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH);
+        mDay = c.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+
+                        String str_dayOfMonth = (dayOfMonth < 10 )? "0" + dayOfMonth : dayOfMonth + "";
+                        monthOfYear++;
+                        String str_monthOfYear = (monthOfYear < 10 )? "0" + monthOfYear : monthOfYear + "";
+
+                        fromDateTime = str_dayOfMonth + "-" + str_monthOfYear + "-" + year;
+                        //Calling Time Picker
+                        tiemPicker(fromDateTime);
+
+                    }
+                }, mYear, mMonth, mDay);
+        datePickerDialog.show();
+    }
+
 
 
 

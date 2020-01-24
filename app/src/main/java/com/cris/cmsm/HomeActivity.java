@@ -149,13 +149,13 @@ public class HomeActivity extends AppCompatActivity implements ResponseView, Rec
             if(loginInfoModel.getCrewid() == null)
             {
                 list.add(new MenuModel(R.color.colorCardOrange, R.drawable.crew_position, res.getString(R.string.crew_monitored)));
-                list.add(new MenuModel(R.color.colorCardFive, R.drawable.consumption_analytics, res.getString(R.string.crew_availability_detail)));
+                //list.add(new MenuModel(R.color.colorCardFive, R.drawable.consumption_analytics, res.getString(R.string.crew_availability_detail)));
                 list.add(new MenuModel(R.color.colorCardFive, R.drawable.abnormality,res.getString(R.string.abnormality_report)));
-                list.add(new MenuModel(R.color.colorCardOrange,R.drawable.consumption_analytics,res.getString(R.string.grading)));
+                list.add(new MenuModel(R.color.colorCardFive,R.drawable.consumption_analytics,res.getString(R.string.grading)));
                 list.add(new MenuModel(R.color.colorCardOrange,R.drawable.crew_position,res.getString(R.string.crew_counselling)));
-                list.add(new MenuModel(R.color.colorCardFive,R.drawable.crew_position,"Crew Current Status"));
+                list.add(new MenuModel(R.color.colorCardOrange,R.drawable.crew_position,"Crew Current Status"));
                 list.add(new MenuModel(R.color.colorCardFive, R.drawable.consumption_analytics,"LI Movement"));
-                list.add(new MenuModel(R.color.colorCardOrange, R.drawable.availability, res.getString(R.string.inspection_record)));
+                list.add(new MenuModel(R.color.colorCardFive, R.drawable.availability, res.getString(R.string.inspection_record)));
                 //list.add(new MenuModel(R.color.colorTeal, R.drawable.feedback, res.getString(R.string.feedback)));
             }
             else

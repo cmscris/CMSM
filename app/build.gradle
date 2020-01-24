@@ -8,8 +8,8 @@ android {
         applicationId "com.cris.cmsm"
         minSdkVersion 15
         targetSdkVersion 28
-        versionCode 29
-        versionName "1.0.17"
+        versionCode 36
+        versionName "1.0.24"
     }
     buildTypes {
         release {

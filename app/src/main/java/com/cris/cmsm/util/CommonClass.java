@@ -30,8 +30,12 @@ import com.cris.cmsm.models.response.ResponseSSERole;
 import com.cris.cmsm.models.response.SebMaster;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -648,4 +652,52 @@ public class CommonClass {
     }
 
 
+    // FUNCTION TO COMPARE 2 STRING DATES
+    public static boolean isBefore(String startDate, String endDate)
+    {
+        try{
+
+            System.out.println(" From Date : " + startDate);
+            System.out.println(" To Date : " + endDate);
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+            System.out.println("Date Compare Result " + sdf.parse(startDate).before(sdf.parse(endDate)));
+
+            if(sdf.parse(startDate).before(sdf.parse(endDate)))
+                return true;
+
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+
+        return false;
+    }
+
+
+    public static boolean isBeforeCurrent(String strDate)
+    {
+
+        try{
+
+
+        // GET CURRENT DATE TIME
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+        Date date = new Date();
+        String current_dateTime = formatter.format(date);
+        System.out.println(" CURRENT DATE TIME : " + formatter.format(date));
+
+        if(formatter.parse(strDate).before(formatter.parse(current_dateTime)))
+            return true;
+
+
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+
+        return false;
+    }
 }

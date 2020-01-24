@@ -1,6 +1,7 @@
 package com.cris.cmsm.navcontrollers;
 
 import android.Manifest;
+import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -89,7 +91,7 @@ public class LiArrivalController extends BaseActivity implements View.OnClickLis
     String toDate;
     NumberFormat format;
     // GLOBAL VARIABLES FOR TIME PICKER
-    int mHour, mMinute;
+    int mHour, mMinute, mDay, mMonth, mYear;
     int pickfrmhour,pickfrmmin;
     String Hour, Minute, toDateTime;
 
@@ -204,7 +206,8 @@ public class LiArrivalController extends BaseActivity implements View.OnClickLis
         tv_to_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tiemPicker(toDate);
+                datePicker();
+                //tiemPicker(toDate);
             }
         });
 
@@ -432,6 +435,11 @@ public class LiArrivalController extends BaseActivity implements View.OnClickLis
 
 
     private boolean isValid() {
+
+        String frm_date = tv_frm_date.getText().toString();
+        String to_date = tv_to_date.getText().toString();
+
+
         if (et_to_sttn.getText().toString().trim().isEmpty()) {
             commonClass.showToast("Please enter From Station.");
             return false;
@@ -443,6 +451,19 @@ public class LiArrivalController extends BaseActivity implements View.OnClickLis
             return false;
         }else if (et_train_no.getText().toString().trim().isEmpty()) {
             commonClass.showToast("Please enter train No.");
+            return false;
+        }
+        else if(!CommonClass.isBefore(frm_date,to_date))
+        {
+            commonClass.showToast("From date cannot be greater than To Date");
+            return false;
+        }else if (!CommonClass.isBeforeCurrent(to_date)) {
+            commonClass.showToast("To Date/Time cannot be greater than Current Date/Time  ");
+            return false;
+        }
+        else if(et_kms.getText().toString().trim().isEmpty())
+        {
+            commonClass.showToast("Please enter KMs");
             return false;
         }else
             return true;
@@ -468,7 +489,7 @@ public class LiArrivalController extends BaseActivity implements View.OnClickLis
 
 
 
-    private void tiemPicker( String toDate){
+    private void tiemPicker(String toDate){
         // Get Current Time
         final Calendar c = Calendar.getInstance();
         mHour = c.get(Calendar.HOUR_OF_DAY);
@@ -494,7 +515,32 @@ public class LiArrivalController extends BaseActivity implements View.OnClickLis
         timePickerDialog.show();
     }
 
+    private void datePicker(){
 
+        // Get Current Date
+        final Calendar c = Calendar.getInstance();
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH);
+        mDay = c.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+
+                        String str_dayOfMonth = (dayOfMonth < 10 )? "0" + dayOfMonth : dayOfMonth + "";
+                        monthOfYear++;
+                        String str_monthOfYear = (monthOfYear < 10 )? "0" + monthOfYear : monthOfYear + "";
+
+                        toDateTime = str_dayOfMonth + "-" + str_monthOfYear + "-" + year;
+                        //Calling Time Picker
+                        tiemPicker(toDateTime);
+
+                    }
+                }, mYear, mMonth, mDay);
+        datePickerDialog.show();
+    }
 
 
     @Override
